@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "hisb",
+	"version": "${version}",
+	"name": "Minecraft How it Should Be - 1.21",
+	"description": "The mod to fix Minecraft's problems, from adventure to building to redstone!",
+	"authors": [
+		"Aaron Terry"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/hisb/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.aaronterry.hisb.HisbMod"
+		],
+		"client": [
+			"net.aaronterry.hisb.HisbModClient"
+		],
+		"fabric-datagen": [
+			"net.aaronterry.hisb.HisbModDataGenerator"
+		]
+	},
+	"mixins": [
+		"hisb.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
