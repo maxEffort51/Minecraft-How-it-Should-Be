@@ -7,5 +7,7 @@
   "item.hisb.purified_redstone": "Purified Redstone",
   "item.hisb.purified_emerald": "Purified Emerald",
   "item.hisb.purified_diamond": "Purified Diamond",
-  "item.hisb.dyremite_chunk": "Dyremite Chunk"
+  "item.hisb.dyremite_chunk": "Dyremite Chunk",
+
+  "block.hisb.purifier_table": "Purifier Table"
 }

@@ -34,5 +34,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(ModBlocks.DYREMITE_BLOCK);
+        addDrop(ModBlocks.PURIFIER_TABLE);
     }
 }

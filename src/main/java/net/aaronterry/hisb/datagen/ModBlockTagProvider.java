@@ -29,5 +29,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         addToTag(BlockTags.PICKAXE_MINEABLE, ModBlocks.DYREMITE_BLOCK);
         addToTag(BlockTags.NEEDS_DIAMOND_TOOL, ModBlocks.DYREMITE_BLOCK);
+        addToTag(BlockTags.AXE_MINEABLE, ModBlocks.PURIFIER_TABLE);
     }
 }

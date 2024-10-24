@@ -1,6 +1,7 @@
 package net.aaronterry.hisb.block;
 
 import net.aaronterry.hisb.HisbMod;
+import net.aaronterry.hisb.block.custom.PurifierTableBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -17,6 +18,9 @@ public class ModBlocks {
             new Block(AbstractBlock.Settings.create().strength(6f)
                     .requiresTool()));
 
+    public static final Block PURIFIER_TABLE = registerBlock("purifier_table",
+            new PurifierTableBlock(AbstractBlock.Settings.create().strength(3f)));
+
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
         return Registry.register(Registries.BLOCK, Identifier.of(HisbMod.MOD_ID, name), block);
@@ -32,6 +36,10 @@ public class ModBlocks {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.add(ModBlocks.DYREMITE_BLOCK);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
+            entries.add(ModBlocks.PURIFIER_TABLE);
         });
     }
 }
