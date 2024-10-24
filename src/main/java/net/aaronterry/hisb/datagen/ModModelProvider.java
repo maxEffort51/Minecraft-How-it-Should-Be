@@ -25,7 +25,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        generateBlocks(blockStateModelGenerator, new Block[]{ModBlocks.DYREMITE_BLOCK,ModBlocks.PURIFIER_TABLE});
+        generateBlocks(blockStateModelGenerator, new Block[]{ModBlocks.DYREMITE_BLOCK});
     }
 
     @Override

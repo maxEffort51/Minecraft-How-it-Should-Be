@@ -71,9 +71,7 @@ public class KeyGroup {
         if (this.output != null) this.output = value;
     }
 
-    public Object getKey(int index) {
-
-    }
+    public Object getKey(int index) { return inputs[index]; }
 
     public Object getValue() { return this.output; }
 

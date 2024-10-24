@@ -1,9 +1,7 @@
 package net.aaronterry.hisb;
 
 import net.aaronterry.hisb.block.ModBlocks;
-import net.aaronterry.hisb.block.entity.ModBlockEntities;
 import net.aaronterry.hisb.item.ModItems;
-import net.aaronterry.hisb.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -17,7 +15,5 @@ public class HisbMod implements ModInitializer {
 	public void onInitialize() {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
-		ModBlockEntities.registerBlockEntities();
-		ModScreenHandlers.registerScreenHandlers();
 	}
 }
