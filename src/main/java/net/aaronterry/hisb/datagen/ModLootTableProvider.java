@@ -1,6 +1,7 @@
 package net.aaronterry.hisb.datagen;
 
 import net.aaronterry.hisb.block.ModBlocks;
+import net.aaronterry.hisb.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
@@ -29,8 +30,13 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                 .apply(ApplyBonusLootFunction.oreDrops(impl.getOrThrow(Enchantments.FORTUNE))))));
     }
 
+    public void addDrop(Block[] blocks) { for (Block block : blocks) addDrop(block); }
+    public void addSameOreDrop(Block[] blocks, Item result, int min, int max) { for (Block block : blocks) addOreDrop(block, result, min, max); }
+
     @Override
     public void generate() {
-        addDrop(ModBlocks.DYREMITE_BLOCK);
+        addDrop(ModBlocks.DROP_SELF);
+        addSameOreDrop(new Block[] {ModBlocks.PURVIUM_ORE,ModBlocks.PURPUR_PURVIUM_ORE},ModItems.PURVIUM_CHUNK, 1, 1);
+        addOreDrop(ModBlocks.BURPLE_PURVIUM_ORE, ModItems.PURVIUM_CHUNK, 1,2);
     }
 }

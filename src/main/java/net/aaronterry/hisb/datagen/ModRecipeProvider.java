@@ -1,48 +1,51 @@
 package net.aaronterry.hisb.datagen;
 
-import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.block.ModBlocks;
+import net.aaronterry.hisb.item.ModArmorItems;
 import net.aaronterry.hisb.item.ModItems;
+import net.aaronterry.hisb.item.ModToolItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModRecipeProvider extends FabricRecipeProvider {
+public class ModRecipeProvider extends ModRecipeHelperProvider {
     public ModRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
-    public void reverseRecipe(RecipeExporter xpt, ItemConvertible base, ItemConvertible compact, RecipeCategory category) {
-        offerReversibleCompactingRecipes(xpt, category, base, category, compact);
-    }
-
-    public ShapedRecipeJsonBuilder singleShaped(RecipeCategory cat, ItemConvertible result, String[] pattern, ItemConvertible hash) {
-        return ShapedRecipeJsonBuilder.create(cat, result)
-                .pattern(pattern[0]).pattern(pattern[1]).pattern(pattern[2])
-                .input('#', hash)
-                .criterion(hasItem(hash), conditionsFromItem(hash));
-    }
-
     @Override
-    public void generate(RecipeExporter exporter) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DYREMITE_CHUNK)
-                .pattern("DLD").pattern("IGI").pattern("RER")
-                .input('I',ModItems.PURIFIED_IRON)
-                .input('G',ModItems.PURIFIED_GOLD)
-                .input('L',ModItems.PURIFIED_LAPIS)
-                .input('E',ModItems.PURIFIED_EMERALD)
-                .input('R',ModItems.PURIFIED_REDSTONE)
-                .input('D',ModItems.PURIFIED_DIAMOND)
-                .criterion(hasItem(ModItems.PURIFIED_DIAMOND), conditionsFromItem(ModItems.PURIFIED_DIAMOND))
-                .offerTo(exporter, Identifier.of(HisbMod.MOD_ID, "dyremite_chunk_from_purified"));
+    public void generate(RecipeExporter xpt) {
+        // SHAPED
+        Shaped.recipe(RecipeCategory.COMBAT, ModArmorItems.PURVIUM_ELYTRA).pattern(new Pattern("*#*","*#*","* *"))
+                .input(new char[] {'*','#'}, new Item[] {ModItems.PURVIUM_CHUNK,Items.PHANTOM_MEMBRANE}).needs(0).offer(xpt);
 
-        reverseRecipe(exporter, ModItems.DYREMITE_CHUNK, ModBlocks.DYREMITE_BLOCK, RecipeCategory.MISC);
+        // SHAPELESS
+        Shapeless.recipe(RecipeCategory.MISC, ModItems.DYREMITE_CHUNK).input(ModItems.PURIFIED_DIAMOND, ModItems.PURIFIED_IRON, ModItems.PURIFIED_REDSTONE, 2)
+                .input(ModItems.PURIFIED_LAPIS, ModItems.PURIFIED_EMERALD, ModItems.PURIFIED_COPPER, 1).needsResult().offer(xpt, "dyremite_chunk_main");
+        Shapeless.recipe(RecipeCategory.MISC, ModItems.FIRITE_SCRAP).input(ModItems.PURIFIED_SCRAP, 4, ModItems.CRYSTALLINE_QUARTZ, 3, Items.LAVA_BUCKET, 1)
+                .needsResult().offer(xpt);
+        Shapeless.recipe(RecipeCategory.MISC, ModItems.DIRTY_SCRAP).input(Items.NETHERITE_SCRAP, 5, ModItems.PURIFIED_SCRAP, 2, ModItems.CRYSTALLINE_QUARTZ, 2)
+                .needsResult().offer(xpt, "dirty_scrap_main");
+        Shapeless.recipe(RecipeCategory.MISC, ModBlocks.PURIFIER_TABLE).input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE},
+                new int[] {2,2,2,1,2}).needsResult().offer(xpt);
+        Shapeless.recipe(RecipeCategory.MISC, ModItems.DEEP_ROD).input(Items.STICK, 3, ModItems.SCULTIUM_BONES, 3).needsResult().offer(xpt);
+        Shapeless.recipe(RecipeCategory.MISC, ModItems.BLAST_CHARGE).input(ModItems.BLAST_SHARD,9).needs(ModItems.BLAST_SHARD).offer(xpt);
+
+        // RECIPE
+        Recipe.reverse(xpt, ModItems.DYREMITE_CHUNK, ModBlocks.DYREMITE_BLOCK, RecipeCategory.MISC);
+        Recipe.reverse(xpt, ModItems.DIRTY_SCRAP, ModBlocks.DEBRITINUM_BLOCK, RecipeCategory.MISC);
+        Recipe.oneIngredient(xpt, ModArmorItems.PURVIUM_ARMOR, ModItems.PURVIUM_CHUNK, RecipeCategory.COMBAT, '#', new Pattern[] {
+                new Pattern("###","# #"),new Pattern("###","# #","# #"),new Pattern("# #","# #")});
+        Recipe.toolset(xpt, ModToolItems.SCULTIUM, ModItems.SCULTIUM_BONES, ModItems.DEEP_ROD, ModItems.SCULTIUM_BONES);
+        Recipe.tool(xpt, "sword", ModToolItems.DEPNETUM_SWORD, ModItems.DEPNETUM_CLUMP, ModItems.DEEP_ROD, ModItems.DEPNETUM_CLUMP);
+        Recipe.armor(xpt, ModArmorItems.DEPNETUM_SET, ModItems.DEPNETUM_CLUMP);
+
+        // CUSTOM
+        Custom.firite(xpt);
     }
 }
