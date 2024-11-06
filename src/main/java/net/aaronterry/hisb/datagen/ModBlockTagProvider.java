@@ -33,17 +33,17 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         addToTag(ModTags.Blocks.ALL_MOD_BLOCKS, ModBlocks.ALL);
 
-        addToTag(BlockTags.AXE_MINEABLE, ModBlocks.AXE);
-        addToTag(BlockTags.PICKAXE_MINEABLE, ModBlocks.PICKAXE);
-        addToTag(BlockTags.SHOVEL_MINEABLE, ModBlocks.SHOVEL);
-        addToTag(BlockTags.HOE_MINEABLE, ModBlocks.HOE);
+        addToTag(BlockTags.AXE_MINEABLE, ModBlocks.Tools.AXE);
+        addToTag(BlockTags.PICKAXE_MINEABLE, ModBlocks.Tools.PICKAXE);
+        addToTag(BlockTags.SHOVEL_MINEABLE, ModBlocks.Tools.SHOVEL);
+        addToTag(BlockTags.HOE_MINEABLE, ModBlocks.Tools.HOE);
 
         // BLOCK MINING
-        addToTag(BlockTags.NEEDS_STONE_TOOL, new Block[] {ModBlocks.DEAD_PLANKS,ModBlocks.STIFF_SOIL,ModBlocks.CORRUPTED_MUD});
-        addToTag(BlockTags.NEEDS_IRON_TOOL, new Block[] {ModBlocks.CONDENSED_PURPUR_BLOCK, ModBlocks.PURVIUM_ORE, ModBlocks.PURPUR_PURVIUM_ORE, ModBlocks.BURPLE_BLOCK, ModBlocks.BURPLE_PURVIUM_ORE,ModBlocks.DEEP_STONE,ModBlocks.WASHED_DARK,ModBlocks.WASHED_SCULK,ModBlocks.DEEP,ModBlocks.DARK,ModBlocks.DEEP_SCULK});
-        addToTag(BlockTags.NEEDS_DIAMOND_TOOL, new Block[] {ModBlocks.DYREMITE_BLOCK, ModBlocks.DEEP_STONE, ModBlocks.STIFF_STONE, ModBlocks.SCULTIUM_ORE,ModBlocks.DEPNETUM_ORE,ModBlocks.DARK_DEPNETUM_ORE});
-        addToTag(ModTags.Blocks.NEEDS_NETHERITE_TOOL, new Block[] {ModBlocks.DEBRITINUM_BLOCK, ModBlocks.HARDENED_SCULK, ModBlocks.IMPERVIUM_BLOCK, ModBlocks.DEPNETUM_BLOCK, ModBlocks.SCULTIUM_BLOCK});
-        addToTag(ModTags.Blocks.NEEDS_SCULTIUM_TOOL, new Block[] {});
+        addToTag(BlockTags.NEEDS_STONE_TOOL, ModBlocks.Tools.NEEDS_STONE);
+        addToTag(BlockTags.NEEDS_IRON_TOOL, ModBlocks.Tools.NEEDS_IRON);
+        addToTag(BlockTags.NEEDS_DIAMOND_TOOL, ModBlocks.Tools.NEEDS_DIAMOND);
+        addToTag(ModTags.Blocks.NEEDS_NETHERITE_TOOL, ModBlocks.Tools.NEEDS_NETHERITE);
+        addToTag(ModTags.Blocks.NEEDS_SCULTIUM_TOOL, ModBlocks.Tools.NEEDS_SCULTIUM);
 
         TagKey<Block>[] toolLevels = new TagKey[] {ModTags.Blocks.NEEDS_NETHERITE_TOOL,ModTags.Blocks.NEEDS_SCULTIUM_TOOL};
         TagKey<Block>[] inverseLevels = new TagKey[] {BlockTags.INCORRECT_FOR_DIAMOND_TOOL, BlockTags.INCORRECT_FOR_NETHERITE_TOOL};

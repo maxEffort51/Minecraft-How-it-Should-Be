@@ -20,9 +20,17 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
 
     @Override
     public void generate(RecipeExporter xpt) {
+
+        // Shaped.recipes(category, results[], patterns[], inputChars[], inputs[], needs[], xpt)
+        // Shaped.recipes(categories[], results[], patterns[], inputChars[], inputs[], needs[], xpt)
+
         // SHAPED
         Shaped.recipe(RecipeCategory.COMBAT, ModArmorItems.PURVIUM_ELYTRA).pattern(new Pattern("*#*","*#*","* *"))
                 .input(new char[] {'*','#'}, new Item[] {ModItems.PURVIUM_CHUNK,Items.PHANTOM_MEMBRANE}).needs(0).offer(xpt);
+        Shaped.recipe(RecipeCategory.MISC, Items.HEART_OF_THE_SEA).pattern(new Pattern("$|$","-*-","$|$")).input(new char[] {'$','|','-','*'},
+                new Item[] {ModItems.PRISMALITE_SHARD,Items.PRISMARINE_CRYSTALS,Items.PRISMARINE_SHARD,Items.WATER_BUCKET}).needs(0).offer(xpt);
+
+        // Shapeless.recipes(category, results[], inputs[], amounts[], needsResult, xpt)
 
         // SHAPELESS
         Shapeless.recipe(RecipeCategory.MISC, ModItems.DYREMITE_CHUNK).input(ModItems.PURIFIED_DIAMOND, ModItems.PURIFIED_IRON, ModItems.PURIFIED_REDSTONE, 2)
@@ -35,6 +43,12 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
                 new int[] {2,2,2,1,2}).needsResult().offer(xpt);
         Shapeless.recipe(RecipeCategory.MISC, ModItems.DEEP_ROD).input(Items.STICK, 3, ModItems.SCULTIUM_BONES, 3).needsResult().offer(xpt);
         Shapeless.recipe(RecipeCategory.MISC, ModItems.BLAST_CHARGE).input(ModItems.BLAST_SHARD,9).needs(ModItems.BLAST_SHARD).offer(xpt);
+
+        // Recipe.specific(xpt, block, item, pattern, category)
+        // Recipe.generic("reverse", category, blocks[], items[], xpt)
+        // Recipe.generic("specific", category, blocks[], items[], patterns[], xpt)
+        // Recipe.generic("tool", tooltypes[], tools[], items[], sticks[], xpt)
+        // Recipe.generic("armor", armorsets[][], items[])
 
         // RECIPE
         Recipe.reverse(xpt, ModItems.DYREMITE_CHUNK, ModBlocks.DYREMITE_BLOCK, RecipeCategory.MISC);

@@ -15,11 +15,8 @@ public class ElytraArmorItem extends ArmorItem {
     }
 
     public void elytraTick(ItemStack stack, net.minecraft.entity.Entity entity) {
-        HisbMod.debug("Elytra Tick...");
         if (entity instanceof PlayerEntity player) {
-            HisbMod.debug("Elytra Tock...");
             if (player.isFallFlying() && player.getEquippedStack(EquipmentSlot.CHEST).getItem() == this) {
-                HisbMod.debug("Elytra like the Clock");
                 if (stack.getDamage() < stack.getMaxDamage() - 1) { stack.damage(1, player, EquipmentSlot.CHEST); } else { player.stopFallFlying(); }
                 setupFireworkBoost(player, stack);
             }

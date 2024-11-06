@@ -15,6 +15,7 @@ import net.minecraft.util.Rarity;
 
 public class ModItems {
     // OVERWORLD ITEMS
+    public static final Item PRISMALITE_SHARD = registerItem("prismalite_shard", new Item(new Item.Settings()));
     public static final Item PURIFIED_IRON = registerItem("purified_iron", new Item(new Item.Settings()));
     public static final Item PURIFIED_COPPER = registerItem("purified_copper", new Item(new Item.Settings()));
     public static final Item PURIFIED_LAPIS = registerItem("purified_lapis", new Item(new Item.Settings()));
@@ -36,10 +37,10 @@ public class ModItems {
     public static final Item SCULTIUM_BONES = registerItem("scultium_bones", new Item(new Item.Settings()));
     public static final Item DEEP_ROD = registerItem("deep_rod", new Item(new Item.Settings()));
     public static final Item DEPNETUM_CLUMP = registerItem("depnetum_clump", new Item(new Item.Settings()));
-    public static final Item SCULK_ECHO = registerItem("sculk_echo", new SculkEchoItem(new Item.Settings()));
+    public static final Item SCULK_ECHO = registerItem("sculk_echo", new SculkEchoItem(new Item.Settings().maxCount(1)));
 
     public static final Item[] ALL = new Item[] {
-            PURIFIED_IRON,PURIFIED_COPPER,PURIFIED_LAPIS,PURIFIED_REDSTONE,PURIFIED_EMERALD,PURIFIED_DIAMOND,DYREMITE_CHUNK, // OVERWORLD
+            PRISMALITE_SHARD,PURIFIED_IRON,PURIFIED_COPPER,PURIFIED_LAPIS,PURIFIED_REDSTONE,PURIFIED_EMERALD,PURIFIED_DIAMOND,DYREMITE_CHUNK, // OVERWORLD
             ANCIENT_STAR,FIRITE_SCRAP,PURIFIED_SCRAP,DIRTY_SCRAP,CRYSTALLINE_QUARTZ, // NETHER
             PURVIUM_CHUNK, BLAST_SHARD, BLAST_CHARGE, // END
             SCULTIUM_BONES, DEEP_ROD, DEPNETUM_CLUMP, SCULK_ECHO // DEMANDI

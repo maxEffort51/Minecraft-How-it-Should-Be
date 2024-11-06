@@ -5,10 +5,13 @@ import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.events.ModEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -28,7 +31,7 @@ public class AncientStarItem extends Item {
         Useful.Entities.addStatusEffects(player, effects, 1200);
         //player.addStatusEffect(StatusEffects.REGENERATION); -> GLOWING, REGENERATION, RESISTANCE, FIRE-RESISTANCE, ABSORPTION
         // ModDamageSources.ANCIENT_STAR_EXPLOSION for custom damage source
-        if (entity instanceof LivingEntity) entity.damage(ModEvents.EMPTY, damage); // right back at ya
+        if (entity instanceof LivingEntity) entity.damage(Useful.ModDamageSources.EXPLOSION, damage); // right back at ya
         applyKnockback(player);
         HisbMod.debug("BAM!");
     }

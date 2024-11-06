@@ -30,13 +30,18 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                 .apply(ApplyBonusLootFunction.oreDrops(impl.getOrThrow(Enchantments.FORTUNE))))));
     }
 
+    public void addOreDrops(Block[] blocks, Item[] items) { for (int i = 0; i < blocks.length; i++) addOreDrop(blocks[i], items[i], 1, 1); }
+    public void addOreDrops(Block[] blocks, Item[] items, int[] min, int[] max) { for (int i = 0; i < blocks.length; i++) addOreDrop(blocks[i], items[i], min[i], max[i]); }
+
     public void addDrop(Block[] blocks) { for (Block block : blocks) addDrop(block); }
     public void addSameOreDrop(Block[] blocks, Item result, int min, int max) { for (Block block : blocks) addOreDrop(block, result, min, max); }
 
     @Override
     public void generate() {
         addDrop(ModBlocks.DROP_SELF);
-        addSameOreDrop(new Block[] {ModBlocks.PURVIUM_ORE,ModBlocks.PURPUR_PURVIUM_ORE},ModItems.PURVIUM_CHUNK, 1, 1);
-        addOreDrop(ModBlocks.BURPLE_PURVIUM_ORE, ModItems.PURVIUM_CHUNK, 1,2);
+
+        // Ores
+        addOreDrops(ModBlocks.Ores.BASIC,ModBlocks.Ores.BASIC_DROPS);
+        addOreDrops(ModBlocks.Ores.SPECIFIC, ModBlocks.Ores.SPECIFIC_DROPS, ModBlocks.Ores.SPECIFIC_MIN, ModBlocks.Ores.SPECIFIC_MAX);
     }
 }

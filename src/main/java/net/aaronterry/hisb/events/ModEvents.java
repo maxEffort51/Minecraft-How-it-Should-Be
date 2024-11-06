@@ -20,20 +20,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class ModEvents {
-    public static DamageSource EMPTY = new DamageSource(new RegistryEntry<>() {
-        @Override public DamageType value() { return null; }
-        @Override public boolean hasKeyAndValue() { return false;}
-        @Override public boolean matchesId(Identifier id) { return false; }
-        @Override public boolean matchesKey(RegistryKey<DamageType> key) { return false; }
-        @Override public boolean matches(Predicate<RegistryKey<DamageType>> predicate) { return false; }
-        @Override public boolean isIn(TagKey<DamageType> tag) { return false; }
-        @Override public boolean matches(RegistryEntry<DamageType> entry) { return false; }
-        @Override public Stream<TagKey<DamageType>> streamTags() { return Stream.empty(); }
-        @Override public Either<RegistryKey<DamageType>, DamageType> getKeyOrValue() { return null; }
-        @Override public Optional<RegistryKey<DamageType>> getKey() { return Optional.empty(); }
-        @Override public Type getType() { return null; }
-        @Override public boolean ownerEquals(RegistryEntryOwner<DamageType> owner) { return false; }
-    });
 //    public static class AncientStarTick {
 //
 //
@@ -76,11 +62,21 @@ public class ModEvents {
         private static int tickCounter = 0;
         public static void create(ElytraArmorItem registered) {
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (client.player != null && client.options.jumpKey.isPressed()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
+                if (client.player == null) return;
+                // On jump key toggle fall flying state
+                if (client.options.jumpKey.isPressed()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
                     if (chestStack.getItem() == registered && client.world != null) {
-                        ElytraArmorItem elytra = (ElytraArmorItem) chestStack.getItem().asItem(); elytra.elytraTick(chestStack, client.player);
-                        Useful.doIf(() -> client.player.stopFallFlying(), () -> { if (tickCounter >= tickBreak) { client.player.startFallFlying(); tickCounter = 0; } }, client.player.isFallFlying());
-                        if (tickCounter <= tickBreak + 1) tickCounter++;
+                        if (client.player.isFallFlying()) {
+                            Useful.doIf(() -> { client.player.stopFallFlying(); tickCounter = 0; }, () -> tickCounter++, tickCounter >= tickBreak);
+                        } else {
+                            client.player.startFallFlying();
+                        }
+                    }
+                }
+                if (client.player.isFallFlying()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
+                    if (chestStack.getItem() == registered && client.world != null) {
+                        ElytraArmorItem elytra = (ElytraArmorItem) chestStack.getItem().asItem();
+                        elytra.elytraTick(chestStack, client.player);
                     }
                 }
             });

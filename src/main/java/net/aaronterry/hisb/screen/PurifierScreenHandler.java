@@ -28,10 +28,10 @@ public class PurifierScreenHandler extends ScreenHandler {
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
         this.world = playerInventory.player.getWorld();
-        this.addSlot(new HotSlot(inventory, 0, 45, 11));
-        this.addSlot(new WetSlot(inventory, 1, 117, 11));
-        this.addSlot(new Slot(inventory, 2, 81, 18));
-        this.addSlot(new Slot(inventory, 3, 81, 60));
+        this.addSlot(new HotSlot(inventory, 0, 44, 10));
+        this.addSlot(new WetSlot(inventory, 1, 116, 10));
+        this.addSlot(new Slot(inventory, 2, 80, 17));
+        this.addSlot(new Slot(inventory, 3, 80, 59));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -65,7 +65,7 @@ public class PurifierScreenHandler extends ScreenHandler {
 
         ItemStack originalStack = slot.getStack();
         newStack = originalStack.copy();
-        int playerInventoryStart = 5;
+        int playerInventoryStart = 4;
         int playerInventoryEnd = playerInventoryStart + 36;
 
         if (slotIndex >= playerInventoryStart && slotIndex < playerInventoryEnd) {

@@ -1,4 +1,5 @@
 {
+  "block.hisb.prismalite_ore": "Prismalite Ore",
   "block.hisb.dyremite_block": "Dyremite Block",
   "block.hisb.debritinum_block": "Debritinum Block",
   "block.hisb.purvium_ore": "Purvium Ore",
@@ -27,6 +28,7 @@
   "block.hisb.scultium_block": "Scultium Block",
   "block.hisb.deep_sculk": "Deep Sculk",
 
+  "item.hisb.prismalite_shard": "Prysmalite Shard",
   "item.hisb.purified_iron": "Purified Iron",
   "item.hisb.purified_gold": "Purified Gold",
   "item.hisb.purified_lapis": "Purified Lapis Lazuli",

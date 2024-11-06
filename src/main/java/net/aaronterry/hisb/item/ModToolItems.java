@@ -8,7 +8,6 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.apache.commons.lang3.ArrayUtils;
 
 // WOODEN SWORD -> 3, -2.4F AXE -> 6.0F, -3.2F PICKAXE -> 1.0F, -2.8F SHOVEL -> 1.5F, -3.0F HOE -> 0.0F, -3.0F
 // STONE SWORD -> 3, -2.4F AXE -> 7.0F, -3.2F PICKAXE -> 1.0F, -2.8F SHOVEL -> 1.5F, -3.0F HOE -> -1.0F, -2.0F
@@ -26,15 +25,16 @@ public class ModToolItems {
     public static final Item[] SCULTIUM = new Item[] {SCULTIUM_AXE,SCULTIUM_PICKAXE,SCULTIUM_SHOVEL,SCULTIUM_HOE};
     public static final Item DEPNETUM_SWORD = registerTool("depnetum_sword", new ToolData(ModToolMaterials.SCULTIUM, "sword", 4, -2.0f));
 
-    public static final Item[] ALL = Useful.combine(SCULTIUM, DEPNETUM_SWORD);
+    public static final Item[] ALL = Useful.append(SCULTIUM, DEPNETUM_SWORD);
 
     private static Item registerTool(String name, ToolData data) {
+
         Item item = switch(data.itemType) {
-            case "sword" -> new SwordItem(data.material, new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(data.material, (int) data.baseAttackDamage, data.attackSpeed)));
-            case "axe" -> new AxeItem(data.material, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(data.material, data.baseAttackDamage, data.attackSpeed)));
-            case "pickaxe" -> new PickaxeItem(data.material, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(data.material, data.baseAttackDamage, data.attackSpeed)));
-            case "shovel" -> new ShovelItem(data.material, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(data.material, data.baseAttackDamage, data.attackSpeed)));
-            case "hoe" -> new HoeItem(data.material, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(data.material, data.baseAttackDamage, data.attackSpeed)));
+            case "sword" -> new SwordItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
+            case "axe" -> new AxeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
+            case "pickaxe" -> new PickaxeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
+            case "shovel" -> new ShovelItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
+            case "hoe" -> new HoeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
             default -> throw new IllegalStateException("ModToolItems.registerTool -> Unexpected value: " + data.itemType);
         };
         return registerItem(name, item);

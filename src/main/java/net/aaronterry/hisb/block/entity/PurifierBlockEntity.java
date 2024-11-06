@@ -19,7 +19,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +29,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
     protected static final int HOT_SLOT = 0;
     protected static final int WET_SLOT = 1;
     protected static final int IMPURE_SLOT = 2;
-    protected static final int PURE_SLOT = 2;
+    protected static final int PURE_SLOT = 3;
     public static final KeyGroup HOT_GROUP = new KeyGroup(new Object[]{Items.LAVA_BUCKET, Items.BLAZE_ROD});
     public static final KeyGroup WET_GROUP = new KeyGroup(new Object[]{Items.WATER_BUCKET});
     public static final KeyGroup IMPURE_GROUP = new LargeMap(new Object[]{
@@ -78,7 +77,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
         return new PurifierScreenHandler(i, playerInventory, this, this.propertyDelegate);
     }
 
-    public PurifierBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.PURIFIER_BLOCK_ENTITY, pos, state); }
+    public PurifierBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.PURIFIER_BLOCK_ENTITY, pos, state); maxProgress = 100; }
 
     public void increment() { progress++; }
     public void reset() { progress = 0; }
@@ -95,7 +94,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
 
     @Override protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        Inventories.writeNbt(nbt, inventory, registryLookup);
+        Inventories.readNbt(nbt, inventory, registryLookup);
         nbt.putInt("purifier_table.progress",progress);
     }
 
@@ -106,41 +105,35 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, PurifierBlockEntity blockEntity) {
-        HisbMod.LOGGER.info("PURIFIER TABLE TICK");
 
         if (world.isClient()) return;
         if (slotsAreFilled(blockEntity.inventory)) {
             if (outputSlotAvailable(blockEntity.inventory)) {
                 blockEntity.increment();
-                if (blockEntity.isFinished()) {
-                    craftItem(blockEntity.inventory);
-                }
-            } else {
-                blockEntity.reset();
-            }
-        } else {
-            blockEntity.reset();
-        }
+                if (blockEntity.isFinished()) craftItem(blockEntity.inventory);
+            } else blockEntity.reset();
+        } else blockEntity.reset();
         blockEntity.updateProgress();
     }
 
     private static void craftItem(DefaultedList<ItemStack> inventory) {
-        ItemStack PURE = inventory.get(PURE_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT); Item result = (Item) IMPURE_GROUP.get(IMPURE);
+        ItemStack PURE = inventory.get(PURE_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT); Item result = (Item) IMPURE_GROUP.get(IMPURE.getItem());
         ItemStack HOT = inventory.getFirst(); ItemStack WET = inventory.get(WET_SLOT);
         if (HOT.isOf(Items.LAVA_BUCKET)) { inventory.set(HOT_SLOT,new ItemStack(Items.BUCKET)); } else { HOT.decrement(1); }
         if (WET.isOf(Items.WATER_BUCKET)) { inventory.set(WET_SLOT,new ItemStack(Items.BUCKET)); } else { WET.decrement(1); }
         IMPURE.decrement(1);
-        if (PURE.isEmpty()) { inventory.set(2, new ItemStack(result));
+        if (PURE.isEmpty()) { inventory.set(3, new ItemStack(result));
         } else if (ItemStack.areItemsAndComponentsEqual(PURE, new ItemStack(result))) { PURE.increment(1); }
     }
 
     private static boolean outputSlotAvailable(DefaultedList<ItemStack> inventory) {
-        ItemStack PURE = inventory.get(PURE_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT); Item result = (Item) IMPURE_GROUP.get(IMPURE);
-        return PURE.isOf(result) && PURE.getCount() < 64 || PURE.getCount() == 0;
+        ItemStack PURE = inventory.get(PURE_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT); Item result = (Item) IMPURE_GROUP.get(IMPURE.getItem());
+        boolean k = PURE.isOf(result) && PURE.getCount() < PURE.getMaxCount();
+        return k || PURE.isEmpty();
     }
 
     private static boolean slotsAreFilled(DefaultedList<ItemStack> inventory) {
-        ItemStack HOT = inventory.getFirst(); ItemStack WET = inventory.get(WET_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT);
+        Item HOT = inventory.getFirst().getItem(); Item WET = inventory.get(WET_SLOT).getItem(); Item IMPURE = inventory.get(IMPURE_SLOT).getItem();
         boolean areFilled = HOT_GROUP.contains(HOT) && WET_GROUP.contains(WET) && IMPURE_GROUP.contains(IMPURE);
         if (IMPURE_GROUP.get(IMPURE) instanceof BucketItem) {
             areFilled = areFilled && inventory.get(PURE_SLOT).isOf(Items.BUCKET);

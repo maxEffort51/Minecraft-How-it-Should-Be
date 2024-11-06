@@ -93,11 +93,11 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
         public static void tool(RecipeExporter xpt, String type, Item tool, Item ore, Item stick, Item criterion, String unique) { Recipe._tool(type, tool, ore, stick, criterion).offer(xpt, unique); }
 
         public static void toolset(RecipeExporter xpt, Item[] tools, Item ore, Item stick, Item criterion) {
-            String[] types = new String[] {"sword","axe","pickaxe","shovel","hoe"};
+            String[] types = new String[] {"axe","pickaxe","shovel","hoe"};
             for (int i = 0; i < tools.length; i++) Recipe.tool(xpt, types[i], tools[i], ore, stick, criterion);
         }
         public static void toolset(RecipeExporter xpt, Item[] tools, Item ore, Item stick, Item criterion, String oreType, String unique) {
-            String[] types = new String[] {"sword","axe","pickaxe","shovel","hoe"};
+            String[] types = new String[] {"axe","pickaxe","shovel","hoe"};
             for (int i = 0; i < tools.length; i++) Recipe.tool(xpt, types[i], tools[i], ore, stick, criterion, String.format("%s_%s_%s", oreType, types[i], unique));
         }
     }
