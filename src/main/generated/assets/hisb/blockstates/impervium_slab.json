@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/impervium_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/impervium_block"
+    },
+    "type=top": {
+      "model": "hisb:block/impervium_slab_top"
+    }
+  }
+}

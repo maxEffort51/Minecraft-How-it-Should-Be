@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.util;
 
-import net.aaronterry.hisb.HisbMod;
+import net.aaronterry.hisb.main.HisbMod;
 import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -14,6 +14,9 @@ public class ModTags {
 
         public static final TagKey<Block> INCORRECT_FOR_SCULTIUM_TOOL = createTag("incorrect_for_scultium_tool");
         public static final TagKey<Block> NEEDS_SCULTIUM_TOOL = createTag("needs_scultium_tool");
+        public static final TagKey<Block> INCORRECT_FOR_DEMANDUM_TOOL = createTag("incorrect_for_demandum_tool");
+        public static final TagKey<Block> NEEDS_DEMANDUM_TOOL = createTag("needs_demandum_tool");
+        public static final TagKey<Block> INCORRECT_FOR_SCYTHE_TOOL = createTag("incorrect_for_scythe_tool");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(HisbMod.MOD_ID, name));

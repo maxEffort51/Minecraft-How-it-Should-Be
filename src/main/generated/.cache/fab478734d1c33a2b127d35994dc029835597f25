@@ -1,0 +1,14 @@
+// 1.21.1	2024-11-08T20:37:01.653664	Minecraft How it Should Be - 1.21/Tags for minecraft:block
+af1c8ec8966eb42377a834a4f512d49de5e18539 data/minecraft/tags/block/mineable/shovel.json
+edeb7d967b364c4d54ae1f040cd90f90e2c62b43 data/minecraft/tags/block/incorrect_for_netherite_tool.json
+9f6eea8774adbf16882b176d62ae584f09ba2665 data/hisb/tags/block/all_mod_blocks.json
+40ff24ca543e642867f3c12228439544d2c25844 data/minecraft/tags/block/mineable/pickaxe.json
+515c8b1764fac551d9b13ea7beb30a0759cce10f data/minecraft/tags/block/needs_iron_tool.json
+c6d3a7c8b60ed49847df9d2ebc97f3a9e952d70e data/hisb/tags/block/needs_netherite_tool.json
+f46e4d6bb1bc04c4a0d6a8a09ce050938fc4eddf data/minecraft/tags/block/needs_diamond_tool.json
+9a71c4175f6b9fd9cc81db03c01f2ab46dd0dbf4 data/minecraft/tags/block/needs_stone_tool.json
+b30c948384c9f2bcdb45b748288fae90d5436493 data/minecraft/tags/block/mineable/axe.json
+f5054858e895f2a5e4da7d0c309b7a05025aac69 data/minecraft/tags/block/planks.json
+424d2f7ce84c1feeeb449dca216a4790a34dba76 data/minecraft/tags/block/mineable/hoe.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/hisb/tags/block/needs_scultium_tool.json
+04d9341a284d1f6aaf39d503e047cda1076bcceb data/minecraft/tags/block/incorrect_for_diamond_tool.json

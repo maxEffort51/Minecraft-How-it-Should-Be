@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "net.aaronterry.hisb.pack.exploration.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"HisbModMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

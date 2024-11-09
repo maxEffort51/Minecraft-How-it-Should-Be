@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "hisb:firite_scrap"
+    },
+    {
+      "item": "minecraft:netherite_helmet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:netherite_firite_helmet"
+  }
+}

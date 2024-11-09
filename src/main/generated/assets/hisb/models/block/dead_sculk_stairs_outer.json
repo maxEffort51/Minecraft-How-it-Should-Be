@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hisb:block/dead_sculk",
+    "side": "hisb:block/dead_sculk",
+    "top": "hisb:block/dead_sculk"
+  }
+}

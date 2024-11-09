@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hisb:debritinum_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "hisb:dirty_scrap"
+  }
+}

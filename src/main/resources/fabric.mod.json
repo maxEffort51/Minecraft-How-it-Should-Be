@@ -16,17 +16,17 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.aaronterry.hisb.HisbMod"
+			"net.aaronterry.hisb.main.HisbMod"
 		],
 		"client": [
-			"net.aaronterry.hisb.HisbModClient"
+			"net.aaronterry.hisb.main.HisbModClient"
 		],
 		"fabric-datagen": [
-			"net.aaronterry.hisb.HisbModDataGenerator"
+			"net.aaronterry.hisb.main.HisbModDataGenerator"
 		]
 	},
 	"mixins": [
-		"hisb.mixins.json"
+		"exploration.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",

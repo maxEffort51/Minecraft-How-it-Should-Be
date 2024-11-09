@@ -76,7 +76,8 @@ public class Useful {
     }
 
     public static class ModDamageSources {
-        public static DamageSource EXPLOSION = new DamageSources(DynamicRegistryManager.EMPTY).create(DamageTypes.EXPLOSION);
-        public static DamageSource GENERIC = new net.minecraft.entity.damage.DamageSources(DynamicRegistryManager.EMPTY).create(DamageTypes.GENERIC);
+        public static DamageSources DAMAGE_SOURCES = new DamageSources(DynamicRegistryManager.EMPTY);
+        public static DamageSource EXPLOSION = DAMAGE_SOURCES.create(DamageTypes.EXPLOSION);
+        public static DamageSource GENERIC = DAMAGE_SOURCES.create(DamageTypes.GENERIC);
     }
 }
