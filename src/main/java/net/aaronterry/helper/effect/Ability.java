@@ -30,9 +30,9 @@ public class Ability {
 
     public void tick(LivingEntity entity) {
         Iterable<ItemStack> itemSearch = switch(inputs.findIn) {
-            case "equip" -> entity.getEquippedItems();
-            case "hand" -> List.of(entity.getMainHandStack(), entity.getOffHandStack());
-            case "inventory" -> ((PlayerEntity) entity).getInventory().main;
+            case "equip" -> entity.getAllArmorItems();
+            case "hand" -> entity.getHandItems();
+            case "inventory" -> entity instanceof PlayerEntity player ? player.getInventory().main : entity.getEquippedItems();
             default -> new ArrayList<>();
         };
         AtomicBoolean hasnt = new AtomicBoolean(true);
@@ -41,7 +41,7 @@ public class Ability {
             for (Item item : inputs.items) {
                 if (stack.isOf(item)) { doRun = true; break; }
             }
-            //doRun = doRun || (doEnchant && stack.hasEnchantments() && stack.getEnchantments().getEnchantments().contains(enchantmentKey));
+            //doRun = doRun || (doEnchant && stack.hasEnchantments() && stack.getEnchantments().getEnchantments().contains(enchantmentKey)); // ENCHANTING
             if (doRun && hasnt.get()) { tickFunc.accept(entity); hasnt.set(false); }
         });
     }

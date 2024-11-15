@@ -9,6 +9,6 @@ public class ModScreenHandlers {
     public static final ScreenHandlerType<PurifierScreenHandler> PURIFIER_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, "purifying", new ScreenHandlerType<>(PurifierScreenHandler::new, null));
 
     public static void registerScreenHandlers() {
-        HisbMod.debug("Registering Screen Handlers for " + HisbMod.MOD_ID);
+        HisbMod.debug("Registering Screen Handlers for " + HisbMod.id());
     }
 }

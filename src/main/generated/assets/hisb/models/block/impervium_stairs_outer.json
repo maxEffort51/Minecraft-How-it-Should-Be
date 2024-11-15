@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "hisb:block/impervium_block",
-    "side": "hisb:block/impervium_block",
-    "top": "hisb:block/impervium_block"
-  }
-}

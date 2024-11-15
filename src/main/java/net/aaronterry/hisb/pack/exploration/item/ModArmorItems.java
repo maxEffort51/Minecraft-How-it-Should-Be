@@ -46,7 +46,7 @@ public class ModArmorItems {
 
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
     }
 
     public static void addSet(FabricItemGroupEntries entries, Item[] items) {
@@ -56,7 +56,7 @@ public class ModArmorItems {
     }
 
     public static void registerModArmor() {
-        HisbMod.debug("Registering Mod Armor Items for " + HisbMod.MOD_ID);
+        HisbMod.debug("Registering Mod Armor Items for " + HisbMod.id());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
             addSet(entries, NETHERITE_FIRITE_SET);

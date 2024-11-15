@@ -43,7 +43,7 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
             public Details input(char[] chars, ItemConvertible[] items) { inputs.addAll(List.of(items)); for (int i = 0; i < chars.length; i++) builder.input(chars[i],items[i]); return this; }
             public Details input(char c, ItemConvertible item) { inputs.add(item); builder.input(c, item); return this; }
             public void offer(RecipeExporter xpt) { builder.offerTo(xpt); }
-            public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.MOD_ID, unique)); }
+            public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.id(), unique)); }
         }
     }
 
@@ -71,7 +71,7 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
             public Details input(ItemConvertible i, int a, ItemConvertible i2, int a2, ItemConvertible i3, int a3) { return this.input(new ItemConvertible[] {i, i2, i3}, new int[] {a, a2, a3}); }
             public Details input(ItemConvertible i, ItemConvertible i2, ItemConvertible i3, int a) { return this.input(new ItemConvertible[] {i, i2, i3}, new int[] {a, a, a}); }
             public void offer(RecipeExporter xpt) { builder.offerTo(xpt); }
-            public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.MOD_ID, unique)); }
+            public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.id(), unique)); }
         }
     }
 

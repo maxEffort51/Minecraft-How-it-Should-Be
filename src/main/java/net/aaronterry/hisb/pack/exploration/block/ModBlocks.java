@@ -47,8 +47,9 @@ public class ModBlocks extends HelperBlocks {
 
     /* DEMANDI */
     private static final SortingPreset ps_DEMANDI = new SortingPreset().inDemandi().normalType().dropSelf();
+    private static final SortingPreset ps_DEMPARENT = new SortingPreset().inDemandi().parentBlock().dropSelf();
     public static final Block DEEP = sortBlock(id("deep"), Useful.BlockSettings.auto(20f),ps_DEMANDI).withHoe().ironTool().get();
-    public static final Block DARK = sortBlock(id("dark"), Useful.BlockSettings.auto(9f),ps_DEMANDI).withHoe().ironTool().get();
+    public static final Block DARK = sortBlock(id("dark"), Useful.BlockSettings.auto(9f),ps_DEMPARENT).withHoe().ironTool().get();
     public static final Block DEEP_SCULK = sortBlock(id("deep_sculk"), Useful.BlockSettings.auto(25f),ps_DEMANDI).withHoe().ironTool().get();
 
     public static final Block DEAD_PLANKS = sortBlock(id("dead_planks"), Useful.BlockSettings.auto(10f),ps_DEMANDI).withAxe().stoneTool().get();
@@ -58,14 +59,13 @@ public class ModBlocks extends HelperBlocks {
     public static final Block WASHED_SCULK = sortBlock(id("washed_sculk"), Useful.BlockSettings.auto(26f),ps_DEMANDI).withShovel().ironTool().get();
     public static final Block STIFF_SOIL = sortBlock(id("stiff_soil"), Useful.BlockSettings.auto(20f),ps_DEMANDI).withShovel().diamondTool().get();
 
-    public static final Block DEEP_STONE = sortBlock(id("deep_stone"), Useful.BlockSettings.auto(24f),ps_DEMANDI).withPickaxe().ironTool().get();
-    public static final Block DEAD_SCULK = sortBlock(id("dead_sculk"), Useful.BlockSettings.auto(15f),ps_DEMANDI).withPickaxe().diamondTool().get();
-    public static final Block STIFF_STONE = sortBlock(id("stiff_stone"), Useful.BlockSettings.auto(30f),ps_DEMANDI).withPickaxe().diamondTool().get();
+    public static final Block DEEP_STONE = sortBlock(id("deep_stone"), Useful.BlockSettings.auto(24f),ps_DEMPARENT).withPickaxe().ironTool().get();
+    public static final Block STIFF_STONE = sortBlock(id("stiff_stone"), Useful.BlockSettings.auto(30f)).inDemandi().stone().dropSelf().withPickaxe().diamondTool().get();
+    public static final Block DEAD_SCULK = sortBlock(id("dead_sculk"), Useful.BlockSettings.auto(15f),ps_DEMPARENT).withPickaxe().diamondTool().get();
     public static final Block SCULTIUM_BLOCK = sortBlock(id("scultium_block"), Useful.BlockSettings.auto(75f, 600f),ps_DEMANDI).withPickaxe().netheriteTool().get();
     public static final Block DEPNETUM_BLOCK = sortBlock(id("depnetum_block"), Useful.BlockSettings.auto(80f, 1000f),ps_DEMANDI).withPickaxe().netheriteTool().get();
     public static final Block HARDENED_SCULK = sortBlock(id("hardened_sculk"), Useful.BlockSettings.auto(100f, 10f),ps_DEMANDI).withPickaxe().netheriteTool().get();
-    public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), Useful.BlockSettings.auto(200f),ps_DEMANDI).withPickaxe().scultiumTool().get();
-    public static final Block POLISHED_IMPERVIUM = sortBlock(id("polished_impervium"), Useful.BlockSettings.auto(180f),ps_DEMANDI).withPickaxe().scultiumTool().get();
+    public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), Useful.BlockSettings.auto(200f),ps_DEMPARENT).withPickaxe().scultiumTool().get();
     // ORES
     private static final SortingPreset ps_DEMANDI_ORE = ps_ORE.copy().inDemandi().diamondTool();
     public static final Block SCULTIUM_ORE = sortBlock(id("scultium_ore"), Useful.BlockSettings.auto(32f),ps_DEMANDI_ORE).ore(ModItems.SCULTIUM_BONES).get();
@@ -81,27 +81,37 @@ public class ModBlocks extends HelperBlocks {
             .ticksRandomly().strength(0.3F).sounds(BlockSoundGroup.VINE).burnable().pistonBehavior(PistonBehavior.DESTROY)),ps_VINE).inDemandi().get();
     // DEMANDI SLABS
     private static final SortingPreset ps_DEMSLAB = new SortingPreset().inDemandi().slab();
-    public static final Block DARK_SLAB = sortBlock(id("dark_slab"), new SlabBlock(Useful.BlockSettings.basic(9f, true)),ps_DEMSLAB).copy(DARK);
-
-    public static final Block DEEP_STONE_SLAB = sortBlock(id("deep_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(24f, true)),ps_DEMSLAB).copy(DEEP_STONE);
-    public static final Block STIFF_STONE_SLAB = sortBlock(id("stiff_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(30f, true)),ps_DEMSLAB).copy(STIFF_STONE);
-    public static final Block DEAD_SCULK_SLAB = sortBlock(id("dead_sculk_slab"), new SlabBlock(Useful.BlockSettings.basic(15f, true)),ps_DEMSLAB).copy(DEAD_SCULK);
-    public static final Block IMPERVIUM_SLAB = sortBlock(id("impervium_slab"), new SlabBlock(Useful.BlockSettings.basic(180f, true)),ps_DEMSLAB).copy(IMPERVIUM_BLOCK);
+    public static final Block DARK_SLAB = sortBlock(id("dark_slab"), new SlabBlock(Useful.BlockSettings.basic(9f, true)),ps_DEMSLAB).parent(DARK);
+    public static final Block DEEP_STONE_SLAB = sortBlock(id("deep_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(24f, true)),ps_DEMSLAB).parent(DEEP_STONE);
+    public static final Block STIFF_STONE_SLAB = sortBlock(id("stiff_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(30f, true)),ps_DEMSLAB).parent(STIFF_STONE);
+    public static final Block DEAD_SCULK_SLAB = sortBlock(id("dead_sculk_slab"), new SlabBlock(Useful.BlockSettings.basic(15f, true)),ps_DEMSLAB).parent(DEAD_SCULK);
+    public static final Block IMPERVIUM_SLAB = sortBlock(id("impervium_slab"), new SlabBlock(Useful.BlockSettings.basic(180f, true)),ps_DEMSLAB).parent(IMPERVIUM_BLOCK);
     // DEMANDI STAIRS
     private static final SortingPreset ps_DEMSTAIRS = new SortingPreset().inDemandi().stairs().dropSelf();
-    public static final Block DARK_STAIRS = sortBlock(id("dark_stairs"), new StairsBlock(DARK.getDefaultState(), Useful.BlockSettings.basic(9f, true)),ps_DEMSTAIRS).copy(DARK);
-    public static final Block DEEP_STONE_STAIRS = sortBlock(id("deep_stone_stairs"), new StairsBlock(DEEP_STONE.getDefaultState(), Useful.BlockSettings.basic(24f, true)),ps_DEMSTAIRS).copy(DEEP_STONE);
-    public static final Block STIFF_STONE_STAIRS = sortBlock(id("stiff_stone_stairs"), new StairsBlock(STIFF_STONE.getDefaultState(), Useful.BlockSettings.basic(30f, true)),ps_DEMSTAIRS).copy(STIFF_STONE);
-    public static final Block DEAD_SCULK_STAIRS = sortBlock(id("dead_sculk_stairs"), new StairsBlock(DEAD_SCULK.getDefaultState(), Useful.BlockSettings.basic(15f, true)),ps_DEMSTAIRS).copy(DEAD_SCULK);
-    public static final Block IMPERVIUM_STAIRS = sortBlock(id("impervium_stairs"), new StairsBlock(IMPERVIUM_BLOCK.getDefaultState(), Useful.BlockSettings.basic(180f, true)),ps_DEMSTAIRS).copy(IMPERVIUM_BLOCK);
+    public static final Block DARK_STAIRS = sortBlock(id("dark_stairs"), new StairsBlock(DARK.getDefaultState(), Useful.BlockSettings.basic(9f, true)),ps_DEMSTAIRS).parent(DARK);
+    public static final Block DEEP_STONE_STAIRS = sortBlock(id("deep_stone_stairs"), new StairsBlock(DEEP_STONE.getDefaultState(), Useful.BlockSettings.basic(24f, true)),ps_DEMSTAIRS).parent(DEEP_STONE);
+    public static final Block STIFF_STONE_STAIRS = sortBlock(id("stiff_stone_stairs.json"), new StairsBlock(STIFF_STONE.getDefaultState(), Useful.BlockSettings.basic(30f, true)),ps_DEMSTAIRS).parent(STIFF_STONE);
+    public static final Block DEAD_SCULK_STAIRS = sortBlock(id("dead_sculk_stairs"), new StairsBlock(DEAD_SCULK.getDefaultState(), Useful.BlockSettings.basic(15f, true)),ps_DEMSTAIRS).parent(DEAD_SCULK);
+    public static final Block IMPERVIUM_STAIRS = sortBlock(id("impervium_stairs"), new StairsBlock(IMPERVIUM_BLOCK.getDefaultState(), Useful.BlockSettings.basic(180f, true)),ps_DEMSTAIRS).parent(IMPERVIUM_BLOCK);
 
     /* NEXUS */
-    public static final Block HESPER_PLANKS = sortBlock(id("hesper_planks"), Useful.BlockSettings.auto(12f)).inNexus().normalType().dropSelf().withAxe().anyMaterial().get();
+    public static final Block HESPER_PLANKS = sortBlock(id("hesper_planks"), Useful.BlockSettings.auto(12f)).inNexus().planks().dropSelf().withAxe().anyMaterial().get();
     public static final Block HESPER_LOG = sortBlock(id("hesper_log"), new PillarBlock(Useful.BlockSettings.sounds(10f, 3.0f, true, NoteBlockInstrument.BASS, BlockSoundGroup.WOOD)),ps_LOG).inNexus().anyMaterial().get();
     public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), Useful.BlockSettings.auto(15f)).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
+    public static final Block CELESTE_STONE = sortBlock(id("celeste_stone"), Useful.BlockSettings.auto(18f)).inNexus().stone().dropSelf().withPickaxe().anyMaterial().get();
+    public static final Block HESPER_LEAVES = sortBlock(id("hesper_leaves"), Useful.BlockSettings.auto(2f)).inNexus().normalType().dropSelf().withPickaxe().anyMaterial().get();
+    public static final Block INDUG_STONE = sortBlock(id("indug_stone"), Useful.BlockSettings.auto(20f)).inNexus().stone().dropSelf().withPickaxe().anyMaterial().get();
+    public static final Block UNTILLIUM_BLOCK = sortBlock(id("untillium_block"), Useful.BlockSettings.auto(20f)).inNexus().normalType().dropSelf().withPickaxe().netheriteTool().get();
+
+    public static final Block UNTILLIUM_ORE = sortBlock(id("untillium_ore"), Useful.BlockSettings.auto(22f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
+    public static final Block INDUG_UNTILLIUM_ORE = sortBlock(id("indug_untillium_ore"), Useful.BlockSettings.auto(24f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
 
     public static void registerModBlocks() {
         HisbMod.debug("Registering Mod Blocks for " + HisbMod.id());
+//        HisbMod.debug("Mod Blocks: " + ModBlocks.all());
+//        HisbMod.debug("Normal Type: " + ModBlocks.getFromBlockType(SortInputs.NORMAL_TYPE));
+//        HisbMod.debug("Ores: " + ModBlocks.getFromDropType(SortInputs.ORE));
+//        HisbMod.debug("Shovel: " + ModBlocks.getFromToolType(SortInputs.SHOVEL));
 
         addToItemGroup(ItemGroups.BUILDING_BLOCKS,all());
     }

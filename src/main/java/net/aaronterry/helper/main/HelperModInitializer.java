@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HelperModInitializer implements ModInitializer {
@@ -12,7 +13,7 @@ public class HelperModInitializer implements ModInitializer {
     protected static boolean debugMode;
     protected static int debugLevels;
     protected static Logger LOGGER;
-    protected static final List<Runnable> initializers = new ArrayList<>();
+    protected static final List<Runnable> initializers = Collections.synchronizedList(new ArrayList<>());
 
     protected static void _create(String id, boolean debug, int levels) { modId = id; debugMode = debug; debugLevels = levels; LOGGER = LoggerFactory.getLogger(modId); }
 
@@ -42,7 +43,7 @@ public class HelperModInitializer implements ModInitializer {
 
     public static class Builder {
         protected Builder() { }
-        public Builder add(Runnable runnable) { initializers.add(runnable); return new Builder(); }
-        public Builder addAll(Runnable... runnables) { initializers.addAll(List.of(runnables)); return new Builder(); }
+        public Builder add(Runnable runnable) { initializers.add(runnable); return this; }
+        public Builder addAll(Runnable... runnables) { initializers.addAll(List.of(runnables)); return this; }
     }
 }

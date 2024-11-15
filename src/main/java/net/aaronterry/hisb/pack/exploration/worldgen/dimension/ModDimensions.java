@@ -1,9 +1,9 @@
 package net.aaronterry.hisb.pack.exploration.worldgen.dimension;
 
 public class ModDimensions {
-//    private static final RegistryKey<DimensionOptions> MAXDIM_KEY = RegistryKey.of(RegistryKeys.DIMENSION, Identifier.of(HisbMod.MOD_ID, "maxdim"));
-//    private static final RegistryKey<World> MAXDIM_LEVEL_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(HisbMod.MOD_ID, "maxdim"));
-//    private static final RegistryKey<DimensionType> MAX_DIM_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE, Identifier.of(HisbMod.MOD_ID, "maxdim_type"));
+//    private static final RegistryKey<DimensionOptions> MAXDIM_KEY = RegistryKey.of(RegistryKeys.DIMENSION, Identifier.of(HisbMod.id(), "maxdim"));
+//    private static final RegistryKey<World> MAXDIM_LEVEL_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(HisbMod.id(), "maxdim"));
+//    private static final RegistryKey<DimensionType> MAX_DIM_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE, Identifier.of(HisbMod.id(), "maxdim_type"));
 
 //    public static void bootstrapType(Registerable<DimensionType> context) {
 //        context.register(MAX_DIM_TYPE, new DimensionType(

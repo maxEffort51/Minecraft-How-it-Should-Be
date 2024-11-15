@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class PurifierScreen extends HandledScreen<PurifierScreenHandler> {
-    private static final Identifier TEXTURE = Identifier.of(HisbMod.MOD_ID, "textures/gui/purifier_table.png");
+    private static final Identifier TEXTURE = Identifier.of(HisbMod.id(), "textures/gui/purifier_table.png");
 
     public PurifierScreen(PurifierScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

@@ -12,7 +12,7 @@ public class HisbMod extends HelperModInitializer {
 
 	@Override
 	public void onInitialize() {
-		create("hisb").addAll(
+		create("hisb",true).addAll(
 			ModBlocks::registerModBlocks,
 			ModItems::registerModItems,
 			ModScreenHandlers::registerScreenHandlers,

@@ -42,7 +42,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         addDrop(ModBlocks.getFromDropType(HelperBlocks.SortInputs.DROP_SELF));
-        addSlabDrop(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.SLAB));
+        addSlabDrop(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DROP_SLAB));
 
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.BASIC_ORE));
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.SPECIFIC_ORE));

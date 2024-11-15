@@ -50,7 +50,7 @@ public class ModToolItems {
     }
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
     }
 
     public static void addAll(FabricItemGroupEntries entries, Item[] items) {
@@ -60,7 +60,7 @@ public class ModToolItems {
     }
 
     public static void registerModTools() {
-        HisbMod.debug("Registering Mod Tools for " + HisbMod.MOD_ID);
+        HisbMod.debug("Registering Mod Tools for " + HisbMod.id());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> addAll(entries, ALL));
     }

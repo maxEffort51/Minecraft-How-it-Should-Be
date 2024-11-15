@@ -53,7 +53,7 @@ public class ModEvents {
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 if (client.player == null) return;
                 // On jump key toggle fall flying state
-                if (client.options.jumpKey.isPressed()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
+                if (client.options.jumpKey.isPressed() && !client.player.isOnGround()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
                     if (chestStack.getItem() == registered && client.world != null) {
                         if (client.player.isFallFlying()) {
                             Useful.doIf(() -> { client.player.stopFallFlying(); tickCounter = 0; }, () -> tickCounter++, tickCounter >= tickBreak);
@@ -64,8 +64,12 @@ public class ModEvents {
                 }
                 if (client.player.isFallFlying()) { ItemStack chestStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
                     if (chestStack.getItem() == registered && client.world != null) {
-                        ElytraArmorItem elytra = (ElytraArmorItem) chestStack.getItem().asItem();
-                        elytra.elytraTick(chestStack, client.player);
+                        if (client.player.isOnGround()) {
+                            client.player.stopFallFlying();
+                        } else {
+                            ElytraArmorItem elytra = (ElytraArmorItem) chestStack.getItem().asItem();
+                            elytra.elytraTick(chestStack, client.player);
+                        }
                     }
                 }
             });
@@ -73,7 +77,7 @@ public class ModEvents {
     }
 
     public static void registerModEvents() {
-        HisbMod.debug("Preparing Mod Events for " + HisbMod.MOD_ID);
+        HisbMod.debug("Preparing Mod Events for " + HisbMod.id());
         CustomElytraTick.create((ElytraArmorItem) ModArmorItems.PURVIUM_ELYTRA);
         //AncientStarTick.create((AncientStarItem) ModItems.ANCIENT_STAR);
     }

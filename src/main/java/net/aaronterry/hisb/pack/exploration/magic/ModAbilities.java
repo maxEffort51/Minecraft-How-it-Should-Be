@@ -19,20 +19,23 @@ public class ModAbilities {
     public static final Ability GOLD_CHARM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.NETHERITE_FIRITE_SET), entity -> {
         if (entity instanceof PlayerEntity player) {
             Box boundingBox = player.getBoundingBox().expand(15);
+            // SET
             for (PiglinEntity piglin : player.getWorld().getEntitiesByClass(PiglinEntity.class, boundingBox, piglinEntity -> piglinEntity.isAngryAt(player))) {
                 piglin.getBrain().forget(MemoryModuleType.ANGRY_AT);
                 piglin.getBrain().forget(MemoryModuleType.ATTACK_TARGET);
+                piglin.setSilent(true);
                 piglin.setAttacking(false);
                 piglin.setCharging(false);
             }
             for (PiglinBruteEntity piglin : player.getWorld().getEntitiesByClass(PiglinBruteEntity.class, boundingBox, piglinBruteEntity -> piglinBruteEntity.isAngryAt(player))) {
                 piglin.getBrain().forget(MemoryModuleType.ANGRY_AT);
                 piglin.getBrain().forget(MemoryModuleType.ATTACK_TARGET);
+                piglin.setSilent(true);
                 piglin.setAttacking(false);
             }
         }
     });
-    private static final EntityAttributeModifier FALL_PROTECTION = new EntityAttributeModifier(Identifier.of(HisbMod.MOD_ID, "fall_protection"), 0.3f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    private static final EntityAttributeModifier FALL_PROTECTION = new EntityAttributeModifier(Identifier.of(HisbMod.id(), "fall_protection"), 4, EntityAttributeModifier.Operation.ADD_VALUE);
     public static final Ability SAFE_FALL = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.PURVIUM_SET), entity -> {
         if (!entity.isOnGround()) {
             entity.setVelocity(entity.getVelocity().multiply(1, 0.9, 1));
@@ -44,15 +47,16 @@ public class ModAbilities {
     public static final Ability MUFFLED = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.DEPNETUM_SET), entity -> entity.setSilent(true));
     public static final Ability DEEP_CALM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.DEPNETUM_SET), entity -> {
         Box boundingBox = entity.getBoundingBox().expand(15);
-        for (WardenEntity warden : entity.getWorld().getEntitiesByClass(WardenEntity.class, boundingBox, wardenEntity -> true)) {
+        for (WardenEntity warden : entity.getWorld().getEntitiesByClass(WardenEntity.class, boundingBox, wardenEntity -> !(entity instanceof PlayerEntity player) || wardenEntity.isAngryAt(player))) {
             warden.getBrain().forget(MemoryModuleType.ANGRY_AT);
+            warden.getBrain().forget(MemoryModuleType.ATTACK_TARGET);
             warden.setAttacking(false);
         }
     });
     public static final Ability[] ALL = new Ability[] {GOLD_CHARM,SAFE_FALL,UNDARK,MUFFLED,DEEP_CALM};
 
     public static void registerModAbilities() {
-        HisbMod.debug("Preparing Mod Abilities for " + HisbMod.MOD_ID);
+        HisbMod.debug("Preparing Mod Abilities for " + HisbMod.id());
         Ability.registerAbilities(ALL);
     }
 }

@@ -104,7 +104,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
 
     @Override protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
-        Inventories.readNbt(nbt, inventory, registryLookup);
+        Inventories.writeNbt(nbt, inventory, registryLookup);
         progress = nbt.getInt("purifier_table.progress");
     }
 
@@ -115,6 +115,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
             if (outputSlotAvailable(blockEntity.inventory)) {
                 blockEntity.increment();
                 if (blockEntity.isFinished()) craftItem(blockEntity.inventory);
+                blockEntity.markDirty();
             } else blockEntity.reset();
         } else blockEntity.reset();
         blockEntity.updateProgress();

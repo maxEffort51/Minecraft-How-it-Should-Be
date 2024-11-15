@@ -46,15 +46,18 @@ public class ModItems {
     public static final Item BRIGHT_DOVER_TALENT = registerItem("bright_dover_talent", new DoverTalentItem(3, new Item.Settings()));
     public static final Item BLUE_DOVER_TALENT = registerItem("blue_dover_talent", new DoverTalentItem(4, new Item.Settings()));
 
+    public static final Item UNTILLIUM_BAR = registerItem("untillium_bar", new Item(new Item.Settings()));
+
     public static final Item[] ALL = new Item[] {
             PRISMALITE_SHARD,PURIFIED_IRON,PURIFIED_COPPER,PURIFIED_LAPIS,PURIFIED_REDSTONE,PURIFIED_EMERALD,PURIFIED_DIAMOND,DYREMITE_CHUNK, // OVERWORLD
             ANCIENT_STAR,FIRITE_SCRAP,PURIFIED_SCRAP,DIRTY_SCRAP,CRYSTALLINE_QUARTZ, // NETHER
             PURVIUM_CHUNK, BLAST_SHARD, BLAST_CHARGE, // END
-            SCULTIUM_BONES, DEEP_ROD, DEPNETUM_CLUMP, SCULK_ECHO,DEMANDUM_CHUNK,DEMANDUM_GEAR,RED_DOVER_TALENT,ORANGE_DOVER_TALENT,BRIGHT_DOVER_TALENT,BLUE_DOVER_TALENT // DEMANDI
+            SCULTIUM_BONES, DEEP_ROD, DEPNETUM_CLUMP, SCULK_ECHO,DEMANDUM_CHUNK,DEMANDUM_GEAR,RED_DOVER_TALENT,ORANGE_DOVER_TALENT,BRIGHT_DOVER_TALENT,BLUE_DOVER_TALENT, // DEMANDI
+            UNTILLIUM_BAR
     };
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
     }
 
     public static void addAll(FabricItemGroupEntries entries, Item[] items) {
@@ -64,13 +67,11 @@ public class ModItems {
     }
 
     public static void registerModItems() {
-        HisbMod.debug("Registering Mod Items for " + HisbMod.MOD_ID);
+        HisbMod.debug("Registering Mod Items for " + HisbMod.id());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> addAll(entries, ALL));
 
         ModArmorItems.registerModArmor();
         ModToolItems.registerModTools();
-
-        DoverTalentItem.run();
     }
 }

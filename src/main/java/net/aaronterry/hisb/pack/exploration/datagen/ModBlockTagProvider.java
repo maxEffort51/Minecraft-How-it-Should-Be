@@ -19,9 +19,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         super(output, registriesFuture);
     }
 
-    @Nullable public FabricTagBuilder addToTag(TagKey<Block> tag, Block block) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.add(block); return builder; }
-    @Nullable public FabricTagBuilder addToTag(TagKey<Block> tag, TagKey<Block> tagToAdd) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.addTag(tagToAdd); return builder; }
-    @Nullable public FabricTagBuilder addToTag(TagKey<Block> tag, List<Block> blocks) {
+    public FabricTagBuilder addToTag(TagKey<Block> tag, Block block) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.add(block); return builder; }
+    public FabricTagBuilder addToTag(TagKey<Block> tag, TagKey<Block> tagToAdd) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.addTag(tagToAdd); return builder; }
+    public FabricTagBuilder addToTag(TagKey<Block> tag, List<Block> blocks) {
         FabricTagBuilder builder = getOrCreateTagBuilder(tag); for (Block block : blocks) builder.add(block); return builder; }
 
     public void handleToolLevels(TagKey<Block>[] toolTags, TagKey<Block>[] inverse) {
@@ -40,9 +40,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         addToTag(BlockTags.SHOVEL_MINEABLE, ModBlocks.getFromToolType(HelperBlocks.SortInputs.SHOVEL));
         addToTag(BlockTags.HOE_MINEABLE, ModBlocks.getFromToolType(HelperBlocks.SortInputs.HOE));
 
-        addToTag(BlockTags.PLANKS, ModBlocks.DEAD_PLANKS).add(ModBlocks.HESPER_PLANKS); // future: getFromRecipeType(HelperBlocks.SortInputs.PLANKS
+        addToTag(BlockTags.PLANKS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS)).add(ModBlocks.DEAD_PLANKS);
 
         addToTag(BlockTags.CLIMBABLE, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.VINE));
+
+        addToTag(BlockTags.BASE_STONE_OVERWORLD, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE));
 
         addToTag(BlockTags.NEEDS_STONE_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.STONE));
         addToTag(BlockTags.NEEDS_IRON_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.IRON));

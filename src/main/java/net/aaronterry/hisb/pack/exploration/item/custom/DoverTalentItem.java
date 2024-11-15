@@ -15,6 +15,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -33,7 +34,6 @@ public class DoverTalentItem extends Item {
     private static final Identifier ARMOR_BOOST_ID = Identifier.of(HisbMod.id(), "armor_boost");
 
     public final int type;
-    public boolean isReset = true;
 
     public DoverTalentItem(int type, Settings settings) {
         super(settings);
@@ -41,10 +41,25 @@ public class DoverTalentItem extends Item {
     }
 
     @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        // if this item is selected, use it
+        if (!(world instanceof ServerWorld serverWorld)) return;
+
+        if (entity instanceof LivingEntity user) {
+            if (!selected) { reset(user); return; }
+            HisbMod.debug("Dover Tick");
+            doverTick(user, serverWorld);
+        }
+    }
+
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        HisbMod.debug("Dover Talent Use Attempt");
         ItemStack doverStack = user.getStackInHand(hand);
         if (type < 3) return TypedActionResult.pass(doverStack);
-        ServerWorld serverWorld = Objects.requireNonNull(world.getServer()).getWorld(world.getRegistryKey());
+        MinecraftServer server = world.getServer();
+        if (server == null) return TypedActionResult.fail(doverStack);
+        ServerWorld serverWorld = server.getWorld(world.getRegistryKey());
         if (serverWorld == null || !brightTick(user, serverWorld)) return TypedActionResult.fail(doverStack);
         return TypedActionResult.success(doverStack);
     }
@@ -63,21 +78,30 @@ public class DoverTalentItem extends Item {
             case 4 -> blueTick(user, world);
             default -> false;
         };
-        isReset = false;
         if (!success) HisbMod.debug("Dover Talent tick went wrong somewhere");
     }
 
-    public static void run() {
-        HelperServerTick.playerList((server, playerList) -> playerList.forEach(player -> {
-            if (player.getActiveItem().isOf(ModItems.BLUE_DOVER_TALENT)) {
-                ((DoverTalentItem) player.getActiveItem().getItem()).doverTick(player, player.getServerWorld());
-            } else if (player.getInventory().contains(new ItemStack(ModItems.BLUE_DOVER_TALENT))){
-                PlayerInventory inventory = player.getInventory();
-                DoverTalentItem dover = (DoverTalentItem) inventory.getStack(inventory.getSlotWithStack(new ItemStack(ModItems.BLUE_DOVER_TALENT))).getItem();
-                if (!dover.isReset) dover.reset(player);
-            }
-        }));
-    }
+//    public static void run() {
+//        HelperServerTick.playerList((server, playerList) -> playerList.forEach(player -> {
+//            HisbMod.debug("Running dover talent");
+//            ItemStack mainStack = player.getMainHandStack();
+//            HisbMod.debug("Main stack: " + mainStack);
+//            ItemStack offStack = player.getOffHandStack();
+//            Item empty = new DoverTalentItem(0,new Item.Settings());
+//            if (mainStack.isOf(empty)) {
+//                HisbMod.debug("Active item");
+//                ((DoverTalentItem) mainStack.getItem()).doverTick(player, player.getServerWorld());
+//            } else if (offStack.isOf(empty)) {
+//                HisbMod.debug("Active offhand item");
+//                ((DoverTalentItem) offStack.getItem()).doverTick(player, player.getServerWorld());
+//            } else if (player.getInventory().contains(new ItemStack(empty))){
+//                HisbMod.debug("In inventory");
+//                PlayerInventory inventory = player.getInventory();
+//                DoverTalentItem dover = (DoverTalentItem) inventory.getStack(inventory.getSlotWithStack(new ItemStack(ModItems.BLUE_DOVER_TALENT))).getItem();
+//                if (!dover.isReset) dover.reset(player);
+//            }
+//        }));
+//    }
 
     private void addAttribute(LivingEntity user, RegistryEntry<EntityAttribute> type, Identifier attribute, int add) {
         EntityAttributeInstance instance = user.getAttributeInstance(type);
@@ -94,17 +118,27 @@ public class DoverTalentItem extends Item {
     }
 
     private boolean redTick(LivingEntity user) {
-        addAttribute(user, EntityAttributes.GENERIC_ATTACK_DAMAGE, DAMAGE_BOOST_ID, 5);
-        addAttribute(user, EntityAttributes.GENERIC_ARMOR, ARMOR_BOOST_ID, 5);
-        return true;
+        try {
+            addAttribute(user, EntityAttributes.GENERIC_ATTACK_DAMAGE, DAMAGE_BOOST_ID, 5);
+            addAttribute(user, EntityAttributes.GENERIC_ARMOR, ARMOR_BOOST_ID, 5);
+            return true;
+        } catch (Exception e) {
+            HisbMod.debug("Dover Talent - Red Tick Error: " + e.getMessage());
+            return false;
+        }
     }
 
     private boolean orangeTick(LivingEntity user, ServerWorld world) {
-        redTick(user);
-        Box destroyBorder = user.getBoundingBox().expand(1);
-        List<ProjectileEntity> projectiles = world.getEntitiesByClass(ProjectileEntity.class, destroyBorder, entity -> true);
-        for (ProjectileEntity projectile : projectiles) { if (projectile.getBoundingBox().intersects(destroyBorder)) projectile.discard(); }
-        return true;
+        try {
+            if (!redTick(user)) return false;
+            Box destroyBorder = user.getBoundingBox().expand(1);
+            List<ProjectileEntity> projectiles = world.getEntitiesByClass(ProjectileEntity.class, destroyBorder, entity -> true);
+            for (ProjectileEntity projectile : projectiles) { if (projectile.getBoundingBox().intersects(destroyBorder)) projectile.discard(); }
+            return true;
+        } catch (Exception e) {
+            HisbMod.debug("Dover Talent - Orange Tick Error: " + e.getMessage());
+            return false;
+        }
     }
 
     private boolean brightTick(LivingEntity user, ServerWorld world) {
@@ -120,9 +154,14 @@ public class DoverTalentItem extends Item {
     }
 
     private boolean blueTick(LivingEntity user, ServerWorld world) {
-        orangeTick(user, world);
-        float healthPercentage = user.getHealth() / user.getMaxHealth();
-        if (healthPercentage < 1) user.heal(user.getMaxHealth() / 3000);
-        return true;
+        try {
+            if (!orangeTick(user, world)) return false;
+            float healthPercentage = user.getHealth() / user.getMaxHealth();
+            if (healthPercentage < 1) user.heal(user.getMaxHealth() / 3000);
+            return true;
+        } catch (Exception e) {
+            HisbMod.debug("Dover Talent - Blue Tick Error: " + e.getMessage());
+            return false;
+        }
     }
 }

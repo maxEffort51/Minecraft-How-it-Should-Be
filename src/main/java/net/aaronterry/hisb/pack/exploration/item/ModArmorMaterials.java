@@ -29,7 +29,7 @@ public class ModArmorMaterials {
             25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, 0.4F, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
 
     private static RegistryEntry<ArmorMaterial> register(String id, EnumMap<ArmorItem.Type, Integer> defense, int enchantability, RegistryEntry<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(Identifier.of(HisbMod.MOD_ID, id)));
+        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(Identifier.of(HisbMod.id(), id)));
         return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
     }
 
@@ -38,7 +38,7 @@ public class ModArmorMaterials {
         for (ArmorItem.Type type : ArmorItem.Type.values()) {
             enumMap.put(type, defense.get(type));
         }
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(HisbMod.MOD_ID, id),
+        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(HisbMod.id(), id),
                 new ArmorMaterial(enumMap, enchantability, equipSound, repairIngredient, layers, toughness, knockbackResistance)
         );
     }
