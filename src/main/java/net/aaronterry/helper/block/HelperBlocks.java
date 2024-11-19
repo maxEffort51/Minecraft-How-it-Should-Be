@@ -105,17 +105,18 @@ public class HelperBlocks {
 
         public Block get() { return sortData.get(); }
 
+        private boolean isEmpty(String str) { return str.equals("_empty"); }
+
         public SortingPreset copy() { return new SortingPreset(this); }
         public Block copy(Block block) {
             if (block == null) { throw new IllegalArgumentException("Null input in HelperBlocks.copy"); }
             Sorted sortedBlock = getFromBlock(block);
-            switch(lastOff) {
-                case -1: dimension(sortedBlock.dim);
-                case 0: blockType(sortedBlock.blockType);
-                case 1: drop(sortedBlock.dropType);
-                case 2: tool(sortedBlock.toolType);
-                case 3: toolMaterial(sortedBlock.toolMaterial);
-            }
+            if (isEmpty(sortData.dim)) sortData.dim = sortedBlock.dim;
+            if (isEmpty(sortData.blockType)) sortData.blockType = sortedBlock.blockType;
+            if (isEmpty(sortData.dropType)) sortData.dropType = sortedBlock.dropType;
+            if (isEmpty(sortData.oreType)) sortData.oreType = sortedBlock.oreType;
+            if (isEmpty(sortData.toolType)) sortData.toolType = sortedBlock.toolType;
+            if (isEmpty(sortData.toolMaterial)) sortData.toolMaterial = sortedBlock.toolMaterial;
             return get();
         }
 
@@ -145,8 +146,12 @@ public class HelperBlocks {
         public SortingPreset vine() { return blockType(SortInputs.VINE); }
         public SortingPreset slab() { sortData.blockType = SortInputs.SLAB; return drop(SortInputs.DROP_SLAB); }
         public SortingPreset stairs() { return blockType(SortInputs.STAIRS); }
-        public SortingPreset door() { return blockType(SortInputs.DOOR); }
+        public SortingPreset door() { sortData.blockType = SortInputs.DOOR; return drop(SortInputs.DROP_DOOR); }
         public SortingPreset trapdoor() { return blockType(SortInputs.TRAPDOOR); }
+        public SortingPreset wall() { return blockType(SortInputs.WALL); }
+        public SortingPreset fence() { return blockType(SortInputs.FENCE); }
+        public SortingPreset fenceGate() { return blockType(SortInputs.FENCE_GATE); }
+        public SortingPreset sign() { return blockType(SortInputs.SIGN); }
         public SortingPreset parentBlock() { return blockType(SortInputs.PARENT_BLOCK); }
         public SortingPreset normalType() { return blockType(SortInputs.NORMAL_TYPE); }
 
@@ -237,11 +242,17 @@ public class HelperBlocks {
         public static final String STAIRS = "stairs";
         public static final String DOOR = "door";
         public static final String TRAPDOOR = "trapdoor";
+        public static final String WALL = "wall";
+        public static final String FENCE = "fence";
+        public static final String FENCE_GATE = "fence_gate";
+        public static final String SIGN = "sign";
+        public static final String CROSS = "cross_section";
         public static final String PARENT_BLOCK = "parent_block";
         public static final String NORMAL_TYPE = "block_empty";
         // DROP TYPES
         public static final String DROP_SELF = "self";
         public static final String DROP_SLAB = "drop_slab";
+        public static final String DROP_DOOR = "drop_door";
         public static final String ORE = "ore";
         public static final String BASIC_ORE = "basic_ore";
         public static final String SPECIFIC_ORE = "specific_ore";
@@ -279,8 +290,8 @@ public class HelperBlocks {
 
     /* SORTING PROCESS CLASS */
     public static class Sorting {
-        private Block block; private String dim; private String blockType; private String dropType;
-        private String oreType; private OreData oreData; private String toolType; private String toolMaterial;
+        private Block block; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
+        private String oreType = "_empty_"; private OreData oreData; private String toolType = "_empty_"; private String toolMaterial = "_empty_";
         private Block parent; private boolean hasBlock;
 
         private Sorting() { this.hasBlock = false; }
@@ -291,17 +302,19 @@ public class HelperBlocks {
             parent = template.parent; hasBlock = template.hasBlock;
         }
 
-        private void fillNull() {
-            if (dim == null) dim = SortInputs.NO_DIM;
-            if (blockType == null) blockType = SortInputs.NORMAL_TYPE;
-            if (dropType == null) dropType = SortInputs.NO_DROPS;
-            if (oreType == null) oreType = SortInputs.NO_ORE;
-            if (toolType == null) toolType = SortInputs.HAND;
-            if (toolMaterial == null) toolMaterial = SortInputs.NO_MATERIAL;
+        private boolean isEmpty(String str) { return str.equals("_empty"); }
+
+        private void fillEmpty() {
+            if (isEmpty(dim)) dim = SortInputs.NO_DIM;
+            if (isEmpty(blockType)) blockType = SortInputs.NORMAL_TYPE;
+            if (isEmpty(dropType)) dropType = SortInputs.NO_DROPS;
+            if (isEmpty(oreType)) oreType = SortInputs.NO_ORE;
+            if (isEmpty(toolType)) toolType = SortInputs.HAND;
+            if (isEmpty(toolMaterial)) toolMaterial = SortInputs.NO_MATERIAL;
         }
 
         public Block get() {
-            fillNull();
+            fillEmpty();
             sorted.add(new Sorted(this));
             return block;
         }
@@ -337,8 +350,12 @@ public class HelperBlocks {
             public DropType vine() { return blockType(SortInputs.VINE); }
             public Tool slab() { sortData.blockType = SortInputs.SLAB; sortData.dropType = SortInputs.DROP_SLAB; return new Tool(sortData); }
             public DropType stairs() { return blockType(SortInputs.STAIRS); }
-            public DropType door() { return blockType(SortInputs.DOOR); }
+            public Tool door() { sortData.blockType = SortInputs.DOOR; sortData.dropType = SortInputs.DROP_DOOR; return new Tool(sortData); }
             public DropType trapdoor() { return blockType(SortInputs.TRAPDOOR); }
+            public DropType wall() { return blockType(SortInputs.WALL); }
+            public DropType fence() { return blockType(SortInputs.FENCE); }
+            public DropType fenceGate() { return blockType(SortInputs.FENCE_GATE); }
+            public DropType sign() { return blockType(SortInputs.SIGN); }
             public DropType parentBlock() { return blockType(SortInputs.PARENT_BLOCK); }
             public DropType normalType() { return blockType(SortInputs.NORMAL_TYPE); }
         }

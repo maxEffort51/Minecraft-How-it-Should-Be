@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hisb:block/hesper_log_top",
+    "side": "hisb:block/hesper_log"
+  }
+}

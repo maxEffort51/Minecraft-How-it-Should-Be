@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hisb:block/dead_log_top",
+    "side": "hisb:block/dead_log"
+  }
+}

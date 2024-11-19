@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hisb:purified_scrap"
+    },
+    {
+      "item": "hisb:purified_scrap"
+    },
+    {
+      "item": "hisb:purified_scrap"
+    },
+    {
+      "item": "hisb:purified_scrap"
+    },
+    {
+      "item": "hisb:crystalline_quartz"
+    },
+    {
+      "item": "hisb:crystalline_quartz"
+    },
+    {
+      "item": "hisb:crystalline_quartz"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "hisb:firite_scrap"
+  }
+}

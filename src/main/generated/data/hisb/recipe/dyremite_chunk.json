@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hisb:dyremite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "hisb:dyremite_chunk"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/dark_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/dark"
+    },
+    "type=top": {
+      "model": "hisb:block/dark_slab_top"
+    }
+  }
+}

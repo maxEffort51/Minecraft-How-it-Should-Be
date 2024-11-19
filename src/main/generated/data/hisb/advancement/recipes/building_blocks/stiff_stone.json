@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stiff_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:stiff_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hisb:stiff_stone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stiff_soil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hisb:stiff_stone"
+    ]
+  }
+}

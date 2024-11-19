@@ -37,12 +37,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     public void addDrop(List<Block> blocks) { for (Block block : blocks) addDrop(block); }
     public void addSlabDrop(List<Block> blocks) { for (Block block : blocks) addDrop(block, slabDrops(block)); }
+    public void addDoorDrop(List<Block> blocks) { for (Block block : blocks) addDrop(block, doorDrops(block)); }
     public void addSameOreDrop(List<Block> blocks, Item result, int min, int max) { for (Block block : blocks) addOreDrop(block, result, min, max); }
 
     @Override
     public void generate() {
         addDrop(ModBlocks.getFromDropType(HelperBlocks.SortInputs.DROP_SELF));
         addSlabDrop(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DROP_SLAB));
+        addDoorDrop(ModBlocks.getFromDropType(HelperBlocks.SortInputs.DROP_DOOR));
 
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.BASIC_ORE));
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.SPECIFIC_ORE));
