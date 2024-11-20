@@ -1,16 +1,18 @@
-// 1.21	2024-11-18T20:15:43.803736	Minecraft How it Should Be - 1.21/Tags for minecraft:block
-50086e529bd573620f1123ead64668215beb1e3a data/minecraft/tags/block/mineable/shovel.json
+// 1.21	2024-11-19T19:27:10.232204	Minecraft How it Should Be - 1.21/Tags for minecraft:block
+2cfabcfaece4aa7b13899622fc161928ded8d1f6 data/minecraft/tags/block/mineable/shovel.json
+bfe1d5007ad36106cee522ffb23c7ac470a9a6c4 data/minecraft/tags/block/slabs.json
 edeb7d967b364c4d54ae1f040cd90f90e2c62b43 data/minecraft/tags/block/incorrect_for_netherite_tool.json
-eff9ef15b92c2ad54d314403bf59824c8ff54a30 data/minecraft/tags/block/mineable/pickaxe.json
-5e37ac7164c8f1fc35fdd8a25c2319c4d2dbf4aa data/hisb/tags/block/all_mod_blocks.json
-e4bcedbbc6cce28aff6f1cae46556b304f022ad0 data/minecraft/tags/block/base_stone_overworld.json
-38e7ceadb8c6d94d47fadc95a2711fca5fb08945 data/minecraft/tags/block/needs_iron_tool.json
+ffdd35b0c8bf10057babe5a182c9181616cd6449 data/minecraft/tags/block/mineable/pickaxe.json
+1d3677a039faa71cf206bd319a834871227a6add data/hisb/tags/block/all_mod_blocks.json
+c8f8cfe036b13b9f53d9d07b8c6c0aa5f7d11a02 data/minecraft/tags/block/needs_iron_tool.json
+4dc4853084307e2a875d7564d0c39e6182f47119 data/minecraft/tags/block/base_stone_overworld.json
 0654b7672f5b0e428e6952f71dc04caea2cfdc95 data/hisb/tags/block/needs_netherite_tool.json
+891c4f3b17fc9b2482b28fb289a7ad7d208ea222 data/minecraft/tags/block/stairs.json
 b067cdad526bf01e266ef790464a3bc317b84a3f data/minecraft/tags/block/climbable.json
-a23ff796a7a6c36100e41a457b7e297134345659 data/minecraft/tags/block/needs_diamond_tool.json
+0b4d32865fcfdfdc747de75e51c59288e93eb130 data/minecraft/tags/block/needs_diamond_tool.json
 7ec2e57dd8b063361b5bb8bc977805a0a6281324 data/minecraft/tags/block/needs_stone_tool.json
-57570ba1c70c39d25898b9901f04957dbac70fe2 data/minecraft/tags/block/mineable/axe.json
-ef92b6cce47950bdb895b08f97921bdb47e08107 data/minecraft/tags/block/mineable/hoe.json
+300f50b1f46498dcf842f638b3e73bc8d5af6d05 data/minecraft/tags/block/mineable/axe.json
 26d21fbd33c0e0a89dc768c799b38202fb5a7df5 data/minecraft/tags/block/planks.json
-8475127d8233f93973381093875f279e22cf7b5a data/hisb/tags/block/needs_scultium_tool.json
+3dbecbcdd3a04e5ee2daf87ff7ea7b45089f9a37 data/minecraft/tags/block/mineable/hoe.json
+90945e768b4342075b61f903ef90287ace36de7c data/hisb/tags/block/needs_scultium_tool.json
 04d9341a284d1f6aaf39d503e047cda1076bcceb data/minecraft/tags/block/incorrect_for_diamond_tool.json

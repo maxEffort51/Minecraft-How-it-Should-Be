@@ -4,6 +4,7 @@
     "hisb:condensed_purpur_block",
     "hisb:deep_stone",
     "hisb:stiff_stone",
+    "hisb:sculkstone",
     "hisb:dead_sculk",
     "hisb:hardened_sculk",
     "hisb:impervium_block",
@@ -24,6 +25,20 @@
     "hisb:dark_depnetum_ore",
     "hisb:untillium_ore",
     "hisb:indug_untillium_ore",
-    "hisb:hesper_leaves"
+    "hisb:condensed_purpur_slab",
+    "hisb:condensed_purpur_stairs",
+    "hisb:deep_stone_slab",
+    "hisb:deep_stone_stairs",
+    "hisb:stiff_stone_slab",
+    "hisb:stiff_stone_stairs",
+    "hisb:dead_sculk_slab",
+    "hisb:dead_sculk_stairs",
+    "hisb:impervium_slab",
+    "hisb:impervium_stairs",
+    "hisb:celeste_stone_slab",
+    "hisb:celeste_stone_stairs",
+    "hisb:celeste_stone_wall",
+    "hisb:indug_stone_slab",
+    "hisb:indug_stone_stairs"
   ]
 }

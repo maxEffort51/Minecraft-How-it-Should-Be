@@ -1,5 +1,6 @@
 package net.aaronterry.helper.block;
 
+import net.aaronterry.hisb.main.HisbMod;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -62,12 +63,24 @@ public class HelperBlocks {
         sorted.forEach(sortedBlock -> { if (sortedBlock.hasBlock() && sortedBlock.matches(sortBy, requirement)) result.add(sortedBlock.getBlock()); });
         return result;
     }
+    private static List<Block> get(String sortBy, String requirement, boolean includeParent) {
+        List<Block> result = new ArrayList<>();
+        sorted.forEach(sortedBlock -> { HisbMod.debug("Include parent? " + (includeParent || !sortedBlock.isParentBlock()) + " for block " + sortedBlock.getBlock());
+            if (sortedBlock.hasBlock() && sortedBlock.matches(sortBy, requirement) && (includeParent || !sortedBlock.isParentBlock())) result.add(sortedBlock.getBlock());
+        });
+        return result;
+    }
     public static List<Block> getNotSorted() { return notSorted.stream().toList(); }
     public static List<Block> getFromDimension(String req) { return get("dim",req); }
+    public static List<Block> getFromDimension(String req, boolean includeParents) { return get("dim",req,includeParents); }
     public static List<Block> getFromBlockType(String req) { return get("blockType",req); }
+    public static List<Block> getFromBlockType(String req, boolean includeParents) { return get("blockType",req,includeParents); }
     public static List<Block> getFromDropType(String req) { return get("dropType",req); }
+    public static List<Block> getFromDropType(String req, boolean includeParents) { return get("dropType",req,includeParents); }
     public static List<Block> getFromToolType(String req) { return get("toolType",req); }
+    public static List<Block> getFromToolType(String req, boolean includeParents) { return get("toolType",req,includeParents); }
     public static List<Block> getFromToolMaterial(String req) { return get("toolMaterial",req); }
+    public static List<Block> getFromToolMaterial(String req, boolean includeParents) { return get("toolMaterial",req,includeParents); }
     public static List<OreData> getFromOreType(String req) {
         List<OreData> result = new ArrayList<>();
         sorted.forEach(sortedBlock -> { if (sortedBlock.matches("oreType", req)) result.add(sortedBlock.getOreData()); });
@@ -76,6 +89,11 @@ public class HelperBlocks {
     private static List<Sorted> find(String sortBy, String requirement) {
         List<Sorted> result = new ArrayList<>();
         sorted.forEach(sortedBlock -> { if (sortedBlock.matches(sortBy, requirement)) result.add(sortedBlock); });
+        return result;
+    }
+    public static List<Sorted> getParents() {
+        List<Sorted> result = new ArrayList<>();
+        sorted.forEach(sortedBlock -> { if (sortedBlock.isParentBlock()) result.add(sortedBlock); });
         return result;
     }
     public static List<Sorted> sortWithDimension(String req) { return find("dim",req); }
@@ -105,7 +123,7 @@ public class HelperBlocks {
 
         public Block get() { return sortData.get(); }
 
-        private boolean isEmpty(String str) { return str.equals("_empty"); }
+        private boolean isEmpty(String str) { return str.equals("_empty_"); }
 
         public SortingPreset copy() { return new SortingPreset(this); }
         public Block copy(Block block) {
@@ -128,59 +146,38 @@ public class HelperBlocks {
             SortingPreset newPreset = this.copy(); newPreset.create(create); return newPreset;
         }
 
-        private SortingPreset dimension(String dim) { sortData.dim = dim; if (lastOff < 0) { lastOff = 0; } return this; }
-        public SortingPreset inOverworld() { return dimension(SortInputs.OVERWORLD); }
-        public SortingPreset inNether() { return dimension(SortInputs.NETHER); }
-        public SortingPreset inEnd() { return dimension(SortInputs.END); }
-        public SortingPreset inDemandi() { return dimension(SortInputs.DEMANDI); }
-        public SortingPreset inNexus() { return dimension(SortInputs.NEXUS); }
-        public SortingPreset inCustom() { return dimension(SortInputs.CUSTOM_DIM); }
-        public SortingPreset noDimension() { return dimension(SortInputs.NO_DIM); }
+        public SortingPreset parent() { sortData.isParent = true; return this; }
 
-        private SortingPreset blockType(String type) { sortData.blockType = type; if (lastOff < 1) { lastOff = 1; } return this; }
-        public SortingPreset pillar() { return blockType(SortInputs.PILLAR); }
-        public SortingPreset stone() { return blockType(SortInputs.STONE_BLOCK_TYPE); }
-        public SortingPreset planks() { return blockType(SortInputs.WOOD_PLANKS); }
-        public SortingPreset multifaceted() { return blockType(SortInputs.MULTIFACETED); }
-        public SortingPreset tableBlock() { return blockType(SortInputs.TABLE); }
-        public SortingPreset vine() { return blockType(SortInputs.VINE); }
-        public SortingPreset slab() { sortData.blockType = SortInputs.SLAB; return drop(SortInputs.DROP_SLAB); }
-        public SortingPreset stairs() { return blockType(SortInputs.STAIRS); }
-        public SortingPreset door() { sortData.blockType = SortInputs.DOOR; return drop(SortInputs.DROP_DOOR); }
-        public SortingPreset trapdoor() { return blockType(SortInputs.TRAPDOOR); }
-        public SortingPreset wall() { return blockType(SortInputs.WALL); }
-        public SortingPreset fence() { return blockType(SortInputs.FENCE); }
-        public SortingPreset fenceGate() { return blockType(SortInputs.FENCE_GATE); }
-        public SortingPreset sign() { return blockType(SortInputs.SIGN); }
-        public SortingPreset parentBlock() { return blockType(SortInputs.PARENT_BLOCK); }
-        public SortingPreset normalType() { return blockType(SortInputs.NORMAL_TYPE); }
+        public SortingPreset dimension(String dim) { sortData.dim = dim; if (lastOff < 0) { lastOff = 0; } return this; }
 
-        private SortingPreset drop(String drop) { sortData.dropType = drop; if (lastOff < 2) { lastOff = 2; } return this; }
-        public SortingPreset dropSelf() { return drop(SortInputs.DROP_SELF); }
+        public SortingPreset model(String type) { sortData.blockType = type; if (lastOff < 1) { lastOff = 1; } return this; }
+
+        public SortingPreset sign(Block wallSign) { sortData.wallSign = wallSign; return model(SortInputs.SIGN); }
+
+        public SortingPreset drop(String drop) { sortData.dropType = drop; if (lastOff < 2) { lastOff = 2; } return this; }
+
         public SortingPreset ore(ItemConvertible drop) { sortData.oreType = SortInputs.BASIC_ORE; sortData.oreData = new OreData(sortData.block,drop); return drop(SortInputs.ORE); }
-        public SortingPreset ore(ItemConvertible drop, int min, int max) { sortData.oreType = SortInputs.SPECIFIC_ORE; sortData.oreData = new OreData(sortData.block,drop, min, max); return drop(SortInputs.ORE); }
-        public SortingPreset needsShears() { return drop(SortInputs.NEEDS_SHEARS); }
-        public SortingPreset noDrops() { return drop(SortInputs.NO_DROPS); }
+        public SortingPreset ore(ItemConvertible drop, int min, int max) { sortData.oreType = SortInputs.SPECIFIC_ORE; sortData.oreData = new OreData(sortData.block, drop, min, max); return drop(SortInputs.ORE); }
 
-        private SortingPreset tool(String tool) { sortData.toolType = tool; if (lastOff < 3) { lastOff = 3; } return this; }
-        public SortingPreset withAxe() { return tool(SortInputs.AXE); }
-        public SortingPreset withPickaxe() { return tool(SortInputs.PICKAXE); }
-        public SortingPreset withShovel() { return tool(SortInputs.SHOVEL); }
-        public SortingPreset withHoe() { return tool(SortInputs.HOE); }
-        public SortingPreset noTool() { return tool(SortInputs.HAND); }
+        public SortingPreset tool(String tool) { sortData.toolType = tool; if (lastOff < 3) { lastOff = 3; } return this; }
 
-        private SortingPreset toolMaterial(String mat) { sortData.toolMaterial = mat; if (lastOff < 4) { lastOff = 4; } return this; }
-        public SortingPreset stoneTool() { return toolMaterial(SortInputs.STONE); }
-        public SortingPreset ironTool() { return toolMaterial(SortInputs.IRON); }
-        public SortingPreset diamondTool() { return toolMaterial(SortInputs.DIAMOND); }
-        public SortingPreset netheriteTool() { return toolMaterial(SortInputs.NETHERITE); }
-        public SortingPreset scultiumTool() { return toolMaterial(SortInputs.SCULTIUM); }
-        public SortingPreset anyMaterial() { return toolMaterial(SortInputs.NO_MATERIAL); }
+        public SortingPreset material(String mat) { sortData.toolMaterial = mat; if (lastOff < 4) { lastOff = 4; } return this; }
+
+        public SortingPreset and(SortingPreset preset) {
+            if (!isEmpty(preset.sortData.dim) && isEmpty(sortData.dim)) sortData.dim = preset.sortData.dim;
+            if (!isEmpty(preset.sortData.blockType) && isEmpty(sortData.blockType)) sortData.blockType = preset.sortData.blockType;
+            if (!isEmpty(preset.sortData.dropType) && isEmpty(sortData.dropType)) sortData.dropType = preset.sortData.dropType;
+            if (!isEmpty(preset.sortData.oreType) && isEmpty(sortData.oreType)) sortData.oreType = preset.sortData.oreType;
+            if (!isEmpty(preset.sortData.toolType) && isEmpty(sortData.toolType)) sortData.toolType = preset.sortData.toolType;
+            if (!isEmpty(preset.sortData.toolMaterial) && isEmpty(sortData.toolMaterial)) sortData.toolMaterial = preset.sortData.toolMaterial;
+            return this;
+        }
     }
 
     /* ALREADY SORTED */
     public static class Sorted {
         private final Block block;
+        private final Block wallSign;
         private final Block parent;
         private final String dim;
         private final String blockType;
@@ -190,12 +187,13 @@ public class HelperBlocks {
         private final String toolType;
         private final String toolMaterial;
         private final boolean hasBlock;
+        private final boolean isParent;
 
         private Sorted(Sorting template) {
-            block = template.block; dim = template.dim; blockType = template.blockType;
+            wallSign = template.wallSign; block = template.block; dim = template.dim; blockType = template.blockType;
             dropType = template.dropType; oreType = template.oreType; oreData = template.oreData;
             toolType = template.toolType; toolMaterial = template.toolMaterial; parent = template.parent;
-            hasBlock = template.hasBlock;
+            hasBlock = template.hasBlock; isParent = template.isParent;
         }
 
         public boolean hasParent() { return parent != null; }
@@ -205,6 +203,8 @@ public class HelperBlocks {
         public boolean hasBlock() { return hasBlock; }
 
         public Block getBlock() { return block; }
+
+        public Block getWallSign() { return wallSign; }
 
         public OreData getOreData() { return oreData; }
 
@@ -219,6 +219,8 @@ public class HelperBlocks {
                 default -> false;
             };
         }
+
+        public boolean isParentBlock() { return isParent; }
     }
 
     /* POSSIBLE SORT INPUTS */
@@ -247,7 +249,6 @@ public class HelperBlocks {
         public static final String FENCE_GATE = "fence_gate";
         public static final String SIGN = "sign";
         public static final String CROSS = "cross_section";
-        public static final String PARENT_BLOCK = "parent_block";
         public static final String NORMAL_TYPE = "block_empty";
         // DROP TYPES
         public static final String DROP_SELF = "self";
@@ -290,16 +291,16 @@ public class HelperBlocks {
 
     /* SORTING PROCESS CLASS */
     public static class Sorting {
-        private Block block; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
+        private Block block; private Block wallSign; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
         private String oreType = "_empty_"; private OreData oreData; private String toolType = "_empty_"; private String toolMaterial = "_empty_";
-        private Block parent; private boolean hasBlock;
+        private boolean isParent = false; private Block parent; private boolean hasBlock;
 
         private Sorting() { this.hasBlock = false; }
         private Sorting(Block block) { this.block = block; this.hasBlock = true; }
         private Sorting(Sorting template) {
-            block = template.block; dim = template.dim;blockType = template.blockType;dropType = template.dropType;
+            wallSign = template.wallSign; block = template.block; dim = template.dim;blockType = template.blockType;dropType = template.dropType;
             oreType = template.oreType; oreData = template.oreData; toolType = template.toolType; toolMaterial = template.toolMaterial;
-            parent = template.parent; hasBlock = template.hasBlock;
+            isParent = template.isParent; parent = template.parent; hasBlock = template.hasBlock;
         }
 
         private boolean isEmpty(String str) { return str.equals("_empty"); }
@@ -355,8 +356,8 @@ public class HelperBlocks {
             public DropType wall() { return blockType(SortInputs.WALL); }
             public DropType fence() { return blockType(SortInputs.FENCE); }
             public DropType fenceGate() { return blockType(SortInputs.FENCE_GATE); }
-            public DropType sign() { return blockType(SortInputs.SIGN); }
-            public DropType parentBlock() { return blockType(SortInputs.PARENT_BLOCK); }
+            public DropType sign(Block wallSign) { sortData.wallSign = wallSign; return blockType(SortInputs.SIGN); }
+            public DropType parentBlock() { sortData.isParent = true; return blockType(SortInputs.NORMAL_TYPE); }
             public DropType normalType() { return blockType(SortInputs.NORMAL_TYPE); }
         }
 

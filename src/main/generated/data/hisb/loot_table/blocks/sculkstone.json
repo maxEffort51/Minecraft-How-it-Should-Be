@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hisb:stiff_stone_stairs.json"
+          "name": "hisb:sculkstone"
         }
       ],
       "rolls": 1.0

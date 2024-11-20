@@ -3,6 +3,8 @@
     "hisb:impervium_block",
     "hisb:deep_dark_heart",
     "hisb:deep_heart",
-    "hisb:dark_heart"
+    "hisb:dark_heart",
+    "hisb:impervium_slab",
+    "hisb:impervium_stairs"
   ]
 }

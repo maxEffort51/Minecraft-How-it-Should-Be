@@ -1,4 +1,4 @@
-// 1.21	2024-11-18T20:15:43.80624	Minecraft How it Should Be - 1.21/Block Loot Tables
+// 1.21	2024-11-19T19:27:10.237377	Minecraft How it Should Be - 1.21/Block Loot Tables
 190c902400ec5a1dfbd74b4661b16db27ebb7ceb data/hisb/loot_table/blocks/hesper_trapdoor.json
 53f1d80846771955d96449b43aafc725563de6cb data/hisb/loot_table/blocks/washed_sculk.json
 0a3f2fb3692c3f5a95df63732882709232b69e31 data/hisb/loot_table/blocks/scultium_ore.json
@@ -22,10 +22,10 @@ e3f740746fd38f9a7ef87423a5a2c46e35d14fa9 data/hisb/loot_table/blocks/celeste_sto
 514ba70a263a68293083095fd1a8a3a3e3f0b1f7 data/hisb/loot_table/blocks/hesper_sign.json
 46475f8ab8aa9fbd111f1bd1e8e6bba8b14bdd6e data/hisb/loot_table/blocks/celeste_stone_wall.json
 a6b9598db72069db7cbc31e0436f56a377de5dbf data/hisb/loot_table/blocks/deep_sculk.json
-bf25921360f451105ed9375eb29941f534fe1396 data/hisb/loot_table/blocks/stiff_stone_stairs.json.json
 99c2b86c18cdac98a3aacd97e08431bbfe97409a data/hisb/loot_table/blocks/stiff_soil.json
 c3df35ff9d87082cc17de154080cda500367b625 data/hisb/loot_table/blocks/hesper_log.json
 4341e4669b373694605aee22c71ecd184c74637a data/hisb/loot_table/blocks/azure_bluet.json
+cb816da4368cc5c70d725c87d332b13934c40cfb data/hisb/loot_table/blocks/stiff_stone_stairs.json
 f336c4b98eabe9501c3534e8d5f4426ee18e8787 data/hisb/loot_table/blocks/dyremite_block.json
 66bacb51662e7486be974ec74d55071686429847 data/hisb/loot_table/blocks/dark_stairs.json
 b0ae05bbcf636141675d5d7330f07e15903952b1 data/hisb/loot_table/blocks/dark_depnetum_ore.json
@@ -39,6 +39,8 @@ f68dc2cd89c345f92cf7163167f87bfd86e3f3ec data/hisb/loot_table/blocks/deep_stone.
 6cb036a7720d1616c1c9ef853023ac3855b5158a data/hisb/loot_table/blocks/deep_stone_stairs.json
 f640c820a5109f407ba24c995e33b037b852e168 data/hisb/loot_table/blocks/prismalite_ore.json
 e839da823a523cd2cb910733a8af1a3e16433492 data/hisb/loot_table/blocks/impervium_stairs.json
+def7a8490f3ae5f8a0b8e7b7ab934ccdf3864d4b data/hisb/loot_table/blocks/sculkstone.json
+0d8635d270313667a1dbf36aa0b69d3c15b6c287 data/hisb/loot_table/blocks/hesper_wall_sign.json
 64b0b154c5176af6acf8b3c0ccf5d9c5eb1329db data/hisb/loot_table/blocks/purifier_table.json
 a83c2142d9bafbe6ef92e2a00974879333e9ee5c data/hisb/loot_table/blocks/condensed_purpur_block.json
 5419b6d90c4c9ff22cd7875cfd23136e0e7ad3b2 data/hisb/loot_table/blocks/indug_stone_stairs.json

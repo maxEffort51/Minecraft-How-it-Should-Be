@@ -42,6 +42,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         addToTag(BlockTags.PLANKS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS)).add(ModBlocks.DEAD_PLANKS);
 
+        addToTag(BlockTags.SLABS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.SLAB));
+        addToTag(BlockTags.STAIRS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STAIRS));
+
         addToTag(BlockTags.CLIMBABLE, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.VINE));
 
         addToTag(BlockTags.BASE_STONE_OVERWORLD, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE));

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "hisb:block/hesper_door_bottom",
+    "top": "hisb:block/hesper_door_top"
+  }
+}

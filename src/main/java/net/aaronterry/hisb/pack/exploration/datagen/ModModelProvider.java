@@ -5,16 +5,15 @@ import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.item.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.aaronterry.hisb.pack.exploration.item.ModToolItems;
-import net.aaronterry.hisb.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
+import net.minecraft.data.family.BlockFamilies;
+import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -43,31 +42,35 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
         // NORMAL MODEL BLOCKS
         generateBlocks(generator, ModBlocks.getNotSorted());
-        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.NORMAL_TYPE));
-        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TABLE));
-        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE));
-        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS));
+        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.NORMAL_TYPE,false));
+        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TABLE,false));
+        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE,false));
+        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS,false));
 
-        // SLAB, STAIRS, DOOR MODEL BLOCKS
+        // DOOR AND TRAPDOOR BLOCKS
+        ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DOOR).forEach(generator::registerDoor);
+        ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TRAPDOOR).forEach(generator::registerTrapdoor);
+
+        // SLAB, STAIRS, WALLS, FENCES, ETC. BLOCKS
         List<HelperBlocks.Sorted> slabs = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.SLAB);
         List<HelperBlocks.Sorted> stairs = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.STAIRS);
-        List<HelperBlocks.Sorted> doors = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.DOOR);
-        List<HelperBlocks.Sorted> trapdoors = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.TRAPDOOR);
         List<HelperBlocks.Sorted> walls = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.WALL);
         List<HelperBlocks.Sorted> fences = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.FENCE);
         List<HelperBlocks.Sorted> fence_gates = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.FENCE_GATE);
         List<HelperBlocks.Sorted> signs = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.SIGN);
-        List<HelperBlocks.Sorted> parents = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.PARENT_BLOCK);
+        List<HelperBlocks.Sorted> parents = ModBlocks.getParents();
         parents.forEach(parent -> {
             BlockStateModelGenerator.BlockTexturePool texture = generator.registerCubeAllModelTexturePool(parent.getBlock());
-            slabs.forEach(slab -> { if (slab.hasParent() && slab.getParent().equals(parent.getBlock())) texture.slab(slab.getBlock()); });
-            stairs.forEach(stair -> { if (stair.hasParent() && stair.getParent().equals(parent.getBlock())) texture.stairs(stair.getBlock()); });
-            doors.forEach(door -> { if (door.hasParent() && door.getParent().equals(parent.getBlock())) texture.stairs(door.getBlock()); });
-            trapdoors.forEach(door -> { if (door.hasParent() && door.getParent().equals(parent.getBlock())) texture.stairs(door.getBlock()); });
-            walls.forEach(wall -> { if (wall.hasParent() && wall.getParent().equals(parent.getBlock())) texture.stairs(wall.getBlock()); });
-            fences.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) texture.fence(fence.getBlock()); });
-            fence_gates.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) texture.fenceGate(fence.getBlock()); });
-            signs.forEach(sign -> { if (sign.hasParent() && sign.getParent().equals(parent.getBlock())) texture.sign(sign.getBlock()); });
+            BlockFamily.Builder family = new BlockFamily.Builder(parent.getBlock());
+            slabs.forEach(slab -> { if (slab.hasParent() && slab.getParent().equals(parent.getBlock())) family.slab(slab.getBlock()); });
+            stairs.forEach(stair -> { if (stair.hasParent() && stair.getParent().equals(parent.getBlock())) family.stairs(stair.getBlock()); });
+            walls.forEach(wall -> { if (wall.hasParent() && wall.getParent().equals(parent.getBlock())) family.wall(wall.getBlock()); });
+            fences.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) family.fence(fence.getBlock()); });
+            fence_gates.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) family.fenceGate(fence.getBlock()); });
+            signs.forEach(sign -> {
+                if (sign.hasParent() && sign.getParent().equals(parent.getBlock())) { family.sign(sign.getBlock(),sign.getWallSign()); }
+            });
+            texture.family(family.build());
         });
 
         generateCross(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.CROSS));

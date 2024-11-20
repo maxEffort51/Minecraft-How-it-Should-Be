@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "hisb:block/hesper_planks",
+    "side": "hisb:block/hesper_planks",
+    "top": "hisb:block/hesper_planks"
+  }
+}

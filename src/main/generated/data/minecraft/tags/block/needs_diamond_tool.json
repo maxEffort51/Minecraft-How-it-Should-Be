@@ -6,6 +6,10 @@
     "hisb:dyremite_block",
     "hisb:scultium_ore",
     "hisb:depnetum_ore",
-    "hisb:dark_depnetum_ore"
+    "hisb:dark_depnetum_ore",
+    "hisb:stiff_stone_slab",
+    "hisb:stiff_stone_stairs",
+    "hisb:dead_sculk_slab",
+    "hisb:dead_sculk_stairs"
   ]
 }
