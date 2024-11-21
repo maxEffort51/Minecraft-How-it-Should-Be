@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:untillium_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_untillium_bar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:untillium_bar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_untillium_bar"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:untillium_block"
+    ]
+  }
+}

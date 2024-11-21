@@ -1,7 +1,8 @@
 package net.aaronterry.hisb.pack.exploration.datagen;
 
+import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.hisb.main.HisbMod;
-import net.aaronterry.hisb.pack.exploration.item.ModArmorItems;
+import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -24,6 +25,62 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
 
+    public static class GenericDetails {
+        private final String type;
+        private ShapedRecipeJsonBuilder shapedBuilder;
+        private Identifier id;
+        private ShapelessRecipeJsonBuilder shapelessBuilder;
+        private ReverseData reverse;
+
+        public GenericDetails(ShapedRecipeJsonBuilder shaped) {
+            shapedBuilder = shaped;
+            this.type = "shaped";
+        }
+        public GenericDetails(ShapelessRecipeJsonBuilder shapeless) {
+            shapelessBuilder = shapeless;
+            this.type = "shapeless";
+        }
+        public GenericDetails(RecipeCategory cat, ItemConvertible base, ItemConvertible compact) {
+            reverse = new ReverseData(cat, base, compact);
+            this.type = "reverse";
+        }
+
+        public GenericDetails(ShapedRecipeJsonBuilder builder, Identifier id) {
+            this(builder);
+            this.id = id;
+        }
+        public GenericDetails(ShapelessRecipeJsonBuilder builder, Identifier id) {
+            this(builder);
+            this.id = id;
+        }
+
+        public void offer(RecipeExporter xpt) {
+            switch(type) {
+                case "shaped": if (id != null) { shapedBuilder.offerTo(xpt, id); } else shapedBuilder.offerTo(xpt); break;
+                case "shapeless": if (id != null) { shapelessBuilder.offerTo(xpt, id); } else shapelessBuilder.offerTo(xpt); break;
+                case "reverse": offerReversibleCompactingRecipes(xpt, reverse.category, reverse.base, reverse.category, reverse.compact);
+            }
+        }
+        public void offer(RecipeExporter xpt, Identifier id) {
+            switch(type) {
+                case "shaped": shapedBuilder.offerTo(xpt, id);
+                case "shapeless": shapelessBuilder.offerTo(xpt, id);
+                case "reverse": offerReversibleCompactingRecipes(xpt, reverse.category, reverse.base, reverse.category, reverse.compact);
+            }
+        }
+
+        // generic recipe details
+        private static class ReverseData {
+            public RecipeCategory category;
+            public ItemConvertible base;
+            public ItemConvertible compact;
+
+            public ReverseData(RecipeCategory cat, ItemConvertible base, ItemConvertible compact) {
+                category = cat; this.base = base; this.compact = compact;
+            }
+        }
+    }
+
     public static class Shaped {
         public static Details recipe(RecipeCategory cat, ItemConvertible result) {
             ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result); return new Details(builder);
@@ -31,36 +88,61 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
         public static Details recipe(RecipeCategory cat, ItemConvertible result, int count) {
             ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result, count); return new Details(builder);
         }
+        // PRESET-BUILT
+        public static Details recipe(RecipeCategory cat, ItemConvertible result, HelperBlocks.SortingPreset preset) {
+            ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result); return new Details(builder, preset);
+        }
+        public static Details recipe(RecipeCategory cat, ItemConvertible result, int count, HelperBlocks.SortingPreset preset) {
+            ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result, count); return new Details(builder, preset);
+        }
 
         public static class Details {
+            private HelperBlocks.SortingPreset preset;
             private final ShapedRecipeJsonBuilder builder;
+            private Identifier id;
             private final List<ItemConvertible> inputs = new ArrayList<>();
             public Details(ShapedRecipeJsonBuilder builder) { this.builder = builder; }
+            public Details(ShapedRecipeJsonBuilder builder, HelperBlocks.SortingPreset preset) {
+                this.builder = builder; this.preset = preset; }
 
             public Details needs(ItemConvertible item) { builder.criterion(hasItem(item), conditionsFromItem(item)); return this; }
             public Details needs(int i) { builder.criterion(hasItem(inputs.get(i)), conditionsFromItem(inputs.get(i))); return this; }
             public Details pattern(Pattern pattern) { pattern.with(builder); return this; }
             public Details input(char[] chars, ItemConvertible[] items) { inputs.addAll(List.of(items)); for (int i = 0; i < chars.length; i++) builder.input(chars[i],items[i]); return this; }
             public Details input(char c, ItemConvertible item) { inputs.add(item); builder.input(c, item); return this; }
+            public Details id(Identifier id) { this.id = id; return this; }
             public void offer(RecipeExporter xpt) { builder.offerTo(xpt); }
             public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.id(), unique)); }
+            public HelperBlocks.SortingPreset endRecipe() { preset.recipe(new GenericDetails(builder, id)); return preset; }
         }
     }
 
     public static class Shapeless {
         public static Details recipe(RecipeCategory cat, ItemConvertible result) {
-            ShapelessRecipeJsonBuilder builder = ShapelessRecipeJsonBuilder.create(cat, result);
-            return new Details(builder, result);
+            ShapelessRecipeJsonBuilder builder = ShapelessRecipeJsonBuilder.create(cat, result); return new Details(builder, result);
         }
         public static Details recipe(RecipeCategory cat, ItemConvertible result, int count) {
             ShapelessRecipeJsonBuilder builder = ShapelessRecipeJsonBuilder.create(cat, result, count); return new Details(builder, result);
         }
+        // PRESET-BUILT
+        public static Details recipe(RecipeCategory cat, ItemConvertible result, HelperBlocks.SortingPreset preset) {
+            ShapelessRecipeJsonBuilder builder = ShapelessRecipeJsonBuilder.create(cat, result); return new Details(builder, result, preset);
+        }
+        public static Details recipe(RecipeCategory cat, ItemConvertible result, int count, HelperBlocks.SortingPreset preset) {
+            ShapelessRecipeJsonBuilder builder = ShapelessRecipeJsonBuilder.create(cat, result, count); return new Details(builder, result, preset);
+        }
 
         public static class Details {
+            private HelperBlocks.SortingPreset preset;
+            private Identifier id;
             private final ShapelessRecipeJsonBuilder builder;
             private final ItemConvertible result;
 
             public Details(ShapelessRecipeJsonBuilder builder, ItemConvertible result) { this.builder = builder; this.result = result; }
+            public Details(ShapelessRecipeJsonBuilder builder, ItemConvertible result, HelperBlocks.SortingPreset preset) {
+                this.builder = builder; this.result = result; this.preset = preset; }
+
+
             public Details needs(ItemConvertible item) { builder.criterion(hasItem(item), conditionsFromItem(item)); return this; }
             public Details needsResult() { builder.criterion(hasItem(result), conditionsFromItem(result)); return this; }
             public Details input(ItemConvertible input, int amount) { builder.input(input, amount); return this; }
@@ -70,8 +152,10 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
             public Details input(ItemConvertible i, int a, ItemConvertible i2, int a2) { return this.input(new ItemConvertible[] {i, i2}, new int[] {a, a2}); }
             public Details input(ItemConvertible i, int a, ItemConvertible i2, int a2, ItemConvertible i3, int a3) { return this.input(new ItemConvertible[] {i, i2, i3}, new int[] {a, a2, a3}); }
             public Details input(ItemConvertible i, ItemConvertible i2, ItemConvertible i3, int a) { return this.input(new ItemConvertible[] {i, i2, i3}, new int[] {a, a, a}); }
-            public void offer(RecipeExporter xpt) { builder.offerTo(xpt); }
+            public Details id(Identifier id) { this.id = id; return this; }
+            public void offer(RecipeExporter xpt) { if (id != null) { builder.offerTo(xpt, id); } else builder.offerTo(xpt); }
             public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.id(), unique)); }
+            public HelperBlocks.SortingPreset endRecipe() { preset.recipe(new GenericDetails(builder, id)); return preset; }
         }
     }
 

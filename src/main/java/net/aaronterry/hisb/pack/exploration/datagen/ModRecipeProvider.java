@@ -1,9 +1,11 @@
 package net.aaronterry.hisb.pack.exploration.datagen;
 
+import net.aaronterry.helper.block.HelperBlocks;
+import net.aaronterry.hisb.main.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
-import net.aaronterry.hisb.pack.exploration.item.ModArmorItems;
+import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
-import net.aaronterry.hisb.pack.exploration.item.ModToolItems;
+import net.aaronterry.hisb.pack.exploration.item.tool.ModToolItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
@@ -11,6 +13,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends ModRecipeHelperProvider {
@@ -40,12 +43,8 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
                 .needsResult().offer(xpt);
         Shapeless.recipe(RecipeCategory.MISC, ModItems.DIRTY_SCRAP, 4).input(Items.NETHERITE_SCRAP, 5, ModItems.PURIFIED_SCRAP, 2, ModItems.CRYSTALLINE_QUARTZ, 2)
                 .needsResult().offer(xpt, "dirty_scrap_main");
-        Shapeless.recipe(RecipeCategory.MISC, ModBlocks.PURIFIER_TABLE).input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE},
-                new int[] {2,2,2,1,2}).needsResult().offer(xpt);
         Shapeless.recipe(RecipeCategory.MISC, ModItems.DEEP_ROD, 3).input(Items.STICK, 3, ModItems.SCULTIUM_BONES, 3).needsResult().offer(xpt);
         Shapeless.recipe(RecipeCategory.MISC, ModItems.BLAST_CHARGE).input(ModItems.BLAST_SHARD,9).needs(ModItems.BLAST_SHARD).offer(xpt);
-        Shapeless.recipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DEAD_PLANKS, 4).input(ModBlocks.DEAD_LOG).needs(ModBlocks.DEAD_LOG).offer(xpt);
-        Shapeless.recipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STIFF_STONE).input(ModBlocks.STIFF_SOIL, 4).needs(ModBlocks.STIFF_SOIL).offer(xpt);
 
         // Recipe.specific(xpt, block, item, pattern, category)
         // Recipe.generic("reverse", category, blocks[], items[], xpt)
@@ -54,8 +53,6 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
         // Recipe.generic("armor", armorsets[][], items[])
 
         // RECIPE
-        Recipe.reverse(xpt, ModItems.DYREMITE_CHUNK, ModBlocks.DYREMITE_BLOCK, RecipeCategory.MISC);
-        Recipe.reverse(xpt, ModItems.DIRTY_SCRAP, ModBlocks.DEBRITINUM_BLOCK, RecipeCategory.MISC);
         Recipe.oneIngredient(xpt, ModArmorItems.PURVIUM_ARMOR, ModItems.PURVIUM_CHUNK, RecipeCategory.COMBAT, '#', new Pattern[] {
                 new Pattern("###","# #"),new Pattern("###","# #","# #"),new Pattern("# #","# #")});
         Recipe.toolset(xpt, ModToolItems.SCULTIUM, ModItems.SCULTIUM_BONES, ModItems.DEEP_ROD, ModItems.SCULTIUM_BONES);
@@ -66,5 +63,22 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
 
         // CUSTOM
         Custom.firite(xpt);
+
+        /* BLOCK RECIPES */
+        // FOR ALL BLOCKS WITH RECIPES... -> GET THE RECIPE DATA; OFFER THE RECIPE TO EXPORTER
+        HisbMod.debug("blocks with recipes: " + ModBlocks.getBlocksWithRecipes());
+        List<HelperBlocks.Sorted> recipes = ModBlocks.getBlocksWithRecipes();
+        for (HelperBlocks.Sorted sort : recipes) {
+            List<GenericDetails> details = sort.getRecipes();
+            details.forEach(recipe -> recipe.offer(xpt));
+        }
+
+//        Shapeless.recipe(RecipeCategory.MISC, ModBlocks.PURIFIER_TABLE).input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE},
+//                new int[] {2,2,2,1,2}).needsResult().offer(xpt);
+//        Shapeless.recipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DEAD_PLANKS, 4).input(ModBlocks.DEAD_LOG).needs(ModBlocks.DEAD_LOG).offer(xpt);
+
+//        Shapeless.recipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STIFF_STONE).input(ModBlocks.STIFF_SOIL, 4).needs(ModBlocks.STIFF_SOIL).offer(xpt);
+//        Recipe.reverse(xpt, ModItems.DYREMITE_CHUNK, ModBlocks.DYREMITE_BLOCK, RecipeCategory.MISC);
+//        Recipe.reverse(xpt, ModItems.DIRTY_SCRAP, ModBlocks.DEBRITINUM_BLOCK, RecipeCategory.MISC);
     }
 }

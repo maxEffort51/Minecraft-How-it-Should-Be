@@ -1,12 +1,14 @@
 package net.aaronterry.helper.block;
 
 import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.pack.exploration.datagen.ModRecipeHelperProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -17,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* ADDITIONS
- * ItemGroups organization
+ * ItemGroup organization
  * Functionality organization
- * Biome organization ?
+ * Recipe organization
  */
 
 public class HelperBlocks {
@@ -65,7 +67,7 @@ public class HelperBlocks {
     }
     private static List<Block> get(String sortBy, String requirement, boolean includeParent) {
         List<Block> result = new ArrayList<>();
-        sorted.forEach(sortedBlock -> { HisbMod.debug("Include parent? " + (includeParent || !sortedBlock.isParentBlock()) + " for block " + sortedBlock.getBlock());
+        sorted.forEach(sortedBlock -> {
             if (sortedBlock.hasBlock() && sortedBlock.matches(sortBy, requirement) && (includeParent || !sortedBlock.isParentBlock())) result.add(sortedBlock.getBlock());
         });
         return result;
@@ -94,6 +96,11 @@ public class HelperBlocks {
     public static List<Sorted> getParents() {
         List<Sorted> result = new ArrayList<>();
         sorted.forEach(sortedBlock -> { if (sortedBlock.isParentBlock()) result.add(sortedBlock); });
+        return result;
+    }
+    public static List<Sorted> getBlocksWithRecipes() {
+        List<Sorted> result = new ArrayList<>();
+        sorted.forEach(sortedBlock -> { if(sortedBlock.hasRecipes()) result.add(sortedBlock); });
         return result;
     }
     public static List<Sorted> sortWithDimension(String req) { return find("dim",req); }
@@ -146,13 +153,32 @@ public class HelperBlocks {
             SortingPreset newPreset = this.copy(); newPreset.create(create); return newPreset;
         }
 
+        public ModRecipeHelperProvider.Shaped.Details shapedRecipe(RecipeCategory cat) {
+            return ModRecipeHelperProvider.Shaped.recipe(cat, sortData.block, copy());
+        }
+        public ModRecipeHelperProvider.Shaped.Details shapedRecipe(RecipeCategory cat, int count) {
+            return ModRecipeHelperProvider.Shaped.recipe(cat, sortData.block, count, copy());
+        }
+        public ModRecipeHelperProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat) {
+            return ModRecipeHelperProvider.Shapeless.recipe(cat, sortData.block, copy());
+        }
+        public ModRecipeHelperProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat, int count) {
+            return ModRecipeHelperProvider.Shapeless.recipe(cat, sortData.block, count, copy());
+        }
+        public SortingPreset reverseRecipe(RecipeCategory cat, ItemConvertible base) {
+            sortData.recipes.add(new ModRecipeHelperProvider.GenericDetails(cat, base, sortData.block));
+            return this;
+        }
+
+        public void recipe(ModRecipeHelperProvider.GenericDetails details) {
+            sortData.recipes.add(details);
+        }
+
         public SortingPreset parent() { sortData.isParent = true; return this; }
 
         public SortingPreset dimension(String dim) { sortData.dim = dim; if (lastOff < 0) { lastOff = 0; } return this; }
 
         public SortingPreset model(String type) { sortData.blockType = type; if (lastOff < 1) { lastOff = 1; } return this; }
-
-        public SortingPreset sign(Block wallSign) { sortData.wallSign = wallSign; return model(SortInputs.SIGN); }
 
         public SortingPreset drop(String drop) { sortData.dropType = drop; if (lastOff < 2) { lastOff = 2; } return this; }
 
@@ -177,7 +203,6 @@ public class HelperBlocks {
     /* ALREADY SORTED */
     public static class Sorted {
         private final Block block;
-        private final Block wallSign;
         private final Block parent;
         private final String dim;
         private final String blockType;
@@ -188,12 +213,13 @@ public class HelperBlocks {
         private final String toolMaterial;
         private final boolean hasBlock;
         private final boolean isParent;
+        private final List<ModRecipeHelperProvider.GenericDetails> recipes;
 
         private Sorted(Sorting template) {
-            wallSign = template.wallSign; block = template.block; dim = template.dim; blockType = template.blockType;
+            block = template.block; dim = template.dim; blockType = template.blockType;
             dropType = template.dropType; oreType = template.oreType; oreData = template.oreData;
             toolType = template.toolType; toolMaterial = template.toolMaterial; parent = template.parent;
-            hasBlock = template.hasBlock; isParent = template.isParent;
+            hasBlock = template.hasBlock; isParent = template.isParent; recipes = template.recipes;
         }
 
         public boolean hasParent() { return parent != null; }
@@ -204,9 +230,11 @@ public class HelperBlocks {
 
         public Block getBlock() { return block; }
 
-        public Block getWallSign() { return wallSign; }
-
         public OreData getOreData() { return oreData; }
+
+        public boolean hasRecipes() { return !recipes.isEmpty(); }
+
+        public List<ModRecipeHelperProvider.GenericDetails> getRecipes() { return recipes; }
 
         public boolean matches(String type, String condition) {
             return switch(type) {
@@ -247,7 +275,6 @@ public class HelperBlocks {
         public static final String WALL = "wall";
         public static final String FENCE = "fence";
         public static final String FENCE_GATE = "fence_gate";
-        public static final String SIGN = "sign";
         public static final String CROSS = "cross_section";
         public static final String NORMAL_TYPE = "block_empty";
         // DROP TYPES
@@ -291,16 +318,16 @@ public class HelperBlocks {
 
     /* SORTING PROCESS CLASS */
     public static class Sorting {
-        private Block block; private Block wallSign; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
+        private Block block; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
         private String oreType = "_empty_"; private OreData oreData; private String toolType = "_empty_"; private String toolMaterial = "_empty_";
-        private boolean isParent = false; private Block parent; private boolean hasBlock;
+        private boolean isParent = false; private Block parent; private boolean hasBlock; private List<ModRecipeHelperProvider.GenericDetails> recipes = new ArrayList<>();
 
         private Sorting() { this.hasBlock = false; }
         private Sorting(Block block) { this.block = block; this.hasBlock = true; }
         private Sorting(Sorting template) {
-            wallSign = template.wallSign; block = template.block; dim = template.dim;blockType = template.blockType;dropType = template.dropType;
+            block = template.block; dim = template.dim; blockType = template.blockType;dropType = template.dropType;
             oreType = template.oreType; oreData = template.oreData; toolType = template.toolType; toolMaterial = template.toolMaterial;
-            isParent = template.isParent; parent = template.parent; hasBlock = template.hasBlock;
+            isParent = template.isParent; parent = template.parent; hasBlock = template.hasBlock; recipes.addAll(template.recipes);
         }
 
         private boolean isEmpty(String str) { return str.equals("_empty"); }
@@ -356,7 +383,6 @@ public class HelperBlocks {
             public DropType wall() { return blockType(SortInputs.WALL); }
             public DropType fence() { return blockType(SortInputs.FENCE); }
             public DropType fenceGate() { return blockType(SortInputs.FENCE_GATE); }
-            public DropType sign(Block wallSign) { sortData.wallSign = wallSign; return blockType(SortInputs.SIGN); }
             public DropType parentBlock() { sortData.isParent = true; return blockType(SortInputs.NORMAL_TYPE); }
             public DropType normalType() { return blockType(SortInputs.NORMAL_TYPE); }
         }

@@ -2,7 +2,7 @@ package net.aaronterry.hisb.pack.exploration.events;
 
 import net.aaronterry.helper.Useful;
 import net.aaronterry.hisb.main.HisbMod;
-import net.aaronterry.hisb.pack.exploration.item.ModArmorItems;
+import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.custom.ElytraArmorItem;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.entity.EquipmentSlot;

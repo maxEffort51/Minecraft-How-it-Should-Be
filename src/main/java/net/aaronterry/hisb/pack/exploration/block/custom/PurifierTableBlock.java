@@ -25,11 +25,6 @@ import org.jetbrains.annotations.Nullable;
 public class PurifierTableBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final MapCodec<PurifierTableBlock> CODEC = createCodec(PurifierTableBlock::new);
 
-    private static <T extends BlockEntity> BlockEntityType<T> create(String id, BlockEntityType.Builder<T> builder) {
-        Type<?> type = Util.getChoiceType(TypeReferences.BLOCK_ENTITY, id);
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, id, builder.build(type));
-    }
-
     @Override
     public MapCodec<? extends PurifierTableBlock> getCodec() {
         return CODEC;

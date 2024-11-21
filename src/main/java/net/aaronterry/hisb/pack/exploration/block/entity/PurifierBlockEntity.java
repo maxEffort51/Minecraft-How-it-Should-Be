@@ -109,7 +109,6 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, PurifierBlockEntity blockEntity) {
-
         if (world.isClient()) return;
         if (slotsAreFilled(blockEntity.inventory)) {
             if (outputSlotAvailable(blockEntity.inventory)) {

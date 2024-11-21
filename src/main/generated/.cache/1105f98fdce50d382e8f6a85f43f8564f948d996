@@ -1,4 +1,4 @@
-// 1.21	2024-11-19T19:27:10.237377	Minecraft How it Should Be - 1.21/Block Loot Tables
+// 1.21	2024-11-20T18:46:17.719968	Minecraft How it Should Be - 1.21/Block Loot Tables
 190c902400ec5a1dfbd74b4661b16db27ebb7ceb data/hisb/loot_table/blocks/hesper_trapdoor.json
 53f1d80846771955d96449b43aafc725563de6cb data/hisb/loot_table/blocks/washed_sculk.json
 0a3f2fb3692c3f5a95df63732882709232b69e31 data/hisb/loot_table/blocks/scultium_ore.json
@@ -19,7 +19,6 @@ e7151278329c0310c45695752ebe375a78a78f9a data/hisb/loot_table/blocks/scultium_bl
 addc9f9d5ac1ce2985563f5c5d37ac60cdbd123f data/hisb/loot_table/blocks/deep.json
 e3f740746fd38f9a7ef87423a5a2c46e35d14fa9 data/hisb/loot_table/blocks/celeste_stone.json
 4453877a2639e68afb897123950ec544216d2112 data/hisb/loot_table/blocks/purvium_block.json
-514ba70a263a68293083095fd1a8a3a3e3f0b1f7 data/hisb/loot_table/blocks/hesper_sign.json
 46475f8ab8aa9fbd111f1bd1e8e6bba8b14bdd6e data/hisb/loot_table/blocks/celeste_stone_wall.json
 a6b9598db72069db7cbc31e0436f56a377de5dbf data/hisb/loot_table/blocks/deep_sculk.json
 99c2b86c18cdac98a3aacd97e08431bbfe97409a data/hisb/loot_table/blocks/stiff_soil.json
@@ -40,7 +39,6 @@ f68dc2cd89c345f92cf7163167f87bfd86e3f3ec data/hisb/loot_table/blocks/deep_stone.
 f640c820a5109f407ba24c995e33b037b852e168 data/hisb/loot_table/blocks/prismalite_ore.json
 e839da823a523cd2cb910733a8af1a3e16433492 data/hisb/loot_table/blocks/impervium_stairs.json
 def7a8490f3ae5f8a0b8e7b7ab934ccdf3864d4b data/hisb/loot_table/blocks/sculkstone.json
-0d8635d270313667a1dbf36aa0b69d3c15b6c287 data/hisb/loot_table/blocks/hesper_wall_sign.json
 64b0b154c5176af6acf8b3c0ccf5d9c5eb1329db data/hisb/loot_table/blocks/purifier_table.json
 a83c2142d9bafbe6ef92e2a00974879333e9ee5c data/hisb/loot_table/blocks/condensed_purpur_block.json
 5419b6d90c4c9ff22cd7875cfd23136e0e7ad3b2 data/hisb/loot_table/blocks/indug_stone_stairs.json

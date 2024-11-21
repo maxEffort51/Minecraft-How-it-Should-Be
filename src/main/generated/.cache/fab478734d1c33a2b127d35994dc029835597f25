@@ -1,18 +1,18 @@
-// 1.21	2024-11-19T19:27:10.232204	Minecraft How it Should Be - 1.21/Tags for minecraft:block
+// 1.21	2024-11-20T18:46:17.718315	Minecraft How it Should Be - 1.21/Tags for minecraft:block
 2cfabcfaece4aa7b13899622fc161928ded8d1f6 data/minecraft/tags/block/mineable/shovel.json
 bfe1d5007ad36106cee522ffb23c7ac470a9a6c4 data/minecraft/tags/block/slabs.json
 edeb7d967b364c4d54ae1f040cd90f90e2c62b43 data/minecraft/tags/block/incorrect_for_netherite_tool.json
 ffdd35b0c8bf10057babe5a182c9181616cd6449 data/minecraft/tags/block/mineable/pickaxe.json
-1d3677a039faa71cf206bd319a834871227a6add data/hisb/tags/block/all_mod_blocks.json
-c8f8cfe036b13b9f53d9d07b8c6c0aa5f7d11a02 data/minecraft/tags/block/needs_iron_tool.json
+f1e69f6ce858c24a769d6de7c722539538102979 data/hisb/tags/block/all_mod_blocks.json
 4dc4853084307e2a875d7564d0c39e6182f47119 data/minecraft/tags/block/base_stone_overworld.json
-0654b7672f5b0e428e6952f71dc04caea2cfdc95 data/hisb/tags/block/needs_netherite_tool.json
+c8f8cfe036b13b9f53d9d07b8c6c0aa5f7d11a02 data/minecraft/tags/block/needs_iron_tool.json
+dd8545af5d0ec9c0dfb5643313e6c7fd72249d3f data/hisb/tags/block/needs_netherite_tool.json
 891c4f3b17fc9b2482b28fb289a7ad7d208ea222 data/minecraft/tags/block/stairs.json
 b067cdad526bf01e266ef790464a3bc317b84a3f data/minecraft/tags/block/climbable.json
 0b4d32865fcfdfdc747de75e51c59288e93eb130 data/minecraft/tags/block/needs_diamond_tool.json
 7ec2e57dd8b063361b5bb8bc977805a0a6281324 data/minecraft/tags/block/needs_stone_tool.json
-300f50b1f46498dcf842f638b3e73bc8d5af6d05 data/minecraft/tags/block/mineable/axe.json
+a28cbd56401ab1d67821bf2219a62efc2c765373 data/minecraft/tags/block/mineable/axe.json
 26d21fbd33c0e0a89dc768c799b38202fb5a7df5 data/minecraft/tags/block/planks.json
 3dbecbcdd3a04e5ee2daf87ff7ea7b45089f9a37 data/minecraft/tags/block/mineable/hoe.json
-90945e768b4342075b61f903ef90287ace36de7c data/hisb/tags/block/needs_scultium_tool.json
+21e7f425d0ae5254ee475fcb387d4a8c50aed97d data/hisb/tags/block/needs_scultium_tool.json
 04d9341a284d1f6aaf39d503e047cda1076bcceb data/minecraft/tags/block/incorrect_for_diamond_tool.json

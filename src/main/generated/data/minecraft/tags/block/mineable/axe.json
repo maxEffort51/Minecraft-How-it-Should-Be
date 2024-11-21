@@ -9,8 +9,6 @@
     "hisb:hesper_door",
     "hisb:hesper_trapdoor",
     "hisb:hesper_fence",
-    "hisb:hesper_fence_gate",
-    "hisb:hesper_wall_sign",
-    "hisb:hesper_sign"
+    "hisb:hesper_fence_gate"
   ]
 }

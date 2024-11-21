@@ -1,10 +1,12 @@
 package net.aaronterry.hisb.pack.exploration.item;
 
 import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.custom.AncientStarItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.BlastChargeItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.DoverTalentItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.SculkEchoItem;
+import net.aaronterry.hisb.pack.exploration.item.tool.ModToolItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -45,6 +47,7 @@ public class ModItems {
     public static final Item ORANGE_DOVER_TALENT = registerItem("orange_dover_talent", new DoverTalentItem(2, new Item.Settings()));
     public static final Item BRIGHT_DOVER_TALENT = registerItem("bright_dover_talent", new DoverTalentItem(3, new Item.Settings()));
     public static final Item BLUE_DOVER_TALENT = registerItem("blue_dover_talent", new DoverTalentItem(4, new Item.Settings()));
+    public static final Item[] DOVER_TALENTS = new Item[] {RED_DOVER_TALENT,ORANGE_DOVER_TALENT,BRIGHT_DOVER_TALENT,BLUE_DOVER_TALENT};
 
     public static final Item UNTILLIUM_BAR = registerItem("untillium_bar", new Item(new Item.Settings()));
 
