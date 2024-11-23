@@ -1,67 +1,51 @@
 package net.aaronterry.hisb.pack.exploration.item.armor;
 
-import net.aaronterry.helper.Useful;
+import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.main.HisbMod;
-import net.aaronterry.hisb.pack.exploration.item.custom.ElytraArmorItem;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class ModArmorItems {
-    public static final Item NETHERITE_FIRITE_HELMET = registerItem("netherite_firite_helmet", new ArmorItem(
-            ModArmorMaterials.NETHERITE_FIRITE, ArmorItem.Type.HELMET, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(37))));
-    public static final Item NETHERITE_FIRITE_CHESTPLATE = registerItem("netherite_firite_chestplate", new ArmorItem(
-            ModArmorMaterials.NETHERITE_FIRITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(37))));
-    public static final Item NETHERITE_FIRITE_LEGGINGS = registerItem("netherite_firite_leggings", new ArmorItem(
-            ModArmorMaterials.NETHERITE_FIRITE, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(37))));
-    public static final Item NETHERITE_FIRITE_BOOTS = registerItem("netherite_firite_boots", new ArmorItem(
-            ModArmorMaterials.NETHERITE_FIRITE, ArmorItem.Type.BOOTS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(37))));
-    public static final Item[] NETHERITE_FIRITE_SET = new Item[] {NETHERITE_FIRITE_HELMET,NETHERITE_FIRITE_CHESTPLATE,NETHERITE_FIRITE_LEGGINGS,NETHERITE_FIRITE_BOOTS};
-    public static final Item PURVIUM_HELMET = registerItem("purvium_helmet", new ArmorItem(
-            ModArmorMaterials.PURVIUM, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(40))));
-    public static final Item PURVIUM_ELYTRA = registerItem("purvium_elytra", new ElytraArmorItem(
-            ModArmorMaterials.PURVIUM, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(40))));
-    public static final Item PURVIUM_LEGGINGS = registerItem("purvium_leggings", new ArmorItem(
-            ModArmorMaterials.PURVIUM, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(40))));
-    public static final Item PURVIUM_BOOTS = registerItem("purvium_boots", new ArmorItem(
-            ModArmorMaterials.PURVIUM, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(40))));
-    public static final Item[] PURVIUM_ARMOR = new Item[] {PURVIUM_HELMET,PURVIUM_LEGGINGS,PURVIUM_BOOTS};
-    public static final Item[] PURVIUM_SET = new Item[] {PURVIUM_HELMET,PURVIUM_ELYTRA,PURVIUM_LEGGINGS,PURVIUM_BOOTS};
-    public static final Item DEPNETUM_HELMET = registerItem("depnetum_helmet", new ArmorItem(
-            ModArmorMaterials.DEPNETUM, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(43))));
-    public static final Item DEPNETUM_CHESTPLATE = registerItem("depnetum_chestplate", new ArmorItem(
-            ModArmorMaterials.DEPNETUM, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(43))));
-    public static final Item DEPNETUM_LEGGINGS = registerItem("depnetum_leggings", new ArmorItem(
-            ModArmorMaterials.DEPNETUM, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(43))));
-    public static final Item DEPNETUM_BOOTS = registerItem("depnetum_boots", new ArmorItem(
-            ModArmorMaterials.DEPNETUM, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(43))));
-    public static final Item[] DEPNETUM_SET = new Item[] {DEPNETUM_HELMET,DEPNETUM_CHESTPLATE,DEPNETUM_LEGGINGS,DEPNETUM_BOOTS};
+public class ModArmorItems extends HelperItems {
+    public static final ItemCaller firite = createCaller("hisb_firite_armor");
+    public static final ItemCaller purvium = createCaller("hisb_purvium_armor");
+    public static final ItemCaller depnetum = createCaller("hisb_depnetum_armor");
+    public static final ItemCaller untillium = createCaller("hisb_untillium_armor");
 
-    public static final Item[] ALL = Useful.combine(NETHERITE_FIRITE_SET,PURVIUM_SET,DEPNETUM_SET);
+    private static final ItemCaller armor = createCaller("hisb_armor")
+            .addChild(firite).addChild(purvium).addChild(depnetum).addChild(untillium);
 
+    public static Identifier id(String input) { return Identifier.of(HisbMod.id(), input); }
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
-    }
+    public static final Item NETHERITE_FIRITE_HELMET = makeArmor(firite, id("netherite_firite_helmet"), ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.HELMET, new Item.Settings().fireproof(), 37);
+    public static final Item NETHERITE_FIRITE_CHESTPLATE = makeArmor(firite, id("netherite_firite_chestplate"), ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.CHESTPLATE, new Item.Settings().fireproof(), 37);
+    public static final Item NETHERITE_FIRITE_LEGGINGS = makeArmor(firite, id("netherite_firite_leggings"), ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.LEGGINGS, new Item.Settings().fireproof(), 37);
+    public static final Item NETHERITE_FIRITE_BOOTS = makeArmor(firite, id("netherite_firite_boots"), ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.BOOTS, new Item.Settings().fireproof(), 37);
 
-    public static void addSet(FabricItemGroupEntries entries, Item[] items) {
-        for (Item item : items) {
-            entries.add(item);
-        }
-    }
+    public static final Item PURVIUM_HELMET = makeArmor(purvium, id("purvium_helmet"), ModArmorMaterials.PURVIUM, ItemTypes.HELMET, new Item.Settings(), 30);
+//    public static final Item PURVIUM_ELYTRA = makeArmor(purvium, id("purvium_elytra"), ModArmorMaterials.PURVIUM, ItemTypes.ELYTRA, new Item.Settings(), 39);
+    public static final Item PURVIUM_LEGGINGS = makeArmor(purvium, id("purvium_leggings"), ModArmorMaterials.PURVIUM, ItemTypes.LEGGINGS, new Item.Settings(), 39);
+    public static final Item PURVIUM_BOOTS = makeArmor(purvium, id("purvium_boots"), ModArmorMaterials.PURVIUM, ItemTypes.BOOTS, new Item.Settings(), 39);
+
+    public static final Item DEPNETUM_HELMET = makeArmor(depnetum, id("depnetum_helmet"), ModArmorMaterials.DEPNETUM, ItemTypes.HELMET, new Item.Settings(), 41);
+    public static final Item DEPNETUM_CHESTPLATE = makeArmor(depnetum, id("depnetum_chestplate"), ModArmorMaterials.DEPNETUM, ItemTypes.CHESTPLATE, new Item.Settings(), 41);
+    public static final Item DEPNETUM_LEGGINGS = makeArmor(depnetum, id("depnetum_leggings"), ModArmorMaterials.DEPNETUM, ItemTypes.LEGGINGS, new Item.Settings(), 41);
+    public static final Item DEPNETUM_BOOTS = makeArmor(depnetum, id("depnetum_boots"), ModArmorMaterials.DEPNETUM, ItemTypes.BOOTS, new Item.Settings(), 41);
+
+    public static final Item UNTILLIUM_HELMET = makeArmor(untillium, id("untillium_helmet"), ModArmorMaterials.UNTILLIUM, ItemTypes.HELMET, new Item.Settings(), 42);
+    public static final Item UNTILLIUM_CHESTPLATE = makeArmor(untillium, id("untillium_chestplate"), ModArmorMaterials.UNTILLIUM, ItemTypes.CHESTPLATE, new Item.Settings(), 42);
+    public static final Item UNTILLIUM_LEGGINGS = makeArmor(untillium, id("untillium_leggings"), ModArmorMaterials.UNTILLIUM, ItemTypes.LEGGINGS, new Item.Settings(), 42);
+    public static final Item UNTILLIUM_BOOTS = makeArmor(untillium, id("untillium_boots"), ModArmorMaterials.UNTILLIUM, ItemTypes.BOOTS, new Item.Settings(), 42);
+
+    public static Item[] all() { return all(armor); }
+    public static Item[] netheriteFirite() { return all(firite); }
+    public static Item[] purvium() { return all(purvium); }
+    public static Item[] depnetum() { return all(depnetum); }
+    public static Item[] untillium() { return all(untillium); }
 
     public static void registerModArmor() {
         HisbMod.debug("Registering Mod Armor Items for " + HisbMod.id());
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-            addSet(entries, NETHERITE_FIRITE_SET);
-            addSet(entries, PURVIUM_SET);
-            addSet(entries, DEPNETUM_SET);
-        });
+        addToItemGroup(ItemGroups.COMBAT, all());
     }
 }

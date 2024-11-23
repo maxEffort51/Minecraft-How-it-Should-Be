@@ -16,6 +16,8 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_SCULTIUM_TOOL = createTag("needs_scultium_tool");
         public static final TagKey<Block> INCORRECT_FOR_DEMANDUM_TOOL = createTag("incorrect_for_demandum_tool");
         public static final TagKey<Block> NEEDS_DEMANDUM_TOOL = createTag("needs_demandum_tool");
+        public static final TagKey<Block> INCORRECT_FOR_UNTILLIUM_TOOL = createTag("incorrect_for_untillium_tool");
+        public static final TagKey<Block> NEEDS_UNTILLIUM_TOOL = createTag("needs_untillium_tool");
         public static final TagKey<Block> INCORRECT_FOR_SCYTHE_TOOL = createTag("incorrect_for_scythe_tool");
 
         private static TagKey<Block> createTag(String name) {

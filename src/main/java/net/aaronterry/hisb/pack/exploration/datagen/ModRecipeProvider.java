@@ -28,8 +28,8 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
         // Shaped.recipes(categories[], results[], patterns[], inputChars[], inputs[], needs[], xpt)
 
         // SHAPED
-        Shaped.recipe(RecipeCategory.COMBAT, ModArmorItems.PURVIUM_ELYTRA).pattern(new Pattern("*#*","*#*","* *"))
-                .input(new char[] {'*','#'}, new Item[] {ModItems.PURVIUM_CHUNK,Items.PHANTOM_MEMBRANE}).needs(0).offer(xpt);
+//        Shaped.recipe(RecipeCategory.COMBAT, ModArmorItems.PURVIUM_ELYTRA).pattern(new Pattern("*#*","*#*","* *"))
+//                .input(new char[] {'*','#'}, new Item[] {ModItems.PURVIUM_CHUNK,Items.PHANTOM_MEMBRANE}).needs(0).offer(xpt);
         Shaped.recipe(RecipeCategory.MISC, Items.HEART_OF_THE_SEA).pattern(new Pattern("$|$","-*-","$|$")).input(new char[] {'$','|','-','*'},
                 new Item[] {ModItems.PRISMALITE_SHARD,Items.PRISMARINE_CRYSTALS,Items.PRISMARINE_SHARD,Items.WATER_BUCKET}).needs(0).offer(xpt);
         Shaped.recipe(RecipeCategory.MISC, ModItems.DEMANDUM_GEAR).pattern(new Pattern(" # ","###"," # ")).input('#',ModItems.DEMANDUM_CHUNK).needs(0).offer(xpt);
@@ -53,13 +53,13 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
         // Recipe.generic("armor", armorsets[][], items[])
 
         // RECIPE
-        Recipe.oneIngredient(xpt, ModArmorItems.PURVIUM_ARMOR, ModItems.PURVIUM_CHUNK, RecipeCategory.COMBAT, '#', new Pattern[] {
+        Recipe.oneIngredient(xpt, ModArmorItems.purvium(), ModItems.PURVIUM_CHUNK, RecipeCategory.COMBAT, '#', new Pattern[] {
                 new Pattern("###","# #"),new Pattern("###","# #","# #"),new Pattern("# #","# #")});
         Recipe.toolset(xpt, ModToolItems.SCULTIUM, ModItems.SCULTIUM_BONES, ModItems.DEEP_ROD, ModItems.SCULTIUM_BONES);
         Recipe.tool(xpt, "sword", ModToolItems.DEPNETUM_SWORD, ModItems.DEPNETUM_CLUMP, ModItems.DEEP_ROD, ModItems.DEPNETUM_CLUMP);
         Recipe.toolset(xpt, ModToolItems.DEMANDUM, ModItems.DEMANDUM_CHUNK, ModItems.DEEP_ROD, ModItems.DEMANDUM_CHUNK);
 
-        Recipe.armor(xpt, ModArmorItems.DEPNETUM_SET, ModItems.DEPNETUM_CLUMP);
+        Recipe.armor(xpt, ModArmorItems.depnetum(), ModItems.DEPNETUM_CLUMP);
 
         // CUSTOM
         Custom.firite(xpt);

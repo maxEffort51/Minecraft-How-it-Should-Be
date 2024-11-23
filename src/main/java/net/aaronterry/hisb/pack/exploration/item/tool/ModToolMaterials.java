@@ -1,6 +1,5 @@
 package net.aaronterry.hisb.pack.exploration.item.tool;
 
-import com.google.common.base.Suppliers;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.aaronterry.hisb.util.ModTags;
 import net.minecraft.block.Block;
@@ -20,6 +19,7 @@ import java.util.function.Supplier;
 public enum ModToolMaterials implements ToolMaterial {
     SCULTIUM(ModTags.Blocks.INCORRECT_FOR_SCULTIUM_TOOL, 1000, 10.0F, 6.0F, 13, () -> Ingredient.ofItems(ModItems.SCULTIUM_BONES)),
     DEMANDUM(ModTags.Blocks.INCORRECT_FOR_DEMANDUM_TOOL, 1500, 11.0F, 8F, 16, () -> Ingredient.ofItems(ModItems.DEMANDUM_CHUNK)),
+    UNTILLIUM(ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL, 2500, 13.0F, 10F, 23, () -> Ingredient.ofItems(ModItems.UNTILLIUM_BAR)),
     SCYTHE(ModTags.Blocks.INCORRECT_FOR_SCYTHE_TOOL, 2000, 12.0F, 14F, 10, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
 
     private final TagKey<Block> inverseTag;
@@ -29,40 +29,15 @@ public enum ModToolMaterials implements ToolMaterial {
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    ModToolMaterials(final TagKey<Block> inverseTag, final int itemDurability, final float miningSpeed, final float attackDamage,
-                     final int enchantability, final Supplier<Ingredient> repairIngredient) {
-        this.inverseTag = inverseTag;
-        this.itemDurability = itemDurability;
-        this.miningSpeed = miningSpeed;
-        this.attackDamage = attackDamage;
-        this.enchantability = enchantability;
-        this.repairIngredient = Suppliers.memoize(repairIngredient::get);
+    ModToolMaterials(TagKey<Block> inverseTag, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+        this.inverseTag = inverseTag; this.itemDurability = itemDurability; this.miningSpeed = miningSpeed;
+        this.attackDamage = attackDamage; this.enchantability = enchantability; this.repairIngredient = repairIngredient;
     }
 
-    @Override
-    public int getDurability() {
-        return this.itemDurability;
-    }
-
-    @Override
-    public float getMiningSpeedMultiplier() {
-        return this.miningSpeed;
-    }
-
-    @Override
-    public float getAttackDamage() {
-        return this.attackDamage;
-    }
-
-    @Override
-    public TagKey<Block> getInverseTag() {
-        return this.inverseTag;
-    }
-
-    @Override
-    public int getEnchantability() {
-        return this.enchantability;
-    }
-
-    @Override public Ingredient getRepairIngredient() { return this.repairIngredient.get(); }
+    @Override public int getDurability() { return itemDurability; }
+    @Override public float getMiningSpeedMultiplier() { return miningSpeed; }
+    @Override public float getAttackDamage() { return attackDamage; }
+    @Override public TagKey<Block> getInverseTag() { return inverseTag; }
+    @Override public int getEnchantability() { return enchantability; }
+    @Override public Ingredient getRepairIngredient() { return repairIngredient.get(); }
 }

@@ -1,5 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.item;
 
+import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.main.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.custom.AncientStarItem;
@@ -7,72 +8,56 @@ import net.aaronterry.hisb.pack.exploration.item.custom.BlastChargeItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.DoverTalentItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.SculkEchoItem;
 import net.aaronterry.hisb.pack.exploration.item.tool.ModToolItems;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
-public class ModItems {
+public class ModItems extends HelperItems {
+    
+    private static final ItemCaller dover = createCaller("hisb_dover_talents",HisbMod.id());
+    private static final ItemCaller general = createCaller("hisb_general",HisbMod.id()).addChild(dover);
+    
+    public static Item[] all() { return all(general); }
+    public static Item[] doverTalents() { return all(dover); }
+    
     // OVERWORLD ITEMS
-    public static final Item PRISMALITE_SHARD = registerItem("prismalite_shard", new Item(new Item.Settings()));
-    public static final Item PURIFIED_IRON = registerItem("purified_iron", new Item(new Item.Settings()));
-    public static final Item PURIFIED_COPPER = registerItem("purified_copper", new Item(new Item.Settings()));
-    public static final Item PURIFIED_LAPIS = registerItem("purified_lapis", new Item(new Item.Settings()));
-    public static final Item PURIFIED_REDSTONE = registerItem("purified_redstone", new Item(new Item.Settings()));
-    public static final Item PURIFIED_EMERALD = registerItem("purified_emerald", new Item(new Item.Settings()));
-    public static final Item PURIFIED_DIAMOND = registerItem("purified_diamond", new Item(new Item.Settings()));
-    public static final Item DYREMITE_CHUNK = registerItem("dyremite_chunk", new Item(new Item.Settings()));
+    public static final Item PRISMALITE_SHARD = makeItem(general, "prismalite_shard");
+    public static final Item PURIFIED_IRON = makeItem(general, "purified_iron");
+    public static final Item PURIFIED_COPPER = makeItem(general, "purified_copper");
+    public static final Item PURIFIED_LAPIS = makeItem(general, "purified_lapis");
+    public static final Item PURIFIED_REDSTONE = makeItem(general, "purified_redstone");
+    public static final Item PURIFIED_EMERALD = makeItem(general, "purified_emerald");
+    public static final Item PURIFIED_DIAMOND = makeItem(general, "purified_diamond");
+    public static final Item DYREMITE_CHUNK = makeItem(general, "dyremite_chunk");
     // NETHER ITEMS
-    public static final Item ANCIENT_STAR = registerItem("ancient_star", new AncientStarItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
-    public static final Item FIRITE_SCRAP = registerItem("firite_scrap", new Item(new Item.Settings()));
-    public static final Item PURIFIED_SCRAP = registerItem("purified_scrap", new Item(new Item.Settings()));
-    public static final Item DIRTY_SCRAP = registerItem("dirty_scrap", new Item(new Item.Settings()));
-    public static final Item CRYSTALLINE_QUARTZ = registerItem("crystalline_quartz", new Item(new Item.Settings()));
+    public static final Item ANCIENT_STAR = makeItem(general, "ancient_star", new AncientStarItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+
+    public static final Item FIRITE_SCRAP = makeItem(general, "firite_scrap");
+    public static final Item PURIFIED_SCRAP = makeItem(general, "purified_scrap");
+    public static final Item DIRTY_SCRAP = makeItem(general, "dirty_scrap");
+    public static final Item CRYSTALLINE_QUARTZ = makeItem(general, "crystalline_quartz");
     // END ITEMS
-    public static final Item PURVIUM_CHUNK = registerItem("purvium_chunk", new Item(new Item.Settings()));
-    public static final Item BLAST_SHARD = registerItem("blast_shard", new Item(new Item.Settings()));
-    public static final Item BLAST_CHARGE = registerItem("blast_charge", new BlastChargeItem(new Item.Settings().rarity(Rarity.UNCOMMON)));
+    public static final Item PURVIUM_CHUNK = makeItem(general, "purvium_chunk");
+    public static final Item BLAST_SHARD = makeItem(general, "blast_shard");
+    public static final Item BLAST_CHARGE = makeItem(general, "blast_charge", new BlastChargeItem(new Item.Settings().rarity(Rarity.UNCOMMON)));
     // DEMANDI ITEMS
-    public static final Item SCULTIUM_BONES = registerItem("scultium_bones", new Item(new Item.Settings()));
-    public static final Item DEEP_ROD = registerItem("deep_rod", new Item(new Item.Settings()));
-    public static final Item DEPNETUM_CLUMP = registerItem("depnetum_clump", new Item(new Item.Settings()));
-    public static final Item SCULK_ECHO = registerItem("sculk_echo", new SculkEchoItem(new Item.Settings().maxCount(1)));
-    public static final Item DEMANDUM_GEAR = registerItem("demandum_gear", new Item(new Item.Settings()));
-    public static final Item DEMANDUM_CHUNK = registerItem("demandum_chunk", new Item(new Item.Settings()));
-    public static final Item RED_DOVER_TALENT = registerItem("red_dover_talent", new DoverTalentItem(1, new Item.Settings()));
-    public static final Item ORANGE_DOVER_TALENT = registerItem("orange_dover_talent", new DoverTalentItem(2, new Item.Settings()));
-    public static final Item BRIGHT_DOVER_TALENT = registerItem("bright_dover_talent", new DoverTalentItem(3, new Item.Settings()));
-    public static final Item BLUE_DOVER_TALENT = registerItem("blue_dover_talent", new DoverTalentItem(4, new Item.Settings()));
-    public static final Item[] DOVER_TALENTS = new Item[] {RED_DOVER_TALENT,ORANGE_DOVER_TALENT,BRIGHT_DOVER_TALENT,BLUE_DOVER_TALENT};
+    public static final Item SCULTIUM_BONES = makeItem(general, "scultium_bones");
+    public static final Item DEEP_ROD = makeItem(general, "deep_rod");
+    public static final Item DEPNETUM_CLUMP = makeItem(general, "depnetum_clump");
+    public static final Item SCULK_ECHO = makeItem(general, "sculk_echo", new SculkEchoItem(new Item.Settings().maxCount(1)));
+    public static final Item DEMANDUM_GEAR = makeItem(general, "demandum_gear");
+    public static final Item DEMANDUM_CHUNK = makeItem(general, "demandum_chunk");
+    public static final Item RED_DOVER_TALENT = makeItem(dover, "red_dover_talent", new DoverTalentItem(1, new Item.Settings()));
+    public static final Item ORANGE_DOVER_TALENT = makeItem(dover, "orange_dover_talent", new DoverTalentItem(2, new Item.Settings()));
+    public static final Item BRIGHT_DOVER_TALENT = makeItem(dover, "bright_dover_talent", new DoverTalentItem(3, new Item.Settings()));
+    public static final Item BLUE_DOVER_TALENT = makeItem(dover, "blue_dover_talent", new DoverTalentItem(4, new Item.Settings()));
 
-    public static final Item UNTILLIUM_BAR = registerItem("untillium_bar", new Item(new Item.Settings()));
-
-    public static final Item[] ALL = new Item[] {
-            PRISMALITE_SHARD,PURIFIED_IRON,PURIFIED_COPPER,PURIFIED_LAPIS,PURIFIED_REDSTONE,PURIFIED_EMERALD,PURIFIED_DIAMOND,DYREMITE_CHUNK, // OVERWORLD
-            ANCIENT_STAR,FIRITE_SCRAP,PURIFIED_SCRAP,DIRTY_SCRAP,CRYSTALLINE_QUARTZ, // NETHER
-            PURVIUM_CHUNK, BLAST_SHARD, BLAST_CHARGE, // END
-            SCULTIUM_BONES, DEEP_ROD, DEPNETUM_CLUMP, SCULK_ECHO,DEMANDUM_CHUNK,DEMANDUM_GEAR,RED_DOVER_TALENT,ORANGE_DOVER_TALENT,BRIGHT_DOVER_TALENT,BLUE_DOVER_TALENT, // DEMANDI
-            UNTILLIUM_BAR
-    };
-
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
-    }
-
-    public static void addAll(FabricItemGroupEntries entries, Item[] items) {
-        for (Item item : items) {
-            entries.add(item);
-        }
-    }
+    public static final Item UNTILLIUM_BAR = makeItem(general, "untillium_bar");
 
     public static void registerModItems() {
         HisbMod.debug("Registering Mod Items for " + HisbMod.id());
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> addAll(entries, ALL));
+        
+        addToItemGroup(ItemGroups.INGREDIENTS, all());
 
         ModArmorItems.registerModArmor();
         ModToolItems.registerModTools();

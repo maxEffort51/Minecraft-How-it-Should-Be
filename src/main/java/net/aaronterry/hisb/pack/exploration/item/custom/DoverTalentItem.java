@@ -114,7 +114,7 @@ public class DoverTalentItem extends Item {
     }
 
     private static void activate() {
-        RED_ABILITY = new Ability(Ability.ItemInputs.items(ModItems.DOVER_TALENTS),entity -> {
+        RED_ABILITY = new Ability(Ability.ItemInputs.items(ModItems.doverTalents()),entity -> {
             try {
                 // ATTACK DAMAGE
                 EntityAttributeInstance attackInstance = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);

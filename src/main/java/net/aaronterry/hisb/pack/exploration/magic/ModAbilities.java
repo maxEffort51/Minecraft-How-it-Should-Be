@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 
 public class ModAbilities {
-    public static final Ability GOLD_CHARM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.NETHERITE_FIRITE_SET), entity -> {
+    public static final Ability GOLD_CHARM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.netheriteFirite()), entity -> {
         if (entity instanceof PlayerEntity player) {
             Box boundingBox = player.getBoundingBox().expand(15);
             // SET
@@ -37,7 +37,7 @@ public class ModAbilities {
     });
     private static final EntityAttributeModifier FALL_DISTANCE = new EntityAttributeModifier(Identifier.of(HisbMod.id(), "ability_fall_distance"), 4, EntityAttributeModifier.Operation.ADD_VALUE);
 
-    public static final Ability SAFE_FALL = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.PURVIUM_SET), (entity,pieces) -> {
+    public static final Ability SAFE_FALL = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.purvium()), (entity,pieces) -> {
         float slowFallBuildup = switch(pieces) {
             case 1 -> 0.95f; case 2 -> 0.9f; case 3 -> 0.83f; case 4 -> 0.7f;
             default -> 1;
@@ -53,7 +53,7 @@ public class ModAbilities {
     });
 
     public static final Ability UNDARK = new Ability(Ability.ItemInputs.armor(ModArmorItems.DEPNETUM_HELMET), entity -> { if (entity.hasStatusEffect(StatusEffects.DARKNESS)) entity.removeStatusEffect(StatusEffects.DARKNESS); });
-    public static final Ability DEEP_CALM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.DEPNETUM_SET), entity -> {
+    public static final Ability DEEP_CALM = new Ability(Ability.ItemInputs.armorSet(ModArmorItems.depnetum()), entity -> {
         Box boundingBox = entity.getBoundingBox().expand(15);
         for (WardenEntity warden : entity.getWorld().getEntitiesByClass(WardenEntity.class, boundingBox, wardenEntity -> !(entity instanceof PlayerEntity player) || wardenEntity.isAngryAt(player))) {
             warden.increaseAngerAt(entity, -1, false);

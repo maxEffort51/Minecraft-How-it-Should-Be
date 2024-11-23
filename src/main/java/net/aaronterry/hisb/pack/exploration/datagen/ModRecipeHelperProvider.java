@@ -195,7 +195,7 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
     public static class Custom {
         public static void firite(RecipeExporter xpt) {
             Item[] NETHERITE_SET = new Item[] {Items.NETHERITE_HELMET,Items.NETHERITE_CHESTPLATE,Items.NETHERITE_LEGGINGS,Items.NETHERITE_BOOTS};
-            for (int i = 0; i < ModArmorItems.NETHERITE_FIRITE_SET.length; i++) Shapeless.recipe(RecipeCategory.COMBAT, ModArmorItems.NETHERITE_FIRITE_SET[i]).input(ModItems.FIRITE_SCRAP,NETHERITE_SET[i]).needs(ModItems.FIRITE_SCRAP).offer(xpt);
+            for (int i = 0; i < ModArmorItems.netheriteFirite().length; i++) Shapeless.recipe(RecipeCategory.COMBAT, ModArmorItems.netheriteFirite()[i]).input(ModItems.FIRITE_SCRAP,NETHERITE_SET[i]).needs(ModItems.FIRITE_SCRAP).offer(xpt);
         }
     }
 

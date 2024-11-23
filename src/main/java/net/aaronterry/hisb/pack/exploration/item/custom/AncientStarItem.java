@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class AncientStarItem extends Item {
-    public AncientStarItem(Settings settings) {
+    public AncientStarItem(Item.Settings settings) {
         super(settings);
     }
 

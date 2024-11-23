@@ -74,8 +74,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
-        generateItems(generator, ModItems.ALL);
+        generateItems(generator, ModItems.all());
         generateItems(generator, ModToolItems.ALL, Models.HANDHELD);
-        generateArmor(generator, ModArmorItems.ALL);
+        generateArmor(generator, ModArmorItems.all());
     }
 }
