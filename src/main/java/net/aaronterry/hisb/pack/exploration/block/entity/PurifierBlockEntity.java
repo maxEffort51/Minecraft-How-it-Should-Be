@@ -33,16 +33,18 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
     protected static final int IMPURE_SLOT = 2;
     protected static final int PURE_SLOT = 3;
     public static final KeyGroup HOT_GROUP = new KeyGroup(new Object[]{Items.LAVA_BUCKET, Items.BLAZE_ROD});
-    public static final KeyGroup WET_GROUP = new KeyGroup(new Object[]{Items.WATER_BUCKET});
+    public static final KeyGroup WET_GROUP = new KeyGroup(new Object[]{Items.POTION,Items.WATER_BUCKET});
     public static final KeyGroup IMPURE_GROUP = new LargeMap(new Object[]{
             Items.IRON_INGOT, Items.COPPER_INGOT, Items.LAPIS_LAZULI, Items.REDSTONE, Items.EMERALD, Items.DIAMOND,
             ModItems.ANCIENT_STAR, Items.OBSIDIAN, Items.REINFORCED_DEEPSLATE, Items.NETHERITE_SCRAP, Items.QUARTZ,
-            ModItems.DEPNETUM_CLUMP, ModBlocks.DEAD_SCULK, ModBlocks.CORRUPTED_MUD, ModBlocks.HARDENED_SCULK, ModItems.PRISMALITE_SHARD
+            ModItems.DEPNETUM_CLUMP, ModBlocks.DEAD_SCULK, ModBlocks.CORRUPTED_MUD, ModBlocks.HARDENED_SCULK, ModItems.PRISMALITE_SHARD,
+            ModItems.BAKED_QUARTZ
             // LAVA_BUCKET, COSMIUM, DEAD SCULK, WATER, CORRUPTED MUD, COBBLESTONE, HARDENED SCULK, DUST
     }, new Object[]{
             ModItems.PURIFIED_IRON, ModItems.PURIFIED_COPPER, ModItems.PURIFIED_LAPIS, ModItems.PURIFIED_REDSTONE, ModItems.PURIFIED_EMERALD, ModItems.PURIFIED_DIAMOND,
             Items.NETHER_STAR, Items.LAVA_BUCKET, Items.DEEPSLATE, ModItems.PURIFIED_SCRAP, ModItems.CRYSTALLINE_QUARTZ,
-            ModItems.DEMANDUM_CHUNK, ModBlocks.STIFF_SOIL, Blocks.MUD, ModBlocks.IMPERVIUM_BLOCK, Items.PRISMARINE_SHARD
+            ModItems.DEMANDUM_CHUNK, ModBlocks.STIFF_SOIL, Blocks.MUD, ModBlocks.IMPERVIUM_BLOCK, Items.PRISMARINE_SHARD,
+            ModItems.CRYSTALLINE_QUARTZ
     }).addKeysValue(new Object[]{ // STAINED GLASS -> GLASS
             Items.WHITE_STAINED_GLASS,Items.GRAY_STAINED_GLASS,Items.BROWN_STAINED_GLASS,Items.BLACK_STAINED_GLASS,
             Items.YELLOW_STAINED_GLASS,Items.GREEN_STAINED_GLASS,Items.ORANGE_STAINED_GLASS,Items.RED_STAINED_GLASS,
@@ -54,8 +56,11 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
             Items.PURPLE_STAINED_GLASS_PANE,Items.PINK_STAINED_GLASS_PANE,Items.MAGENTA_STAINED_GLASS_PANE,Items.BLUE_STAINED_GLASS_PANE,
             Items.LIGHT_BLUE_STAINED_GLASS_PANE,Items.LIGHT_GRAY_STAINED_GLASS_PANE,Items.CYAN_STAINED_GLASS_PANE,Items.LIME_STAINED_GLASS_PANE
     }, Items.GLASS_PANE);
+    public static final KeyGroup WATER_USAGE_AMOUNT = new KeyGroup(new Object[]{Items.POTION,Items.WATER_BUCKET},new int[]{1,4});
     private int progress;
     private int maxProgress;
+    private static int waterUsages;
+    private static int maxWaterUsages;
     protected DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
     protected final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override public int get(int index) {
@@ -81,7 +86,7 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
         return new PurifierScreenHandler(i, playerInventory, this, this.propertyDelegate);
     }
 
-    public PurifierBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.PURIFIER_BLOCK_ENTITY, pos, state); maxProgress = 100; }
+    public PurifierBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.PURIFIER_BLOCK_ENTITY, pos, state); maxProgress = 2000; maxWaterUsages = 4; }
 
     public void increment() { progress++; }
     public void reset() { progress = 0; }
@@ -124,7 +129,13 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
         ItemStack PURE = inventory.get(PURE_SLOT); ItemStack IMPURE = inventory.get(IMPURE_SLOT); Item result = (Item) IMPURE_GROUP.get(IMPURE.getItem());
         ItemStack HOT = inventory.getFirst(); ItemStack WET = inventory.get(WET_SLOT);
         if (HOT.isOf(Items.LAVA_BUCKET)) { inventory.set(HOT_SLOT,new ItemStack(Items.BUCKET)); } else { HOT.decrement(1); }
-        if (WET.isOf(Items.WATER_BUCKET)) { inventory.set(WET_SLOT,new ItemStack(Items.BUCKET)); } else { WET.decrement(1); }
+        // DEPLETE WATER
+        maxWaterUsages = (int) WATER_USAGE_AMOUNT.get(WET.getItem());
+        if (waterUsages > maxWaterUsages) {
+            if (WET.isOf(Items.WATER_BUCKET)) { inventory.set(WET_SLOT,new ItemStack(Items.BUCKET)); } else { WET.decrement(1); }
+            waterUsages = 0;
+        } else waterUsages++;
+
         IMPURE.decrement(1);
         if (PURE.isEmpty()) { inventory.set(3, new ItemStack(result));
         } else if (ItemStack.areItemsAndComponentsEqual(PURE, new ItemStack(result))) { PURE.increment(1); }

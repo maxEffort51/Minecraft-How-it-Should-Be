@@ -1,4 +1,4 @@
-// 1.21	2024-11-23T18:29:34.65369	Minecraft How it Should Be - 1.21/Model Definitions
+// 1.21	2024-11-23T20:21:38.497515	Minecraft How it Should Be - 1.21/Model Definitions
 d2acd6473a3a0d40f596a7472a129de903c364b4 assets/hisb/models/block/celeste_stone_stairs_outer.json
 d2d256ab97a926992e26770dcc547c9fcf2da78d assets/hisb/models/item/untillium_boots_iron_trim.json
 6dd2ef62645bf46727f1bc76b021065152f557b9 assets/hisb/models/item/hesper_log.json
@@ -175,14 +175,13 @@ bc866dff0cfab4bdf989385f7c5b27663472382e assets/hisb/models/item/depnetum_boots_
 f2bdd7052be7325df2a408a8aeeb9418a831ec37 assets/hisb/models/item/purified_lapis.json
 9dc344222a3ba2a707ae286751a8935394b5b5f3 assets/hisb/models/item/corrupted_mud.json
 4b8171a0c8c283a292a0d3517704021c66a1248c assets/hisb/models/item/purvium_leggings_emerald_trim.json
-87b60daa62e38b40fdb033b4b289b42f223376e5 assets/hisb/models/block/celestea.json
 5894efd4f5c9e3c7d41c9ca327b7c018d40ade52 assets/hisb/blockstates/deep_stone_stairs.json
 c49ce3911e83916bcdf91054aefef18b2ab5546f assets/hisb/blockstates/debritinum_block.json
 e95f8452e710036812e189cc4ae74e2babf75af4 assets/hisb/blockstates/stiff_stone_slab.json
 3422141e1d09620b9d96efd276f44bf3dc0d5137 assets/hisb/models/block/stiff_soil.json
 afbed4426825e8affd900e4826884821466dc21e assets/hisb/models/item/washed_sculk.json
-6dadf3c540c1b5f898bea9bfa7aa153c79ed088e assets/hisb/blockstates/hesper_slab.json
 c268878af3c4037048d919d1b225f313a400c8e7 assets/hisb/blockstates/hesper_trapdoor.json
+6dadf3c540c1b5f898bea9bfa7aa153c79ed088e assets/hisb/blockstates/hesper_slab.json
 aa0f6774448ee2bae9ae83991b33b22b65b648a6 assets/hisb/models/block/deep_stone_slab.json
 f7653a0388d1f8d6ec0a971ec8dffe316ffd34e1 assets/hisb/models/block/hesper_fence_gate_wall_open.json
 283389b19ff08c9e39d0ab9302ee808442bd5447 assets/hisb/models/block/hesper_fence_inventory.json
@@ -207,7 +206,6 @@ fc7e2aeac96b231851aa0d1d2bbe89b72a73af13 assets/hisb/models/item/dead_sculk.json
 44f1e02219170b12d641ac1d287cd0ad2ee54669 assets/hisb/blockstates/purvium_block.json
 0d094fd928f5b4dbb82275aaf38712555b6895e1 assets/hisb/blockstates/hardened_sculk.json
 8dfec8894e977e4685ef4b08031f3c70cbc96abb assets/hisb/models/block/dark_stairs.json
-0b350cf56119d910e35fb14d637403598bc4bdb6 assets/hisb/models/item/celestea.json
 52693f82011bef87fe83431e31710c3cefcfaaf8 assets/hisb/models/item/netherite_firite_helmet_diamond_trim.json
 1f371523b624c568769115e12d7cb70d41eab00c assets/hisb/blockstates/hesper_fence.json
 4594ab9e38cd9aeec96f964a6d4206be405fa851 assets/hisb/models/item/purified_emerald.json
@@ -294,8 +292,8 @@ cc435587aa3d39c193fb52fc346a14fa1917d274 assets/hisb/models/item/sculkstone.json
 f512c2f3d54e937f32828caac9367ea6170467e1 assets/hisb/models/item/scultium_ore.json
 9fb758e24d7eacd2c1d2f47d8a0516b20ca73b7b assets/hisb/blockstates/indug_stone_slab.json
 b7813b0a3c8ad0a25ab6e842bc10de9b6cff5b39 assets/hisb/models/item/impervium_slab.json
-55d03f28ce1da5f767aa39c7de63fa99bce48df3 assets/hisb/models/block/hesper_log.json
 6f18aea6c1b50804e083fcca358b632d648f9fad assets/hisb/models/item/depnetum_chestplate_quartz_trim.json
+55d03f28ce1da5f767aa39c7de63fa99bce48df3 assets/hisb/models/block/hesper_log.json
 03910ce429f7469a7c2b10786f6c6a4fde1b32aa assets/hisb/models/block/dark.json
 913bcad7cea207618fb846cf7a50d60614f636cf assets/hisb/models/item/condensed_purpur_slab.json
 10b7c545cc5c5db2971e8e0df40d0f0a5745f280 assets/hisb/models/item/depnetum_chestplate_diamond_trim.json
@@ -337,7 +335,6 @@ fa49f5ed245c57bc778371c5bb8a34852b52b523 assets/hisb/blockstates/celeste_stone.j
 760210c5a56a17820b24eda007f8ced0771a6ad9 assets/hisb/blockstates/purpur_purvium_ore.json
 ec8dd7cbc9797a2b01b90cc2f4b13418a6e9fe69 assets/hisb/models/item/netherite_firite_boots_netherite_trim.json
 3a38a018c476ec89f52eeef1aa0f0358bab379e1 assets/hisb/blockstates/celeste_block.json
-f64a3f40a714a65f4ac6984966b5db84787cb58c assets/hisb/blockstates/celestea.json
 5f1548588078792b27bea54c2899e42c727a9298 assets/hisb/models/item/untillium_leggings_netherite_trim.json
 158661e8e0852672052405685203bb509febc22e assets/hisb/models/item/condensed_purpur_block.json
 bc0f18dc91449a91dfb50eda1882790d67371bc3 assets/hisb/models/item/depnetum_chestplate_lapis_trim.json

@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -24,10 +23,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public FabricTagBuilder addToTag(TagKey<Block> tag, List<Block> blocks) {
         FabricTagBuilder builder = getOrCreateTagBuilder(tag); for (Block block : blocks) builder.add(block); return builder; }
 
-    public void handleToolLevels(TagKey<Block>[] toolTags, TagKey<Block>[] inverse) {
-        for (int i = 0; i < inverse.length; i++) {
-            FabricTagBuilder builder = getOrCreateTagBuilder(inverse[i]);
-            for (int j = i; j < toolTags.length; j++) builder.addTag(toolTags[j]);
+    public void handleToolLevels(List<TagKey<Block>> toolTags, List<TagKey<Block>> inverse) {
+        for (int i = 0; i < inverse.size(); i++) {
+            FabricTagBuilder builder = getOrCreateTagBuilder(inverse.get(i));
+            for (int j = i; j < toolTags.size(); j++) builder.addTag(toolTags.get(j));
         }
     }
 
@@ -44,6 +43,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         addToTag(BlockTags.SLABS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.SLAB));
         addToTag(BlockTags.STAIRS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STAIRS));
+        addToTag(BlockTags.DOORS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DOOR));
+        addToTag(BlockTags.TRAPDOORS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TRAPDOOR));
+        addToTag(BlockTags.FENCES, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.FENCE));
+        addToTag(BlockTags.FENCE_GATES, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.FENCE_GATE));
 
         addToTag(BlockTags.CLIMBABLE, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.VINE));
 
@@ -55,8 +58,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         addToTag(ModTags.Blocks.NEEDS_NETHERITE_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.NETHERITE));
         addToTag(ModTags.Blocks.NEEDS_SCULTIUM_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.SCULTIUM));
 
-        TagKey<Block>[] toolLevels = new TagKey[] {ModTags.Blocks.NEEDS_NETHERITE_TOOL,ModTags.Blocks.NEEDS_SCULTIUM_TOOL};
-        TagKey<Block>[] inverseLevels = new TagKey[] {BlockTags.INCORRECT_FOR_DIAMOND_TOOL, BlockTags.INCORRECT_FOR_NETHERITE_TOOL};
+        List<TagKey<Block>> toolLevels = List.of(ModTags.Blocks.NEEDS_NETHERITE_TOOL,ModTags.Blocks.NEEDS_SCULTIUM_TOOL/*,ModTags.Blocks.NEEDS_DEMANDUM_TOOL,ModTags.Blocks.NEEDS_UNTILLIUM_TOOL*/);
+        List<TagKey<Block>> inverseLevels = List.of(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, BlockTags.INCORRECT_FOR_NETHERITE_TOOL/*,ModTags.Blocks.INCORRECT_FOR_DEMANDUM_TOOL,ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL*/);
         handleToolLevels(toolLevels, inverseLevels);
     }
 }
