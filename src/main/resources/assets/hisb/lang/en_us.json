@@ -71,12 +71,14 @@
   "block.hisb.celeste_stone_wall": "Celeste Stone Wall",
   "block.hisb.indug_stone_slab": "Indug Stone Slab",
   "block.hisb.indug_stone_stairs": "Indug Stone Stairs",
-  "block.hisb.azure_bluet": "Azure Bluet",
+  "block.hisb.hesper_leaves": "Hesper Leaves",
+  "block.hisb.dead_vine": "Dead Vine",
+  "block.hisb.celestea": "Celestea",
 
 
   "item.hisb.prismalite_shard": "Prismalite Shard",
   "item.hisb.purified_iron": "Purified Iron",
-  "item.hisb.purified_gold": "Purified Gold",
+  "item.hisb.purified_copper": "Purified Copper",
   "item.hisb.purified_lapis": "Purified Lapis Lazuli",
   "item.hisb.purified_redstone": "Purified Redstone",
   "item.hisb.purified_emerald": "Purified Emerald",

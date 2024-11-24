@@ -95,7 +95,7 @@ public class DoverTalentItem extends Item {
     private void orangeTick(LivingEntity user, ServerWorld world) {
         try {
             redTick(user);
-            Box destroyBorder = user.getBoundingBox().expand(0.2);
+            Box destroyBorder = user.getBoundingBox().expand(0.5);
             List<ProjectileEntity> projectiles = world.getEntitiesByClass(ProjectileEntity.class, destroyBorder, entity -> true);
             for (ProjectileEntity projectile : projectiles) { if (projectile.getBoundingBox().intersects(destroyBorder)) projectile.discard(); }
         } catch (Exception e) {
@@ -108,7 +108,7 @@ public class DoverTalentItem extends Item {
         world.getEntitiesByClass(Entity.class, user.getBoundingBox().expand(10), entity -> entity != user).forEach(entity -> {
             Vec3d knockbackDirection = entity.getPos().subtract(user.getPos()).normalize();
             double y = Math.abs(knockbackDirection.y) < 0.3 ? 0.5 : Math.abs(knockbackDirection.y) * 1.5;
-            entity.setVelocity(knockbackDirection.x * 4, y, knockbackDirection.z * 4);
+            entity.setVelocity(knockbackDirection.x * 2, y, knockbackDirection.z * 2);
             entity.velocityModified = true;
         });
         world.playSound(user, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.HOSTILE, 0.9f, 1.3f);
