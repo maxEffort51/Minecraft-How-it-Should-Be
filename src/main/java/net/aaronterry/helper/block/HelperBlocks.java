@@ -1,7 +1,6 @@
 package net.aaronterry.helper.block;
 
-import net.aaronterry.hisb.main.HisbMod;
-import net.aaronterry.hisb.pack.exploration.datagen.ModRecipeHelperProvider;
+import net.aaronterry.helper.datagen.ModRecipeHelperProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;

@@ -1,6 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.datagen;
 
 import net.aaronterry.helper.block.HelperBlocks;
+import net.aaronterry.hisb.main.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
@@ -8,13 +9,14 @@ import net.aaronterry.hisb.pack.exploration.item.tool.ModToolItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -26,7 +28,14 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItems(ItemModelGenerator generator, Item[] items) { for (Item item : items) generator.register(item, Models.GENERATED); }
     public void generateItems(ItemModelGenerator generator, Item[] items, Model model) { for (Item item : items) generator.register(item, model); }
 
-    public void generateCross(BlockStateModelGenerator generator, List<Block> blocks) { blocks.forEach(cross -> generator.registerSingleton(Blocks.VINE,block -> TexturedModel.getCubeAll(Identifier.of("minecraft", "block/cross")))); }
+    public void generateCross(BlockStateModelGenerator generator, List<Block> blocks) { blocks.forEach(cross -> {
+        String regex = "(?<=\\{"+HisbMod.id()+":)[^}]+";
+        HisbMod.debug("Cross regex: " + regex);
+        HisbMod.debug("Cross to string: " + cross.toString());
+        Matcher name = Pattern.compile(regex).matcher(cross.toString());
+        if (name.find()) HisbMod.debug("Cross name: " + name.group());
+        generator.registerSingleton(cross,block -> TexturedModel.getCubeAll(Identifier.of("minecraft", "block/"+ name.group())));
+    }); }
 
     public void generateLogs(BlockStateModelGenerator generator, List<Block> blocks) {
         blocks.forEach(log -> generator.registerLog(log).log(log));
@@ -37,7 +46,6 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
         // documentation - NOTE: LEAVES AND VINES NEED A CUSTOM FILE, CAN'T BE GENERATED THROUGH DATAGEN; HERE'S SOME PRESETS ...
-
 
         // NORMAL MODEL BLOCKS
         generateBlocks(generator, ModBlocks.getNotSorted());
@@ -74,8 +82,10 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
+        Item[] items = ModItems.all();
         generateItems(generator, ModItems.all());
-        generateItems(generator, ModToolItems.ALL, Models.HANDHELD);
-        generateArmor(generator, ModArmorItems.all());
+        generateItems(generator, ModToolItems.all(), Models.HANDHELD);
+        generateArmor(generator, ModArmorItems.allArmor());
+        generator.register(ModArmorItems.purviumElytra(), Models.GENERATED);
     }
 }

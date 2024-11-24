@@ -125,5 +125,8 @@
   "item.hisb.red_dover_talent": "Red Dover Talent",
   "item.hisb.orange_dover_talent": "Orange Dover Talent",
   "item.hisb.bright_dover_talent": "Bright Dover Talent",
-  "item.hisb.blue_dover_talent": "Blue Dover Talent"
+  "item.hisb.blue_dover_talent": "Blue Dover Talent",
+
+  "death.attack.ancient_star_reflect": "%1$s's attack reflected right back at 'em",
+  "death.attack.ancient_star_reflect.player": "%1$s attack was reflected by %2$s right back at 'em"
 }

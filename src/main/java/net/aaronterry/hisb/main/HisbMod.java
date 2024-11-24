@@ -5,7 +5,7 @@ import net.aaronterry.helper.util.HelperServerTick;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.block.entity.ModBlockEntities;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
-import net.aaronterry.hisb.pack.exploration.magic.ModAbilities;
+import net.aaronterry.hisb.pack.exploration.effect.ModAbilities;
 import net.aaronterry.hisb.pack.exploration.screen.ModScreenHandlers;
 
 public class HisbMod extends HelperModInitializer {

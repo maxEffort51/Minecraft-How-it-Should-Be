@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "hisb:block/indug_stone",
+    "side": "hisb:block/indug_stone",
+    "top": "hisb:block/indug_stone"
+  }
+}

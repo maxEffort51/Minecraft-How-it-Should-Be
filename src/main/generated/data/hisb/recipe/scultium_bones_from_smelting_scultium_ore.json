@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 250,
+  "experience": 6.0,
+  "group": "scultium_smelting",
+  "ingredient": {
+    "item": "hisb:scultium_ore"
+  },
+  "result": {
+    "id": "hisb:scultium_bones"
+  }
+}

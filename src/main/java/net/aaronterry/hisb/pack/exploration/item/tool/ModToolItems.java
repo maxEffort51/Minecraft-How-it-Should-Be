@@ -1,9 +1,8 @@
 package net.aaronterry.hisb.pack.exploration.item.tool;
 
-import net.aaronterry.helper.Useful;
+import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.main.HisbMod;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -17,37 +16,41 @@ import net.minecraft.util.Identifier;
 // NETHERITE SWORD -> 3, -2.4F AXE -> 5.0F, -3.0F PICKAXE -> 1.0F, -2.8F SHOVEL -> 1.5F, -3.0F HOE -> -4.0F, 0.0F
 // SCULTIUM SWORD -> 3, -2.0F AXE -> 4.5F, -2.8F PICKAXE -> 1.0F, -2.4F SHOVEL -> 1.5F, -2.6F HOE -> -3.0F, 0.0F
 
-public class ModToolItems {
-    public static final Item SCULTIUM_AXE = registerTool("scultium_axe", new ToolData(ModToolMaterials.SCULTIUM, "axe", 4.5f, -2.8f));
-    public static final Item SCULTIUM_PICKAXE = registerTool("scultium_pickaxe", new ToolData(ModToolMaterials.SCULTIUM, "pickaxe", 1.0f, -2.4f));
-    public static final Item SCULTIUM_SHOVEL = registerTool("scultium_shovel", new ToolData(ModToolMaterials.SCULTIUM, "shovel", 1.5f, -2.6f));
-    public static final Item SCULTIUM_HOE = registerTool("scultium_hoe", new ToolData(ModToolMaterials.SCULTIUM, "hoe", -3.0F, 0.0F));
-    public static final Item[] SCULTIUM = new Item[] {SCULTIUM_AXE,SCULTIUM_PICKAXE,SCULTIUM_SHOVEL,SCULTIUM_HOE};
-    public static final Item DEPNETUM_SWORD = registerTool("depnetum_sword", new ToolData(ModToolMaterials.SCULTIUM, "sword", 4, -2.0f));
+public class ModToolItems extends HelperItems {
 
-    public static final Item DEMANDUM_SWORD = registerTool("demandum_sword", new ToolData(ModToolMaterials.DEMANDUM, "sword", 4, -2.0f));
-    public static final Item DEMANDUM_AXE = registerTool("demandum_axe", new ToolData(ModToolMaterials.DEMANDUM, "axe", 4.5f, -2.8f));
-    public static final Item DEMANDUM_PICKAXE = registerTool("demandum_pickaxe", new ToolData(ModToolMaterials.DEMANDUM, "pickaxe", 1.0f, -2.4f));
-    public static final Item DEMANDUM_SHOVEL = registerTool("demandum_shovel", new ToolData(ModToolMaterials.DEMANDUM, "shovel", 1.5f, -2.6f));
-    public static final Item DEMANDUM_HOE = registerTool("demandum_hoe", new ToolData(ModToolMaterials.DEMANDUM, "hoe", -3.0F, 0.0F));
-    public static final Item[] DEMANDUM = new Item[] {DEMANDUM_AXE,DEMANDUM_PICKAXE,DEMANDUM_SHOVEL,DEMANDUM_HOE,DEMANDUM_SWORD};
+    private static final ItemCaller scultium = createCaller("hisb_scultium_tools",HisbMod.id(),"scultium");
+    private static final ItemCaller depnetum = createCaller("hisb_depnetum_tools",HisbMod.id(),"depnetum");
+    private static final ItemCaller demandum = createCaller("hisb_demandum_tools",HisbMod.id(),"demandum");
+    private static final ItemCaller untillium = createCaller("hisb_untillium_tools",HisbMod.id(),"untillium");
+    private static final ItemCaller reaper = createCaller("hisb_reaper_tools",HisbMod.id());
+    private static final ItemCaller tools = createCaller("hisb_tools",HisbMod.id()).addChild(scultium).addChild(depnetum)
+            .addChild(demandum).addChild(untillium).addChild(reaper);
 
-    public static final Item REAPER_SCYTHE = registerTool("reaper_scythe", new ToolData(ModToolMaterials.SCYTHE, "hoe", 5.5F, -2.0F));
+    public static final Item DEPNETUM_SWORD = makeTool(depnetum, ItemTypes.SWORD, ModToolMaterials.SCULTIUM, 4, -2.0f);
+    public static final Item SCULTIUM_AXE = makeTool(scultium, ItemTypes.AXE, ModToolMaterials.SCULTIUM, 4.5f, -2.8f);
+    public static final Item SCULTIUM_PICKAXE = makeTool(scultium, ItemTypes.PICKAXE, ModToolMaterials.SCULTIUM, 1.0f, -2.4f);
+    public static final Item SCULTIUM_SHOVEL = makeTool(scultium, ItemTypes.SHOVEL, ModToolMaterials.SCULTIUM, 1.5f, -2.6f);
+    public static final Item SCULTIUM_HOE = makeTool(scultium, ItemTypes.HOE, ModToolMaterials.SCULTIUM, -3.0F, -0.1F);
 
-    public static final Item[] ALL = Useful.combine(Useful.append(SCULTIUM, DEPNETUM_SWORD),Useful.append(DEMANDUM, REAPER_SCYTHE));
+    public static final Item DEMANDUM_SWORD = makeTool(demandum, ItemTypes.SWORD, ModToolMaterials.DEMANDUM, 4.1f, -2.2f);
+    public static final Item DEMANDUM_AXE = makeTool(demandum, ItemTypes.AXE, ModToolMaterials.DEMANDUM, 4.6f, -3.0f);
+    public static final Item DEMANDUM_PICKAXE = makeTool(demandum, ItemTypes.PICKAXE, ModToolMaterials.DEMANDUM, 1.1f, -2.5f);
+    public static final Item DEMANDUM_SHOVEL = makeTool(demandum, ItemTypes.SHOVEL, ModToolMaterials.DEMANDUM, 1.6f, -2.7f);
+    public static final Item DEMANDUM_HOE = makeTool(demandum, ItemTypes.HOE, ModToolMaterials.DEMANDUM, -2.0F, -0.3F);
 
-    private static Item registerTool(String name, ToolData data) {
+    public static final Item UNTILLIUM_SWORD = makeTool(untillium, ItemTypes.SWORD, ModToolMaterials.UNTILLIUM, 4, -1.9f);
+    public static final Item UNTILLIUM_AXE = makeTool(untillium, ItemTypes.AXE, ModToolMaterials.UNTILLIUM, 4.5f, -2.6f);
+    public static final Item UNTILLIUM_PICKAXE = makeTool(untillium, ItemTypes.PICKAXE, ModToolMaterials.UNTILLIUM, 1.0f, -2.2f);
+    public static final Item UNTILLIUM_SHOVEL = makeTool(untillium, ItemTypes.SHOVEL, ModToolMaterials.UNTILLIUM, 1.5f, -2.4f);
+    public static final Item UNTILLIUM_HOE = makeTool(untillium, ItemTypes.HOE, ModToolMaterials.UNTILLIUM, -1.0f, 0.0f);
 
-        Item item = switch(data.itemType) {
-            case "sword" -> new SwordItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
-            case "axe" -> new AxeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
-            case "pickaxe" -> new PickaxeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
-            case "shovel" -> new ShovelItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
-            case "hoe" -> new HoeItem(data.material, Useful.ItemSettings.tool(data.itemType,data.material, data.baseAttackDamage, data.attackSpeed));
-            default -> throw new IllegalStateException("ModToolItems.registerTool -> Unexpected value: " + data.itemType);
-        };
-        return registerItem(name, item);
-    }
+    public static final Item REAPER_SCYTHE = makeTool(reaper, "reaper_scythe", "hoe", ModToolMaterials.SCYTHE, 5.5F, -2.0F);
+
+    public static final Item[] all() { return all(tools); }
+    public static final Item depnetumTool() { return all(depnetum)[0]; }
+    public static final Item[] scultiumTools() { return all(scultium); }
+    public static final Item[] demandumTools() { return all(demandum); }
+    public static final Item[] untilliumTools() { return all(untillium); }
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(HisbMod.id(), name), item);
@@ -62,20 +65,6 @@ public class ModToolItems {
     public static void registerModTools() {
         HisbMod.debug("Registering Mod Tools for " + HisbMod.id());
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> addAll(entries, ALL));
-    }
-
-    private static class ToolData {
-        public ToolMaterial material;
-        public String itemType;
-        public float baseAttackDamage;
-        public float attackSpeed;
-
-        public ToolData(ToolMaterial material, String itemType, float baseAttackDamage, float attackSpeed) {
-            this.material = material;
-            this.itemType = itemType;
-            this.baseAttackDamage = baseAttackDamage;
-            this.attackSpeed = attackSpeed;
-        }
+        addToItemGroup(ItemGroups.TOOLS, all());
     }
 }

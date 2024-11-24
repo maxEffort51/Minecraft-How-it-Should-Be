@@ -32,10 +32,12 @@ public class ModItems extends HelperItems {
     // NETHER ITEMS
     public static final Item ANCIENT_STAR = makeItem(general, "ancient_star", new AncientStarItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
 
+    public static final Item BAKED_QUARTZ = makeItem(general, "baked_quartz");
+    public static final Item CRYSTALLINE_QUARTZ = makeItem(general, "crystalline_quartz");
     public static final Item FIRITE_SCRAP = makeItem(general, "firite_scrap");
     public static final Item PURIFIED_SCRAP = makeItem(general, "purified_scrap");
     public static final Item DIRTY_SCRAP = makeItem(general, "dirty_scrap");
-    public static final Item CRYSTALLINE_QUARTZ = makeItem(general, "crystalline_quartz");
+    public static final Item DEBRITINUM_SCRAP = makeItem(general, "debritinum_scrap");
     // END ITEMS
     public static final Item PURVIUM_CHUNK = makeItem(general, "purvium_chunk");
     public static final Item BLAST_SHARD = makeItem(general, "blast_shard");

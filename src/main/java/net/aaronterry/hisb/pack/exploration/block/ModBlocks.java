@@ -2,7 +2,6 @@ package net.aaronterry.hisb.pack.exploration.block;
 
 import net.aaronterry.helper.Useful;
 import net.aaronterry.helper.block.HelperBlocks;
-import net.aaronterry.helper.block.table.TableBlock;
 import net.aaronterry.hisb.main.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.custom.PurifierTableBlock;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
@@ -53,7 +52,7 @@ public class ModBlocks extends HelperBlocks {
     /* TABLES */
 
     // new PurifierTableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL))
-    public static final Block PURIFIER_TABLE = sortBlock(id("purifier_table"), new TableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL)))
+    public static final Block PURIFIER_TABLE = sortBlock(id("purifier_table"), new PurifierTableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL)))
             .preset(ps_TABLE).dimension(SortInputs.NO_DIM).tool(SortInputs.PICKAXE).material(SortInputs.STONE).shapelessRecipe(RecipeCategory.MISC)
             .input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE}, new int[] {2,2,2,1,2})
             .needsResult().endRecipe().get();
@@ -98,7 +97,7 @@ public class ModBlocks extends HelperBlocks {
     public static final Block DYREMITE_BLOCK = sortBlock(id("dyremite_block"), Useful.BlockSettings.auto(60f, 500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.OVERWORLD).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DYREMITE_CHUNK).get();
     public static final Block DEBRITINUM_BLOCK = sortBlock(id("debritinum_block"), Useful.BlockSettings.auto(70f, 1500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.NETHER).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
-            .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DIRTY_SCRAP).get();
+            .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DEBRITINUM_SCRAP).get();
     public static final Block PURVIUM_BLOCK = sortBlock(id("purvium_block"), Useful.BlockSettings.auto(80f, 400f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.PURVIUM_CHUNK).get();
     public static final Block SCULTIUM_BLOCK = sortBlock(id("scultium_block"), Useful.BlockSettings.auto(75f, 600f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
@@ -138,8 +137,8 @@ public class ModBlocks extends HelperBlocks {
     // NEXUS
     public static final Block HESPER_SLAB = sortBlock(id("hesper_slab"), new SlabBlock(Useful.BlockSettings.basic(12f, true)),ps_SLAB).parent(HESPER_PLANKS);
     public static final Block HESPER_STAIRS = sortBlock(id("hesper_stairs"), new StairsBlock(HESPER_PLANKS.getDefaultState(), Useful.BlockSettings.basic(12f, true)),ps_STAIRS).parent(HESPER_PLANKS);
-    public static final Block HESPER_DOOR = sortBlock(id("hesper_door"), new DoorBlock(HESPER, Useful.BlockSettings.basic(12f, true)),ps_DOOR).parent(HESPER_PLANKS);
-    public static final Block HESPER_TRAPDOOR = sortBlock(id("hesper_trapdoor"), new TrapdoorBlock(HESPER, Useful.BlockSettings.basic(12f, true)),ps_TRAPDOOR).parent(HESPER_PLANKS);
+    public static final Block HESPER_DOOR = sortBlock(id("hesper_door"), new DoorBlock(HESPER, Useful.BlockSettings.basic(12f, true).nonOpaque()),ps_DOOR).parent(HESPER_PLANKS);
+    public static final Block HESPER_TRAPDOOR = sortBlock(id("hesper_trapdoor"), new TrapdoorBlock(HESPER, Useful.BlockSettings.basic(12f, true).nonOpaque()),ps_TRAPDOOR).parent(HESPER_PLANKS);
     public static final Block HESPER_FENCE = sortBlock(id("hesper_fence"), new FenceBlock(Useful.BlockSettings.basic(12f, true)),ps_FENCE).parent(HESPER_PLANKS);
     public static final Block HESPER_FENCE_GATE = sortBlock(id("hesper_fence_gate"), new FenceGateBlock(HESPER_WOOD, Useful.BlockSettings.basic(12f, true)),ps_FENCE_GATE).parent(HESPER_PLANKS);
     public static final Block CELESTE_STONE_SLAB = sortBlock(id("celeste_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(18f, true)),ps_SLAB).parent(CELESTE_STONE);
@@ -150,9 +149,9 @@ public class ModBlocks extends HelperBlocks {
 
     /* CUSTOM-RENDER BLOCKS */
     public static final Block DEAD_VINE = sortBlock(id("dead_vine"), new VineBlock(AbstractBlock.Settings.create().replaceable().noCollision()
-            .ticksRandomly().strength(0.3F).sounds(BlockSoundGroup.VINE).burnable().pistonBehavior(PistonBehavior.DESTROY)),ps_VINE).dimension(SortInputs.DEMANDI).get();
-    public static final Block HESPER_LEAVES = sortBlock(id("hesper_leaves"), Useful.BlockSettings.auto(2f),ps_NORMAL).model("").dimension(SortInputs.NEXUS).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
-    public static final Block AZURE_BLUET = sortBlock(id("azure_bluet"), new FlowerBlock(StatusEffects.ABSORPTION, 10, Useful.BlockSettings.basic(3f)),ps_FLOWER).dimension(SortInputs.NEXUS).get();
+            .ticksRandomly().strength(0.3f).sounds(BlockSoundGroup.VINE).burnable().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)),ps_VINE).dimension(SortInputs.DEMANDI).get();
+    public static final Block HESPER_LEAVES = sortBlock(id("hesper_leaves"), new LeavesBlock(AbstractBlock.Settings.copy(Blocks.MANGROVE_LEAVES).strength(2f).nonOpaque()),ps_NORMAL).model("").dimension(SortInputs.NEXUS).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
+    public static final Block CELESTEA = sortBlock(id("celestea"), new FlowerBlock(StatusEffects.ABSORPTION, 10, AbstractBlock.Settings.copy(Blocks.SUNFLOWER).strength(1f)),ps_FLOWER).dimension(SortInputs.NEXUS).get();
 
     public static void registerModBlocks() {
         HisbMod.debug("Registering Mod Blocks for " + HisbMod.id());
@@ -166,8 +165,6 @@ public class ModBlocks extends HelperBlocks {
         HisbMod.debug("Fence: " + ModBlocks.getFromBlockType(SortInputs.FENCE));
         HisbMod.debug("Gate: " + ModBlocks.getFromBlockType(SortInputs.FENCE_GATE));
         HisbMod.debug("Parent Blocks: " + ModBlocks.getParents().stream().map(Sorted::getBlock).toList());
-
-        Sorted purifier_table = getFromBlock(PURIFIER_TABLE);
 
         addToItemGroup(ItemGroups.BUILDING_BLOCKS,all());
     }

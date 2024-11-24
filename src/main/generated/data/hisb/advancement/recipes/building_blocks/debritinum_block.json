@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dirty_scrap": {
+    "has_debritinum_scrap": {
       "conditions": {
         "items": [
           {
-            "items": "hisb:dirty_scrap"
+            "items": "hisb:debritinum_scrap"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_dirty_scrap"
+      "has_debritinum_scrap"
     ]
   ],
   "rewards": {

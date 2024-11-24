@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_burple_purvium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:burple_purvium_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:purvium_chunk_from_smelting_burple_purvium_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_burple_purvium_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:purvium_chunk_from_smelting_burple_purvium_ore"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 15.0,
+  "group": "untillium_process",
+  "ingredient": {
+    "item": "hisb:untillium_ore"
+  },
+  "result": {
+    "id": "hisb:untillium_bar"
+  }
+}

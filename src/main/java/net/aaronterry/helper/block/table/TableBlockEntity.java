@@ -11,6 +11,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class TableBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, Inventory {
@@ -56,6 +57,9 @@ public class TableBlockEntity extends BlockEntity implements NamedScreenHandlerF
     // NEEDS: read / write Nbt
 
     // NEEDS: tick function
+    public static void tick(World world, BlockPos blockPos, BlockState blockState, TableBlockEntity tableBlockEntity) {
+        // yay
+    }
 
     @Override public Text getDisplayName() {
         // NEEDS: Display name
@@ -63,5 +67,4 @@ public class TableBlockEntity extends BlockEntity implements NamedScreenHandlerF
     }
 
     @Override public void clear() {  }
-
 }

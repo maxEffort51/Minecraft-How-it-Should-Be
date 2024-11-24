@@ -3,7 +3,7 @@
 	"package": "net.aaronterry.hisb.pack.exploration.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"HisbModMixin"
+      "LivingEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
