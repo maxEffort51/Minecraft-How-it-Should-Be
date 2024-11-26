@@ -59,21 +59,21 @@ public class Useful {
         }
     }
 
-    public static class BlockSettings {
-        public static AbstractBlock.Settings basic(float strength) { return AbstractBlock.Settings.create().strength(strength).requiresTool(); }
-        public static AbstractBlock.Settings basic(float strength, float resistance) { return AbstractBlock.Settings.create().strength(strength, resistance).requiresTool(); }
-        public static AbstractBlock.Settings basic(float strength, boolean requiresTool) {
-            AbstractBlock.Settings settings = AbstractBlock.Settings.create().strength(strength); return requiresTool ? settings : settings.requiresTool();
-        }
-        public static AbstractBlock.Settings basic(float strength, float resistance, boolean requiresTool) {
-            AbstractBlock.Settings settings = AbstractBlock.Settings.create().strength(strength, resistance); return requiresTool ? settings : settings.requiresTool();
-        }
-        public static AbstractBlock.Settings sounds(float strength, boolean requiresTool, NoteBlockInstrument instrument, BlockSoundGroup group) { return basic(strength, requiresTool).instrument(instrument).sounds(group); }
-        public static AbstractBlock.Settings sounds(float strength, float resistance, boolean requiresTool, NoteBlockInstrument instrument, BlockSoundGroup group) { return basic(strength, resistance, requiresTool).instrument(instrument).sounds(group); }
-
-        public static Block auto(float strength) { return new Block(Useful.BlockSettings.basic(strength)); }
-        public static Block auto(float strength, float resistance) { return new Block(Useful.BlockSettings.basic(strength, resistance)); }
-    }
+//    public static class BlockSettings {
+//        public static AbstractBlock.Settings basic(float strength) { return AbstractBlock.Settings.create().strength(strength).requiresTool(); }
+//        public static AbstractBlock.Settings basic(float strength, float resistance) { return AbstractBlock.Settings.create().strength(strength, resistance).requiresTool(); }
+//        public static AbstractBlock.Settings basic(float strength, boolean requiresTool) {
+//            AbstractBlock.Settings settings = AbstractBlock.Settings.create().strength(strength); return requiresTool ? settings : settings.requiresTool();
+//        }
+//        public static AbstractBlock.Settings basic(float strength, float resistance, boolean requiresTool) {
+//            AbstractBlock.Settings settings = AbstractBlock.Settings.create().strength(strength, resistance); return requiresTool ? settings : settings.requiresTool();
+//        }
+//        public static AbstractBlock.Settings sounds(float strength, boolean requiresTool, NoteBlockInstrument instrument, BlockSoundGroup group) { return basic(strength, requiresTool).instrument(instrument).sounds(group); }
+//        public static AbstractBlock.Settings sounds(float strength, float resistance, boolean requiresTool, NoteBlockInstrument instrument, BlockSoundGroup group) { return basic(strength, resistance, requiresTool).instrument(instrument).sounds(group); }
+//
+//        public static Block auto(float strength) { return new Block(Useful.BlockSettings.basic(strength)); }
+//        public static Block auto(float strength, float resistance) { return new Block(Useful.BlockSettings.basic(strength, resistance)); }
+//    }
 
     public static class ModDamageSources {
         public static DamageSources DAMAGE_SOURCES = new DamageSources(DynamicRegistryManager.EMPTY);
