@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.item.armor;
 
 import net.aaronterry.helper.item.HelperArmorMaterials;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.registry.entry.RegistryEntry;

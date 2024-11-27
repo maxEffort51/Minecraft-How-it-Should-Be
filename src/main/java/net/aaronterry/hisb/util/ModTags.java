@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.util;
 
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;

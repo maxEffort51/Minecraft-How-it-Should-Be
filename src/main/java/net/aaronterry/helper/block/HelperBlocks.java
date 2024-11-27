@@ -143,6 +143,18 @@ public class HelperBlocks {
             if (isEmpty(sortData.toolMaterial)) sortData.toolMaterial = sortedBlock.toolMaterial;
             return get();
         }
+        public Block copyAsParent(Block block) {
+            if (block == null) { throw new IllegalArgumentException("Null input in HelperBlocks.copy"); }
+            Sorted sortedBlock = getFromBlock(block);
+            if (isEmpty(sortData.dim)) sortData.dim = sortedBlock.dim;
+            if (isEmpty(sortData.blockType)) sortData.blockType = sortedBlock.blockType;
+            if (isEmpty(sortData.dropType)) sortData.dropType = sortedBlock.dropType;
+            if (isEmpty(sortData.oreType)) sortData.oreType = sortedBlock.oreType;
+            if (isEmpty(sortData.toolType)) sortData.toolType = sortedBlock.toolType;
+            if (isEmpty(sortData.toolMaterial)) sortData.toolMaterial = sortedBlock.toolMaterial;
+            if (sortedBlock.isParent) sortData.isParent = true;
+            return get();
+        }
 
         public Block parent(Block parent) {
             sortData.parent = parent; return copy(parent);
@@ -258,9 +270,10 @@ public class HelperBlocks {
         public static final String END = "end";
         public static final String DEMANDI = "demandi";
         public static final String NEXUS = "nexus";
+        public static final String RARE = "rare";
         public static final String CUSTOM_DIM = "custom";
         public static final String NO_DIM = "dim_empty";
-        // BLOCK TYPES
+        // MODEL TYPES
         public static final String PILLAR = "pillar";
         public static final String MULTIFACETED = "multi";
         public static final String STONE_BLOCK_TYPE = "stone_block_type";
@@ -272,9 +285,12 @@ public class HelperBlocks {
         public static final String DOOR = "door";
         public static final String TRAPDOOR = "trapdoor";
         public static final String WALL = "wall";
+        public static final String GRASSLIKE = "grasslike";
         public static final String FENCE = "fence";
         public static final String FENCE_GATE = "fence_gate";
         public static final String CROSS = "cross_section";
+        public static final String TORCH = "torch";
+        public static final String WALL_TORCH = "wall_torch";
         public static final String NORMAL_TYPE = "block_empty";
         // DROP TYPES
         public static final String DROP_SELF = "self";

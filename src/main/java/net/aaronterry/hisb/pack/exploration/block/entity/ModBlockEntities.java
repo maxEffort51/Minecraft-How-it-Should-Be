@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.block.entity;
 
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;

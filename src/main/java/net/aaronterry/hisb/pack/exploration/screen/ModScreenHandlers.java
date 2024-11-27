@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.screen;
 
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenHandlerType;

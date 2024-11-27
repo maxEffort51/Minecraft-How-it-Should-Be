@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.item.custom;
 
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;

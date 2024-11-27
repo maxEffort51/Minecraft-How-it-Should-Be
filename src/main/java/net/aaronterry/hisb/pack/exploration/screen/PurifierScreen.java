@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;

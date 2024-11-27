@@ -1,7 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.datagen;
 
 import net.aaronterry.helper.block.HelperBlocks;
-import net.aaronterry.hisb.main.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
@@ -12,11 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -63,6 +59,10 @@ public class ModModelProvider extends FabricModelProvider {
             walls.forEach(wall -> { if (wall.hasParent() && wall.getParent().equals(parent.getBlock())) texture.wall(wall.getBlock()); });
             fences.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) texture.fence(fence.getBlock()); });
             fence_gates.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) texture.fenceGate(fence.getBlock()); });
+        });
+
+        ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.WALL_TORCH).forEach(wallTorch -> {
+            if (wallTorch.hasParent()) generator.registerTorch(wallTorch.getParent(),wallTorch.getBlock());
         });
 
         // PILLAR BLOCKS AND LOGS

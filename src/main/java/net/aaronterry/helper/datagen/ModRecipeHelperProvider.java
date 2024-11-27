@@ -1,7 +1,7 @@
 package net.aaronterry.helper.datagen;
 
 import net.aaronterry.helper.block.HelperBlocks;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

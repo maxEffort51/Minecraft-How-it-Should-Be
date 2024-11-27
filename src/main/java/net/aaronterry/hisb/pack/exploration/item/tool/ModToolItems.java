@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.item.tool;
 
 import net.aaronterry.helper.item.HelperItems;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;

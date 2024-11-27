@@ -1,8 +1,8 @@
 package net.aaronterry.hisb.pack.exploration.block;
 
-import net.aaronterry.helper.Useful;
+import net.aaronterry.helper.block.BlockSettings;
 import net.aaronterry.helper.block.HelperBlocks;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.custom.PurifierTableBlock;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
@@ -14,8 +14,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
@@ -33,6 +35,9 @@ public class ModBlocks extends HelperBlocks {
     private static final SortingPreset ps_FENCE = ps_NORMAL.copy().model(SortInputs.FENCE);
     private static final SortingPreset ps_FENCE_GATE = ps_NORMAL.copy().model(SortInputs.FENCE_GATE);
     private static final SortingPreset ps_FLOWER = ps_NORMAL.copy().model(SortInputs.CROSS);
+    private static final SortingPreset ps_GRASSLIKE = ps_NORMAL.copy().model(SortInputs.GRASSLIKE);
+    private static final SortingPreset ps_TORCH = ps_NORMAL.copy().model(SortInputs.TORCH);
+    private static final SortingPreset ps_WALL_TORCH = ps_NORMAL.copy().model(SortInputs.WALL_TORCH);
     private static final SortingPreset ps_LOG = ps_NORMAL.copy().model(SortInputs.PILLAR).tool(SortInputs.AXE);
 
     private static final SortingPreset ps_ORE = new SortingPreset().model(SortInputs.NORMAL_TYPE).tool(SortInputs.PICKAXE);
@@ -52,119 +57,183 @@ public class ModBlocks extends HelperBlocks {
     /* TABLES */
 
     // new PurifierTableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL))
-    public static final Block PURIFIER_TABLE = sortBlock(id("purifier_table"), new PurifierTableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL)))
+    public static final Block PURIFIER_TABLE = sortBlock(id("purifier_table"), new PurifierTableBlock(new BlockSettings(3.5f).sound(NoteBlockInstrument.BASS, BlockSoundGroup.METAL).get()))
             .preset(ps_TABLE).dimension(SortInputs.NO_DIM).tool(SortInputs.PICKAXE).material(SortInputs.STONE).shapelessRecipe(RecipeCategory.MISC)
             .input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE}, new int[] {2,2,2,1,2})
             .needsResult().endRecipe().get();
 
     /* BASIC BLOCKS */
-    public static final Block BURPLE_BLOCK = sortBlock(id("burple_block"), Useful.BlockSettings.auto(6f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.SHOVEL).material(SortInputs.IRON).parent().get();
-    public static final Block CONDENSED_PURPUR_BLOCK = sortBlock(id("condensed_purpur_block"), Useful.BlockSettings.auto(8f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
+    public static final Block BURPLE_BLOCK = sortBlock(id("burple_block"), BlockSettings.makeBlock(6f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.SHOVEL).material(SortInputs.IRON).parent().get();
+    public static final Block CONDENSED_PURPUR_BLOCK = sortBlock(id("condensed_purpur_block"), BlockSettings.makeBlock(8f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
     // DEMANDI
-    public static final Block DEEP = sortBlock(id("deep"), Useful.BlockSettings.auto(20f),ps_DEMANDI).material(SortInputs.IRON).get();
-    public static final Block DARK = sortBlock(id("dark"), Useful.BlockSettings.auto(9f),ps_DEMANDI).material(SortInputs.IRON).parent().get();
-    public static final Block DEEP_SCULK = sortBlock(id("deep_sculk"), Useful.BlockSettings.auto(25f),ps_DEMANDI).material(SortInputs.IRON).get();
-    public static final Block CORRUPTED_MUD = sortBlock(id("corrupted_mud"), Useful.BlockSettings.auto(14f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.STONE).get();
-    public static final Block WASHED_DARK = sortBlock(id("washed_dark"), Useful.BlockSettings.auto(10f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.IRON).get();
-    public static final Block WASHED_SCULK = sortBlock(id("washed_sculk"), Useful.BlockSettings.auto(26f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.IRON).get();
-    public static final Block STIFF_SOIL = sortBlock(id("stiff_soil"), Useful.BlockSettings.auto(20f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.DIAMOND).get();
-    public static final Block DEEP_STONE = sortBlock(id("deep_stone"), Useful.BlockSettings.auto(24f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
-    public static final Block STIFF_STONE = sortBlock(id("stiff_stone"), Useful.BlockSettings.auto(30f),ps_STONE).dimension(SortInputs.DEMANDI).material(SortInputs.DIAMOND).parent()
+    public static final Block DEEP = sortBlock(id("deep"), BlockSettings.makeBlock(20f),ps_DEMANDI).material(SortInputs.IRON).get();
+    public static final Block DARK = sortBlock(id("dark"), BlockSettings.makeBlock(9f),ps_DEMANDI).material(SortInputs.IRON).parent().get();
+    public static final Block DEEP_SCULK = sortBlock(id("deep_sculk"), BlockSettings.makeBlock(25f),ps_DEMANDI).material(SortInputs.IRON).get();
+    public static final Block CORRUPTED_MUD = sortBlock(id("corrupted_mud"), BlockSettings.makeBlock(14f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.STONE).get();
+    public static final Block WASHED_DARK = sortBlock(id("washed_dark"), BlockSettings.makeBlock(10f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.IRON).get();
+    public static final Block WASHED_SCULK = sortBlock(id("washed_sculk"), BlockSettings.makeBlock(26f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.IRON).get();
+    public static final Block STIFF_SOIL = sortBlock(id("stiff_soil"), BlockSettings.makeBlock(20f),ps_DEMANDI).tool(SortInputs.SHOVEL).material(SortInputs.DIAMOND).get();
+    public static final Block DEEP_STONE = sortBlock(id("deep_stone"), BlockSettings.makeBlock(24f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
+    public static final Block STIFF_STONE = sortBlock(id("stiff_stone"), BlockSettings.makeBlock(30f),ps_STONE).dimension(SortInputs.DEMANDI).material(SortInputs.DIAMOND).parent()
             .shapelessRecipe(RecipeCategory.BUILDING_BLOCKS).input(ModBlocks.STIFF_SOIL, 4).needs(ModBlocks.STIFF_SOIL).endRecipe().get();
-    public static final Block SCULKSTONE = sortBlock(id("sculkstone"), Useful.BlockSettings.auto(29f),ps_STONE).dimension(SortInputs.DEMANDI).material(SortInputs.IRON).get();
-    public static final Block DEAD_SCULK = sortBlock(id("dead_sculk"), Useful.BlockSettings.auto(15f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND).parent().get();
-    public static final Block HARDENED_SCULK = sortBlock(id("hardened_sculk"), Useful.BlockSettings.auto(100f, 10f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE).get();
-    public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), Useful.BlockSettings.auto(200f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM).parent().get();
+    public static final Block SCULKSTONE = sortBlock(id("sculkstone"), BlockSettings.makeBlock(29f),ps_STONE).dimension(SortInputs.DEMANDI).material(SortInputs.IRON).get();
+    public static final Block DEAD_SCULK = sortBlock(id("dead_sculk"), BlockSettings.makeBlock(15f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND).parent().get();
+    public static final Block HARDENED_SCULK = sortBlock(id("hardened_sculk"), BlockSettings.makeBlock(100f, 10f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE).get();
+    public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), BlockSettings.makeBlock(200f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM).parent().get();
     // NEXUS
-    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), Useful.BlockSettings.auto(15f)).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
-    public static final Block CELESTE_STONE = sortBlock(id("celeste_stone"), Useful.BlockSettings.auto(18f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
-    public static final Block INDUG_STONE = sortBlock(id("indug_stone"), Useful.BlockSettings.auto(20f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
+    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), BlockSettings.makeBlock(15f)).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
+    public static final Block CELESTE_STONE = sortBlock(id("celeste_stone"), BlockSettings.makeBlock(18f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
+    public static final Block INDUG_STONE = sortBlock(id("indug_stone"), BlockSettings.makeBlock(20f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
+    // RARE
+    public static final Block CLOVE_BLOCK = sortBlock(id("clove_block"), new BlockSettings(1.2f).sound(BlockSoundGroup.GRAVEL).piston(PistonBehavior.PUSH_ONLY).requires().getBlock(),ps_NORMAL).dimension(SortInputs.RARE).tool(SortInputs.SHOVEL).material(SortInputs.STONE).get();
+    public static final Block FINCHSTONE = sortBlock(id("finchstone"), new BlockSettings(10f).sound(BlockSoundGroup.STONE).piston(PistonBehavior.DESTROY).requires().getBlock(),ps_STONE).parent().dimension(SortInputs.RARE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
+    public static final Block CEMENT = sortBlock(id("cement"), new BlockSettings(15f).sound(BlockSoundGroup.PACKED_MUD).piston(PistonBehavior.PUSH_ONLY).getBlock(),ps_NORMAL).dimension(SortInputs.RARE).tool(SortInputs.PICKAXE).material(SortInputs.NO_MATERIAL).get();
+    public static final Block COMPACT_CONCRETE = sortBlock(id("compact_concrete"), new BlockSettings(35f).sound(NoteBlockInstrument.BASEDRUM, BlockSoundGroup.INTENTIONALLY_EMPTY).getBlock(),ps_NORMAL).parent().dimension(SortInputs.RARE).tool(SortInputs.PICKAXE).material(SortInputs.IRON).get();
+    public static final Block WHITE_COMPACT_CONCRETE = sortBlock(id("white_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.WHITE).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block BLACK_COMPACT_CONCRETE = sortBlock(id("black_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.BLACK).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block BLUE_COMPACT_CONCRETE = sortBlock(id("blue_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.BLUE).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block LIGHT_BLUE_COMPACT_CONCRETE = sortBlock(id("light_blue_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIGHT_BLUE).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block YELLOW_COMPACT_CONCRETE = sortBlock(id("yellow_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.YELLOW).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block BROWN_COMPACT_CONCRETE = sortBlock(id("brown_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.BROWN).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block CYAN_COMPACT_CONCRETE = sortBlock(id("cyan_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.CYAN).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block GRAY_COMPACT_CONCRETE = sortBlock(id("gray_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GRAY).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block GREEN_COMPACT_CONCRETE = sortBlock(id("green_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GREEN).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block LIGHT_GRAY_COMPACT_CONCRETE = sortBlock(id("light_gray_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIGHT_GRAY).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block LIME_COMPACT_CONCRETE = sortBlock(id("lime_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIME).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block MAGENTA_COMPACT_CONCRETE = sortBlock(id("magenta_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.MAGENTA).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block ORANGE_COMPACT_CONCRETE = sortBlock(id("orange_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.ORANGE).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block PINK_COMPACT_CONCRETE = sortBlock(id("pink_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PINK).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block PURPLE_COMPACT_CONCRETE = sortBlock(id("purple_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PURPLE).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
+    public static final Block RED_COMPACT_CONCRETE = sortBlock(id("red_compact_concrete"), BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.RED).getBlock(),ps_NORMAL).copyAsParent(COMPACT_CONCRETE);
 
     /* WOOD BLOCKS */
-    public static final Block DEAD_LOG = sortBlock(id("dead_log"), new PillarBlock(Useful.BlockSettings.sounds(8f, 3.0f, true, NoteBlockInstrument.BASS, BlockSoundGroup.WOOD)),ps_LOG).dimension(SortInputs.DEMANDI).material(SortInputs.STONE).get();
-    public static final Block DEAD_PLANKS = sortBlock(id("dead_planks"), Useful.BlockSettings.auto(10f),ps_DEMANDI).tool(SortInputs.AXE).material(SortInputs.STONE)
+    public static final Block DEAD_LOG = sortBlock(id("dead_log"), new PillarBlock(new BlockSettings(8f, 3.0f).requires().sound(NoteBlockInstrument.BASS, BlockSoundGroup.WOOD).get()),ps_LOG).dimension(SortInputs.DEMANDI).material(SortInputs.STONE).get();
+    public static final Block DEAD_PLANKS = sortBlock(id("dead_planks"), BlockSettings.makeBlock(10f),ps_DEMANDI).tool(SortInputs.AXE).material(SortInputs.STONE)
             .shapelessRecipe(RecipeCategory.BUILDING_BLOCKS, 4).input(ModBlocks.DEAD_LOG).needs(ModBlocks.DEAD_LOG).endRecipe().get();
     // NEXUS
-    public static final Block HESPER_LOG = sortBlock(id("hesper_log"), new PillarBlock(Useful.BlockSettings.sounds(10f, 3.0f, true, NoteBlockInstrument.BASS, BlockSoundGroup.WOOD)),ps_LOG).dimension(SortInputs.NEXUS).material(SortInputs.NO_MATERIAL).get();
-    public static final Block HESPER_PLANKS = sortBlock(id("hesper_planks"), Useful.BlockSettings.auto(12f),ps_PLANKS).dimension(SortInputs.NEXUS).material(SortInputs.NO_MATERIAL).parent().get();
+    public static final Block HESPER_LOG = sortBlock(id("hesper_log"), new PillarBlock(new BlockSettings(10f, 3.0f).requires().sound(NoteBlockInstrument.BASS, BlockSoundGroup.WOOD).get()),ps_LOG).dimension(SortInputs.NEXUS).material(SortInputs.NO_MATERIAL).get();
+    public static final Block HESPER_PLANKS = sortBlock(id("hesper_planks"), BlockSettings.makeBlock(12f),ps_PLANKS).dimension(SortInputs.NEXUS).material(SortInputs.NO_MATERIAL).parent().get();
+    // RARE
+    public static final Block LAUREL_LOG = sortBlock(id("laurel_log"), new PillarBlock(new BlockSettings(12f, 3.0f).sound(NoteBlockInstrument.BASS, BlockSoundGroup.WOOD).get()),ps_LOG).dimension(SortInputs.RARE).material(SortInputs.NO_MATERIAL).get();
+    public static final Block LAUREL_PLANKS = sortBlock(id("laurel_planks"), BlockSettings.makeBlock(13f),ps_PLANKS).dimension(SortInputs.RARE).material(SortInputs.NO_MATERIAL).parent().get();
 
     /* LIVING BLOCKS */
-    public static final Block DEEP_DARK_HEART = sortBlock(id("deep_dark_heart"), Useful.BlockSettings.auto(60f),ps_DEMHEART).get();
-    public static final Block DEEP_HEART = sortBlock(id("deep_heart"), Useful.BlockSettings.auto(40f),ps_DEMHEART).get();
-    public static final Block DARK_HEART = sortBlock(id("dark_heart"), Useful.BlockSettings.auto(40f),ps_DEMHEART).get();
+    public static final Block DEEP_DARK_HEART = sortBlock(id("deep_dark_heart"), BlockSettings.makeBlock(60f),ps_DEMHEART).get();
+    public static final Block DEEP_HEART = sortBlock(id("deep_heart"), BlockSettings.makeBlock(40f),ps_DEMHEART).get();
+    public static final Block DARK_HEART = sortBlock(id("dark_heart"), BlockSettings.makeBlock(40f),ps_DEMHEART).get();
 
     /* CONDENSED BLOCKS */
-    public static final Block DYREMITE_BLOCK = sortBlock(id("dyremite_block"), Useful.BlockSettings.auto(60f, 500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.OVERWORLD).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND)
+    public static final Block DYREMITE_BLOCK = sortBlock(id("dyremite_block"), BlockSettings.makeBlock(60f, 500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.OVERWORLD).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DYREMITE_CHUNK).get();
-    public static final Block DEBRITINUM_BLOCK = sortBlock(id("debritinum_block"), Useful.BlockSettings.auto(70f, 1500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.NETHER).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
+    public static final Block DEBRITINUM_BLOCK = sortBlock(id("debritinum_block"), BlockSettings.makeBlock(70f, 1500f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.NETHER).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DEBRITINUM_SCRAP).get();
-    public static final Block PURVIUM_BLOCK = sortBlock(id("purvium_block"), Useful.BlockSettings.auto(80f, 400f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
+    public static final Block PURVIUM_BLOCK = sortBlock(id("purvium_block"), BlockSettings.makeBlock(80f, 400f), Rarity.UNCOMMON,ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.PURVIUM_CHUNK).get();
-    public static final Block SCULTIUM_BLOCK = sortBlock(id("scultium_block"), Useful.BlockSettings.auto(75f, 600f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
+    public static final Block SCULTIUM_BLOCK = sortBlock(id("scultium_block"), BlockSettings.makeBlock(75f, 600f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.SCULTIUM_BONES).get();
-    public static final Block DEPNETUM_BLOCK = sortBlock(id("depnetum_block"), Useful.BlockSettings.auto(80f, 1000f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM)
+    public static final Block DEPNETUM_BLOCK = sortBlock(id("depnetum_block"), BlockSettings.makeBlock(80f, 1000f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.DEPNETUM_CLUMP).get();
-    public static final Block UNTILLIUM_BLOCK = sortBlock(id("untillium_block"), Useful.BlockSettings.auto(20f),ps_NORMAL).dimension(SortInputs.NEXUS).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
+    public static final Block UNTILLIUM_BLOCK = sortBlock(id("untillium_block"), BlockSettings.makeBlock(20f),ps_NORMAL).dimension(SortInputs.NEXUS).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.UNTILLIUM_BAR).get();
 
     /* ORES */
-    public static final Block PRISMALITE_ORE = sortBlock(id("prismalite_ore"), Useful.BlockSettings.auto(6f),ps_ORE).dimension(SortInputs.OVERWORLD).ore(ModItems.PRISMALITE_SHARD).material(SortInputs.IRON).get();
-    public static final Block PURVIUM_ORE = sortBlock(id("purvium_ore"), Useful.BlockSettings.auto(15f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK).get();
-    public static final Block BURPLE_PURVIUM_ORE = sortBlock(id("burple_purvium_ore"), Useful.BlockSettings.auto(12f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK).get();
-    public static final Block PURPUR_PURVIUM_ORE = sortBlock(id("purpur_purvium_ore"), Useful.BlockSettings.auto(14f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK,1,2).get();
-    public static final Block SCULTIUM_ORE = sortBlock(id("scultium_ore"), Useful.BlockSettings.auto(32f),ps_DEMANDI_ORE).ore(ModItems.SCULTIUM_BONES).get();
-    public static final Block DEPNETUM_ORE = sortBlock(id("depnetum_ore"), Useful.BlockSettings.auto(40f),ps_DEMANDI_ORE).ore(ModItems.DEPNETUM_CLUMP).get();
-    public static final Block DARK_DEPNETUM_ORE = sortBlock(id("dark_depnetum_ore"), Useful.BlockSettings.auto(35f),ps_DEMANDI_ORE).ore(ModItems.DEPNETUM_CLUMP,1,2).get();
-    public static final Block UNTILLIUM_ORE = sortBlock(id("untillium_ore"), Useful.BlockSettings.auto(22f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
-    public static final Block INDUG_UNTILLIUM_ORE = sortBlock(id("indug_untillium_ore"), Useful.BlockSettings.auto(24f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
+    public static final Block PRISMALITE_ORE = sortBlock(id("prismalite_ore"), BlockSettings.makeBlock(6f),ps_ORE).dimension(SortInputs.OVERWORLD).ore(ModItems.PRISMALITE_SHARD).material(SortInputs.IRON).get();
+    public static final Block PURVIUM_ORE = sortBlock(id("purvium_ore"), BlockSettings.makeBlock(15f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK).get();
+    public static final Block BURPLE_PURVIUM_ORE = sortBlock(id("burple_purvium_ore"), BlockSettings.makeBlock(12f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK).get();
+    public static final Block PURPUR_PURVIUM_ORE = sortBlock(id("purpur_purvium_ore"), BlockSettings.makeBlock(14f),ps_END_ORE).ore(ModItems.PURVIUM_CHUNK,1,2).get();
+    public static final Block SCULTIUM_ORE = sortBlock(id("scultium_ore"), BlockSettings.makeBlock(32f),ps_DEMANDI_ORE).ore(ModItems.SCULTIUM_BONES).get();
+    public static final Block DEPNETUM_ORE = sortBlock(id("depnetum_ore"), BlockSettings.makeBlock(40f),ps_DEMANDI_ORE).ore(ModItems.DEPNETUM_CLUMP).get();
+    public static final Block DARK_DEPNETUM_ORE = sortBlock(id("dark_depnetum_ore"), BlockSettings.makeBlock(35f),ps_DEMANDI_ORE).ore(ModItems.DEPNETUM_CLUMP,1,2).get();
+    public static final Block UNTILLIUM_ORE = sortBlock(id("untillium_ore"), BlockSettings.makeBlock(22f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
+    public static final Block INDUG_UNTILLIUM_ORE = sortBlock(id("indug_untillium_ore"), BlockSettings.makeBlock(24f)).inNexus().normalType().ore(ModItems.UNTILLIUM_BAR).withPickaxe().netheriteTool().get();
 
     /* NON-BLOCK BLOCKS */
-    public static final Block CONDENSED_PURPUR_SLAB = sortBlock(id("condensed_purpur_slab"), new SlabBlock(Useful.BlockSettings.basic(8f, true)),ps_SLAB).parent(CONDENSED_PURPUR_BLOCK);
-    public static final Block CONDENSED_PURPUR_STAIRS = sortBlock(id("condensed_purpur_stairs"), new StairsBlock(CONDENSED_PURPUR_BLOCK.getDefaultState(), Useful.BlockSettings.basic(8f, true)),ps_STAIRS).parent(CONDENSED_PURPUR_BLOCK);
-    public static final Block BURPLE_SLAB = sortBlock(id("burple_slab"), new SlabBlock(Useful.BlockSettings.basic(6f, true)),ps_SLAB).parent(BURPLE_BLOCK);
-    public static final Block BURPLE_STAIRS = sortBlock(id("burple_stairs"), new StairsBlock(BURPLE_BLOCK.getDefaultState(), Useful.BlockSettings.basic(6f, true)),ps_STAIRS).parent(BURPLE_BLOCK);
+    public static final Block CONDENSED_PURPUR_SLAB = sortBlock(id("condensed_purpur_slab"), new SlabBlock(new BlockSettings(8f).requires().get()),ps_SLAB).parent(CONDENSED_PURPUR_BLOCK);
+    public static final Block CONDENSED_PURPUR_STAIRS = sortBlock(id("condensed_purpur_stairs"), new StairsBlock(CONDENSED_PURPUR_BLOCK.getDefaultState(), new BlockSettings(8f).requires().get()),ps_STAIRS).parent(CONDENSED_PURPUR_BLOCK);
+    public static final Block BURPLE_SLAB = sortBlock(id("burple_slab"), new SlabBlock(new BlockSettings(6f).requires().get()),ps_SLAB).parent(BURPLE_BLOCK);
+    public static final Block BURPLE_STAIRS = sortBlock(id("burple_stairs"), new StairsBlock(BURPLE_BLOCK.getDefaultState(), new BlockSettings(6f).requires().get()),ps_STAIRS).parent(BURPLE_BLOCK);
     // DEMANDI
-    public static final Block DARK_SLAB = sortBlock(id("dark_slab"), new SlabBlock(Useful.BlockSettings.basic(9f, true)),ps_SLAB).parent(DARK);
-    public static final Block DARK_STAIRS = sortBlock(id("dark_stairs"), new StairsBlock(DARK.getDefaultState(), Useful.BlockSettings.basic(9f, true)),ps_STAIRS).parent(DARK);
-    public static final Block DEEP_STONE_SLAB = sortBlock(id("deep_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(24f, true)),ps_SLAB).parent(DEEP_STONE);
-    public static final Block DEEP_STONE_STAIRS = sortBlock(id("deep_stone_stairs"), new StairsBlock(DEEP_STONE.getDefaultState(), Useful.BlockSettings.basic(24f, true)),ps_STAIRS).parent(DEEP_STONE);
-    public static final Block STIFF_STONE_SLAB = sortBlock(id("stiff_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(30f, true)),ps_SLAB).parent(STIFF_STONE);
-    public static final Block STIFF_STONE_STAIRS = sortBlock(id("stiff_stone_stairs"), new StairsBlock(STIFF_STONE.getDefaultState(), Useful.BlockSettings.basic(30f, true)),ps_STAIRS).parent(STIFF_STONE);
-    public static final Block DEAD_SCULK_SLAB = sortBlock(id("dead_sculk_slab"), new SlabBlock(Useful.BlockSettings.basic(15f, true)),ps_SLAB).parent(DEAD_SCULK);
-    public static final Block DEAD_SCULK_STAIRS = sortBlock(id("dead_sculk_stairs"), new StairsBlock(DEAD_SCULK.getDefaultState(), Useful.BlockSettings.basic(15f, true)),ps_STAIRS).parent(DEAD_SCULK);
-    public static final Block IMPERVIUM_SLAB = sortBlock(id("impervium_slab"), new SlabBlock(Useful.BlockSettings.basic(180f, true)),ps_SLAB).parent(IMPERVIUM_BLOCK);
-    public static final Block IMPERVIUM_STAIRS = sortBlock(id("impervium_stairs"), new StairsBlock(IMPERVIUM_BLOCK.getDefaultState(), Useful.BlockSettings.basic(180f, true)),ps_STAIRS).parent(IMPERVIUM_BLOCK);
+    public static final Block DARK_SLAB = sortBlock(id("dark_slab"), new SlabBlock(new BlockSettings(9f).requires().get()),ps_SLAB).parent(DARK);
+    public static final Block DARK_STAIRS = sortBlock(id("dark_stairs"), new StairsBlock(DARK.getDefaultState(), new BlockSettings(9f).requires().get()),ps_STAIRS).parent(DARK);
+    public static final Block DEEP_STONE_SLAB = sortBlock(id("deep_stone_slab"), new SlabBlock(new BlockSettings(24f).requires().get()),ps_SLAB).parent(DEEP_STONE);
+    public static final Block DEEP_STONE_STAIRS = sortBlock(id("deep_stone_stairs"), new StairsBlock(DEEP_STONE.getDefaultState(), new BlockSettings(24f).requires().get()),ps_STAIRS).parent(DEEP_STONE);
+    public static final Block STIFF_STONE_SLAB = sortBlock(id("stiff_stone_slab"), new SlabBlock(new BlockSettings(30f).requires().get()),ps_SLAB).parent(STIFF_STONE);
+    public static final Block STIFF_STONE_STAIRS = sortBlock(id("stiff_stone_stairs"), new StairsBlock(STIFF_STONE.getDefaultState(), new BlockSettings(30f).requires().get()),ps_STAIRS).parent(STIFF_STONE);
+    public static final Block DEAD_SCULK_SLAB = sortBlock(id("dead_sculk_slab"), new SlabBlock(new BlockSettings(15f).requires().get()),ps_SLAB).parent(DEAD_SCULK);
+    public static final Block DEAD_SCULK_STAIRS = sortBlock(id("dead_sculk_stairs"), new StairsBlock(DEAD_SCULK.getDefaultState(), new BlockSettings(15f).requires().get()),ps_STAIRS).parent(DEAD_SCULK);
+    public static final Block IMPERVIUM_SLAB = sortBlock(id("impervium_slab"), new SlabBlock(new BlockSettings(180f).requires().get()),ps_SLAB).parent(IMPERVIUM_BLOCK);
+    public static final Block IMPERVIUM_STAIRS = sortBlock(id("impervium_stairs"), new StairsBlock(IMPERVIUM_BLOCK.getDefaultState(), new BlockSettings(180f).requires().get()),ps_STAIRS).parent(IMPERVIUM_BLOCK);
     // NEXUS
-    public static final Block HESPER_SLAB = sortBlock(id("hesper_slab"), new SlabBlock(Useful.BlockSettings.basic(12f, true)),ps_SLAB).parent(HESPER_PLANKS);
-    public static final Block HESPER_STAIRS = sortBlock(id("hesper_stairs"), new StairsBlock(HESPER_PLANKS.getDefaultState(), Useful.BlockSettings.basic(12f, true)),ps_STAIRS).parent(HESPER_PLANKS);
-    public static final Block HESPER_DOOR = sortBlock(id("hesper_door"), new DoorBlock(HESPER, Useful.BlockSettings.basic(12f, true).nonOpaque()),ps_DOOR).parent(HESPER_PLANKS);
-    public static final Block HESPER_TRAPDOOR = sortBlock(id("hesper_trapdoor"), new TrapdoorBlock(HESPER, Useful.BlockSettings.basic(12f, true).nonOpaque()),ps_TRAPDOOR).parent(HESPER_PLANKS);
-    public static final Block HESPER_FENCE = sortBlock(id("hesper_fence"), new FenceBlock(Useful.BlockSettings.basic(12f, true)),ps_FENCE).parent(HESPER_PLANKS);
-    public static final Block HESPER_FENCE_GATE = sortBlock(id("hesper_fence_gate"), new FenceGateBlock(HESPER_WOOD, Useful.BlockSettings.basic(12f, true)),ps_FENCE_GATE).parent(HESPER_PLANKS);
-    public static final Block CELESTE_STONE_SLAB = sortBlock(id("celeste_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(18f, true)),ps_SLAB).parent(CELESTE_STONE);
-    public static final Block CELESTE_STONE_STAIRS = sortBlock(id("celeste_stone_stairs"), new StairsBlock(CELESTE_STONE.getDefaultState(), Useful.BlockSettings.basic(18f, true)),ps_STAIRS).parent(CELESTE_STONE);
-    public static final Block CELESTE_STONE_WALL = sortBlock(id("celeste_stone_wall"), new WallBlock(Useful.BlockSettings.basic(18f, true)),ps_WALL).parent(CELESTE_STONE);
-    public static final Block INDUG_STONE_SLAB = sortBlock(id("indug_stone_slab"), new SlabBlock(Useful.BlockSettings.basic(20f, true)),ps_SLAB).parent(INDUG_STONE);
-    public static final Block INDUG_STONE_STAIRS = sortBlock(id("indug_stone_stairs"), new StairsBlock(INDUG_STONE.getDefaultState(), Useful.BlockSettings.basic(20f, true)),ps_STAIRS).parent(INDUG_STONE);
+    public static final Block HESPER_SLAB = sortBlock(id("hesper_slab"), new SlabBlock(new BlockSettings(12f).requires().get()),ps_SLAB).parent(HESPER_PLANKS);
+    public static final Block HESPER_STAIRS = sortBlock(id("hesper_stairs"), new StairsBlock(HESPER_PLANKS.getDefaultState(), new BlockSettings(12f).requires().get()),ps_STAIRS).parent(HESPER_PLANKS);
+    public static final Block HESPER_DOOR = sortBlock(id("hesper_door"), new DoorBlock(HESPER, new BlockSettings(12f).requires().model("non_opaque").get()),ps_DOOR).parent(HESPER_PLANKS);
+    public static final Block HESPER_TRAPDOOR = sortBlock(id("hesper_trapdoor"), new TrapdoorBlock(HESPER, new BlockSettings(12f).requires().model("non_opaque").get()),ps_TRAPDOOR).parent(HESPER_PLANKS);
+    public static final Block HESPER_FENCE = sortBlock(id("hesper_fence"), new FenceBlock(new BlockSettings(12f).requires().get()),ps_FENCE).parent(HESPER_PLANKS);
+    public static final Block HESPER_FENCE_GATE = sortBlock(id("hesper_fence_gate"), new FenceGateBlock(HESPER_WOOD, new BlockSettings(12f).requires().get()),ps_FENCE_GATE).parent(HESPER_PLANKS);
+    public static final Block CELESTE_STONE_SLAB = sortBlock(id("celeste_stone_slab"), new SlabBlock(new BlockSettings(18f).requires().get()),ps_SLAB).parent(CELESTE_STONE);
+    public static final Block CELESTE_STONE_STAIRS = sortBlock(id("celeste_stone_stairs"), new StairsBlock(CELESTE_STONE.getDefaultState(), new BlockSettings(18f).requires().get()),ps_STAIRS).parent(CELESTE_STONE);
+    public static final Block CELESTE_STONE_WALL = sortBlock(id("celeste_stone_wall"), new WallBlock(new BlockSettings(18f).requires().get()),ps_WALL).parent(CELESTE_STONE);
+    public static final Block INDUG_STONE_SLAB = sortBlock(id("indug_stone_slab"), new SlabBlock(new BlockSettings(20f).requires().get()),ps_SLAB).parent(INDUG_STONE);
+    public static final Block INDUG_STONE_STAIRS = sortBlock(id("indug_stone_stairs"), new StairsBlock(INDUG_STONE.getDefaultState(), new BlockSettings(20f).requires().get()),ps_STAIRS).parent(INDUG_STONE);
+    // RARE
+    public static final Block COMPACT_CONCRETE_SLAB = sortBlock(id("compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block COMPACT_CONCRETE_STAIRS = sortBlock(id("compact_concrete_stairs"), new StairsBlock(COMPACT_CONCRETE.getDefaultState(), BlockSettings.copy(COMPACT_CONCRETE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block WHITE_COMPACT_CONCRETE_SLAB = sortBlock(id("white_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(WHITE_COMPACT_CONCRETE).get()),ps_NORMAL).parent(WHITE_COMPACT_CONCRETE);
+    public static final Block WHITE_COMPACT_CONCRETE_STAIRS = sortBlock(id("white_compact_concrete_stairs"), new StairsBlock(WHITE_COMPACT_CONCRETE.getDefaultState(), BlockSettings.copy(WHITE_COMPACT_CONCRETE).get()),ps_NORMAL).parent(WHITE_COMPACT_CONCRETE);
+    public static final Block BLACK_COMPACT_CONCRETE_SLAB = sortBlock(id("black_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(BLACK_COMPACT_CONCRETE).get()),ps_NORMAL).parent(BLACK_COMPACT_CONCRETE);
+    public static final Block BLACK_COMPACT_CONCRETE_STAIRS = sortBlock(id("black_compact_concrete_stairs"), new StairsBlock(BLACK_COMPACT_CONCRETE.getDefaultState(), BlockSettings.copy(BLACK_COMPACT_CONCRETE).get()),ps_NORMAL).parent(BLACK_COMPACT_CONCRETE);
+    public static final Block BLUE_COMPACT_CONCRETE_SLAB = sortBlock(id("blue_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(BLUE_COMPACT_CONCRETE).get()),ps_NORMAL).parent(BLUE_COMPACT_CONCRETE);
+    public static final Block BLUE_COMPACT_CONCRETE_STAIRS = sortBlock(id("blue_compact_concrete_stairs"), new StairsBlock(BLUE_COMPACT_CONCRETE.getDefaultState(), BlockSettings.copy(BLUE_COMPACT_CONCRETE).get()),ps_NORMAL).parent(BLUE_COMPACT_CONCRETE);
+    public static final Block LIGHT_BLUE_COMPACT_CONCRETE_SLAB = sortBlock(id("light_blue_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(LIGHT_BLUE_COMPACT_CONCRETE).get()),ps_NORMAL).parent(LIGHT_BLUE_COMPACT_CONCRETE);
+    // CONTINUE HERE !!!
+    public static final Block LIGHT_BLUE_COMPACT_CONCRETE_STAIRS = sortBlock(id("light_blue_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIGHT_BLUE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block YELLOW_COMPACT_CONCRETE_SLAB = sortBlock(id("yellow_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.YELLOW).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block YELLOW_COMPACT_CONCRETE_STAIRS = sortBlock(id("yellow_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.YELLOW).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block BROWN_COMPACT_CONCRETE_SLAB = sortBlock(id("brown_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.BROWN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block BROWN_COMPACT_CONCRETE_STAIRS = sortBlock(id("brown_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.BROWN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block CYAN_COMPACT_CONCRETE_SLAB = sortBlock(id("cyan_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.CYAN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block CYAN_COMPACT_CONCRETE_STAIRS = sortBlock(id("cyan_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.CYAN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block GRAY_COMPACT_CONCRETE_SLAB = sortBlock(id("gray_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GRAY).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block GRAY_COMPACT_CONCRETE_STAIRS = sortBlock(id("gray_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GRAY).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block GREEN_COMPACT_CONCRETE_SLAB = sortBlock(id("green_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GREEN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block GREEN_COMPACT_CONCRETE_STAIRS = sortBlock(id("green_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.GREEN).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block LIGHT_GRAY_COMPACT_CONCRETE_SLAB = sortBlock(id("light_gray_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIGHT_GRAY).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block LIGHT_GRAY_COMPACT_CONCRETE_STAIRS = sortBlock(id("light_gray_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIGHT_GRAY).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block LIME_COMPACT_CONCRETE_SLAB = sortBlock(id("lime_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIME).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block LIME_COMPACT_CONCRETE_STAIRS = sortBlock(id("lime_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.LIME).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block MAGENTA_COMPACT_CONCRETE_SLAB = sortBlock(id("magenta_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.MAGENTA).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block MAGENTA_COMPACT_CONCRETE_STAIRS = sortBlock(id("magenta_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.MAGENTA).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block ORANGE_COMPACT_CONCRETE_SLAB = sortBlock(id("orange_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.ORANGE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block ORANGE_COMPACT_CONCRETE_STAIRS = sortBlock(id("orange_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.ORANGE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block PINK_COMPACT_CONCRETE_SLAB = sortBlock(id("pink_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PINK).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block PINK_COMPACT_CONCRETE_STAIRS = sortBlock(id("pink_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PINK).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block PURPLE_COMPACT_CONCRETE_SLAB = sortBlock(id("purple_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PURPLE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block PURPLE_COMPACT_CONCRETE_STAIRS = sortBlock(id("purple_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.PURPLE).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block RED_COMPACT_CONCRETE_SLAB = sortBlock(id("red_compact_concrete_slab"), new SlabBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.RED).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
+    public static final Block RED_COMPACT_CONCRETE_STAIRS = sortBlock(id("red_compact_concrete_stairs"), new StairsBlock(BlockSettings.copy(COMPACT_CONCRETE).colorMap(DyeColor.RED).get()),ps_NORMAL).parent(COMPACT_CONCRETE);
 
     /* CUSTOM-RENDER BLOCKS */
-    public static final Block DEAD_VINE = sortBlock(id("dead_vine"), new VineBlock(AbstractBlock.Settings.create().replaceable().noCollision()
-            .ticksRandomly().strength(0.3f).sounds(BlockSoundGroup.VINE).burnable().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)),ps_VINE).dimension(SortInputs.DEMANDI).get();
-    public static final Block HESPER_LEAVES = sortBlock(id("hesper_leaves"), new LeavesBlock(AbstractBlock.Settings.copy(Blocks.MANGROVE_LEAVES).strength(2f).nonOpaque()),ps_NORMAL).model("").dimension(SortInputs.NEXUS).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
-    public static final Block CELESTEA = sortBlock(id("celestea"), new FlowerBlock(StatusEffects.ABSORPTION, 10, AbstractBlock.Settings.copy(Blocks.SUNFLOWER).strength(1f)),ps_FLOWER).dimension(SortInputs.NEXUS).get();
+    public static final Block DEAD_VINE = sortBlock(id("dead_vine"), new VineBlock(new BlockSettings(0.3f).replace().noCollide().randomTick().sound(BlockSoundGroup.VINE).burn().model("non_opaque").piston(PistonBehavior.DESTROY).get()),ps_VINE).dimension(SortInputs.DEMANDI).get();
+    public static final Block HESPER_LEAVES = sortBlock(id("hesper_leaves"), new LeavesBlock(BlockSettings.copy(Blocks.MANGROVE_LEAVES).strength(2f).model("non_opaque").get()),ps_NORMAL).model("").dimension(SortInputs.NEXUS).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
+    public static final Block CELESTEA = sortBlock(id("celestea"), new FlowerBlock(StatusEffects.ABSORPTION, 10, BlockSettings.copy(Blocks.SUNFLOWER).strength(1f).get()),ps_FLOWER).dimension(SortInputs.NEXUS).get();
+    // RARE
+    public static final Block CLOVEGRASS = sortBlock(id("clovegrass"), new GrassBlock(new BlockSettings(0.8f).randomTick().sound(BlockSoundGroup.GRASS).get()),ps_GRASSLIKE).dimension(SortInputs.RARE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL).get();
+    public static final Block FALLGRASS = sortBlock(id("fallgrass"), new GrassBlock(new BlockSettings(0.7f).randomTick().sound(BlockSoundGroup.GRASS).get()),ps_GRASSLIKE).dimension(SortInputs.RARE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL).get();
+    public static final Block LUCKY_TORCH = sortBlock(id("lucky_torch"), new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockSettings.copy(Blocks.TORCH).luminance(state -> 15).colorMap(MapColor.GREEN).get()),ps_TORCH).dimension(SortInputs.RARE).tool(SortInputs.PICKAXE).material(SortInputs.NO_MATERIAL).get();
+    public static final Block LUCKY_WALL_TORCH = sortBlock(id("lucky_wall_torch"), new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockSettings.copy(LUCKY_TORCH).get()),ps_WALL_TORCH).parent(LUCKY_TORCH);
 
     public static void registerModBlocks() {
         HisbMod.debug("Registering Mod Blocks for " + HisbMod.id());
 
         HisbMod.debug("Mod Blocks: " + ModBlocks.all());
-        HisbMod.debug("Slabs: " + ModBlocks.getFromBlockType(SortInputs.SLAB));
-        HisbMod.debug("Stairs: " + ModBlocks.getFromBlockType(SortInputs.STAIRS));
-        HisbMod.debug("Door: " + ModBlocks.getFromBlockType(SortInputs.DOOR));
-        HisbMod.debug("Trapdoor: " + ModBlocks.getFromBlockType(SortInputs.TRAPDOOR));
-        HisbMod.debug("Wall: " + ModBlocks.getFromBlockType(SortInputs.WALL));
-        HisbMod.debug("Fence: " + ModBlocks.getFromBlockType(SortInputs.FENCE));
-        HisbMod.debug("Gate: " + ModBlocks.getFromBlockType(SortInputs.FENCE_GATE));
-        HisbMod.debug("Parent Blocks: " + ModBlocks.getParents().stream().map(Sorted::getBlock).toList());
+//        HisbMod.debug("Slabs: " + ModBlocks.getFromBlockType(SortInputs.SLAB));
+//        HisbMod.debug("Stairs: " + ModBlocks.getFromBlockType(SortInputs.STAIRS));
+//        HisbMod.debug("Door: " + ModBlocks.getFromBlockType(SortInputs.DOOR));
+//        HisbMod.debug("Trapdoor: " + ModBlocks.getFromBlockType(SortInputs.TRAPDOOR));
+//        HisbMod.debug("Wall: " + ModBlocks.getFromBlockType(SortInputs.WALL));
+//        HisbMod.debug("Fence: " + ModBlocks.getFromBlockType(SortInputs.FENCE));
+//        HisbMod.debug("Gate: " + ModBlocks.getFromBlockType(SortInputs.FENCE_GATE));
+//        HisbMod.debug("Parent Blocks: " + ModBlocks.getParents().stream().map(Sorted::getBlock).toList());
 
         addToItemGroup(ItemGroups.BUILDING_BLOCKS,all());
     }

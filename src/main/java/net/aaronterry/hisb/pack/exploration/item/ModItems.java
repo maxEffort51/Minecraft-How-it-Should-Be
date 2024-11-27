@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.item;
 
 import net.aaronterry.helper.item.HelperItems;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.pack.exploration.item.custom.AncientStarItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.BlastChargeItem;

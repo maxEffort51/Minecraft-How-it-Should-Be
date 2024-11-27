@@ -1,4 +1,4 @@
-package net.aaronterry.hisb.main;
+package net.aaronterry.hisb;
 
 import net.aaronterry.helper.main.HelperModInitializer;
 import net.aaronterry.helper.util.HelperServerTick;

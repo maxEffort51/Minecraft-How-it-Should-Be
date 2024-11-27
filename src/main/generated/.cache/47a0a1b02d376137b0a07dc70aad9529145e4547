@@ -1,4 +1,4 @@
-// 1.21	2024-11-23T20:21:38.497515	Minecraft How it Should Be - 1.21/Model Definitions
+// 1.21	2024-11-26T16:22:41.223207	Minecraft How it Should Be - 1.21/Model Definitions
 d2acd6473a3a0d40f596a7472a129de903c364b4 assets/hisb/models/block/celeste_stone_stairs_outer.json
 d2d256ab97a926992e26770dcc547c9fcf2da78d assets/hisb/models/item/untillium_boots_iron_trim.json
 6dd2ef62645bf46727f1bc76b021065152f557b9 assets/hisb/models/item/hesper_log.json
@@ -253,8 +253,8 @@ d4a0335bc5560a852f516659fc4fe4a425b1f35d assets/hisb/models/item/depnetum_boots_
 4ebc966745177bfdf738f87bcdd0f97f6024575e assets/hisb/models/item/netherite_firite_boots_copper_trim.json
 b96bf82bc906cb4ce241739553d96c0174a2d7e5 assets/hisb/models/item/depnetum_helmet_lapis_trim.json
 df65c306ad97c8fafcf4258e96f5d5c1e5035a5d assets/hisb/models/item/depnetum_boots_iron_trim.json
-6819357375d2bab7fc6305cff67807a95787d2d3 assets/hisb/models/item/depnetum_helmet.json
 388eb8bb46f0f577b26ed920b8cb767035bc2b3c assets/hisb/models/item/hardened_sculk.json
+6819357375d2bab7fc6305cff67807a95787d2d3 assets/hisb/models/item/depnetum_helmet.json
 ea501dbb5d71797b07d154309dec969c8620f7f3 assets/hisb/models/item/depnetum_chestplate_gold_trim.json
 1b476c975eef4e0d4cc986a058852810c430eec0 assets/hisb/models/item/netherite_firite_chestplate_diamond_trim.json
 8b0248f960cb1598581720d62dc9ed156e24b8f1 assets/hisb/models/block/scultium_ore.json
@@ -371,8 +371,8 @@ f656c0a6963055ee74bf2f72b4d2e38e4c899b17 assets/hisb/models/item/indug_untillium
 c1726d79f5b2e12a04241c57a1317eeae8d13b74 assets/hisb/blockstates/celeste_stone_wall.json
 32df7701e9511222b280b021e074e7a81f7cd712 assets/hisb/models/block/hesper_fence_post.json
 089f0d15da9089ab2452e73e62c53e32cc4643f4 assets/hisb/blockstates/condensed_purpur_stairs.json
-af8981122ff61dc655f4b10fb6c9af3db91ec571 assets/hisb/blockstates/purifier_table.json
 3354bd2037b1284c338d3c53a74d9b4284a0d0bc assets/hisb/models/item/untillium_boots_gold_trim.json
+af8981122ff61dc655f4b10fb6c9af3db91ec571 assets/hisb/blockstates/purifier_table.json
 80396d3ea5bf63a1bcbe4880dd152fb81342c8c1 assets/hisb/models/item/purvium_boots_quartz_trim.json
 34150f4757b52bd95bdefa5036d1fe037c7f1054 assets/hisb/models/item/purvium_leggings_lapis_trim.json
 ccb4ea835f9665497eca66263cee81de00192cb8 assets/hisb/models/item/celeste_stone_slab.json

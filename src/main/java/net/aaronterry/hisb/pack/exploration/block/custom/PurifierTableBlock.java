@@ -1,8 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.block.custom;
 
-import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.MapCodec;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.entity.ModBlockEntities;
 import net.aaronterry.hisb.pack.exploration.block.entity.PurifierBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
@@ -10,13 +9,9 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.*;
-import net.minecraft.datafixer.TypeReferences;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

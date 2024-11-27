@@ -86,8 +86,10 @@
   "item.hisb.dyremite_chunk": "Dyremite Chunk",
 
   "item.hisb.ancient_star": "Ancient Star",
+  "item.hisb.baked_quartz": "Baked Quartz",
   "item.hisb.purified_scrap": "Purified Scrap",
   "item.hisb.dirty_scrap": "Dirty Scrap",
+  "item.hisb.debritinum_scrap": "Debritinum Scrap",
   "item.hisb.firite_scrap": "Firite Scrap",
   "item.hisb.crystalline_quartz": "Crystalline Quartz",
   "item.hisb.netherite_firite_helmet": "Netherite Firite Helmet",
@@ -128,6 +130,17 @@
   "item.hisb.orange_dover_talent": "Orange Dover Talent",
   "item.hisb.bright_dover_talent": "Bright Dover Talent",
   "item.hisb.blue_dover_talent": "Blue Dover Talent",
+
+  "item.hisb.untillium_bar": "Untillium Bar",
+  "item.hisb.untillium_helmet": "Untillium Helmet",
+  "item.hisb.untillium_chestplate": "Untillium Chestplate",
+  "item.hisb.untillium_leggings": "Untillium Leggings",
+  "item.hisb.untillium_boots": "Untillium Boots",
+  "item.hisb.untillium_sword": "Untillium Sword",
+  "item.hisb.untillium_axe": "Untillium Axe",
+  "item.hisb.untillium_pickaxe": "Untillium Pickaxe",
+  "item.hisb.untillium_shovel": "Untillium Shovel",
+  "item.hisb.untillium_hoe": "Untillium Hoe",
 
   "death.attack.ancient_star_reflect": "%1$s's attack reflected right back at 'em",
   "death.attack.ancient_star_reflect.player": "%1$s attack was reflected by %2$s right back at 'em"

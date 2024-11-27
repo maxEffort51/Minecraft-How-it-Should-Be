@@ -12,11 +12,11 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/hisb/icon.png",
+	"icon": "assets/hisb/logo.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.aaronterry.hisb.main.HisbMod"
+			"net.aaronterry.hisb.HisbMod"
 		],
 		"client": [
 			"net.aaronterry.hisb.main.HisbModClient"
@@ -31,9 +31,9 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",
-		"minecraft": "~1.21",
+		"minecraft": ">=1.21",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": ">=0.102.0"
 	},
 	"suggests": {
 		"another-mod": "*"

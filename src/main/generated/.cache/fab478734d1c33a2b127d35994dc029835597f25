@@ -1,11 +1,11 @@
-// 1.21	2024-11-23T20:21:38.493127	Minecraft How it Should Be - 1.21/Tags for minecraft:block
+// 1.21	2024-11-26T16:22:41.219473	Minecraft How it Should Be - 1.21/Tags for minecraft:block
 d05bdcd969a44fb333c6cbb0e92368c7d0e3c3ab data/minecraft/tags/block/fences.json
 2cfabcfaece4aa7b13899622fc161928ded8d1f6 data/minecraft/tags/block/mineable/shovel.json
 5a0f62c5c4fdf4ba25586baabfca4fc16c94be74 data/minecraft/tags/block/fence_gates.json
 bfe1d5007ad36106cee522ffb23c7ac470a9a6c4 data/minecraft/tags/block/slabs.json
 edeb7d967b364c4d54ae1f040cd90f90e2c62b43 data/minecraft/tags/block/incorrect_for_netherite_tool.json
-3df6732dcec99b3d33a47c395018b661783be2e5 data/hisb/tags/block/all_mod_blocks.json
 ffdd35b0c8bf10057babe5a182c9181616cd6449 data/minecraft/tags/block/mineable/pickaxe.json
+3df6732dcec99b3d33a47c395018b661783be2e5 data/hisb/tags/block/all_mod_blocks.json
 4dc4853084307e2a875d7564d0c39e6182f47119 data/minecraft/tags/block/base_stone_overworld.json
 c8f8cfe036b13b9f53d9d07b8c6c0aa5f7d11a02 data/minecraft/tags/block/needs_iron_tool.json
 dd8545af5d0ec9c0dfb5643313e6c7fd72249d3f data/hisb/tags/block/needs_netherite_tool.json

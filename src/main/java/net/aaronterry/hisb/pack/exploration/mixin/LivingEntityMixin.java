@@ -1,6 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.mixin;
 
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.aaronterry.hisb.pack.exploration.item.custom.AncientStarItem;
 import net.minecraft.entity.LivingEntity;

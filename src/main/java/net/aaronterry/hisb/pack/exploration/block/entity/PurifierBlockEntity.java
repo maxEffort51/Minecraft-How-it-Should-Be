@@ -2,7 +2,7 @@ package net.aaronterry.hisb.pack.exploration.block.entity;
 
 import net.aaronterry.helper.KeyGroup;
 import net.aaronterry.helper.LargeMap;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.item.ModItems;
 import net.aaronterry.hisb.pack.exploration.screen.PurifierScreenHandler;

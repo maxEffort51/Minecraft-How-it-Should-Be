@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.pack.exploration.effect;
 
 import net.aaronterry.helper.effect.Ability;
-import net.aaronterry.hisb.main.HisbMod;
+import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.attribute.EntityAttributeInstance;

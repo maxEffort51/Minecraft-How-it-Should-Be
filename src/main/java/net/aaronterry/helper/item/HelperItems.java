@@ -1,6 +1,5 @@
 package net.aaronterry.helper.item;
 
-import net.aaronterry.helper.Useful;
 import net.aaronterry.hisb.pack.exploration.item.custom.ElytraArmorItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -76,22 +75,22 @@ public class HelperItems {
     /* TOOL */
     public static Item makeTool(ItemCaller caller, String type, ToolMaterial material, float baseAttackDamage, float attackSpeed) {
         Item item = switch(type) {
-            case "sword" -> new SwordItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "axe" -> new AxeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "pickaxe" -> new PickaxeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "shovel" -> new ShovelItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "hoe" -> new HoeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "sword" -> new SwordItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "axe" -> new AxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "pickaxe" -> new PickaxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "shovel" -> new ShovelItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "hoe" -> new HoeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
             default -> throw new IllegalStateException("ModToolItems.registerTool -> Unexpected value: " + type);
         };
         return makeItem(caller, caller.getName() + "_" + type, item);
     }
     public static Item makeTool(ItemCaller caller, String name, String type, ToolMaterial material, float baseAttackDamage, float attackSpeed) {
         Item item = switch(type) {
-            case "sword" -> new SwordItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "axe" -> new AxeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "pickaxe" -> new PickaxeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "shovel" -> new ShovelItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
-            case "hoe" -> new HoeItem(material, Useful.ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "sword" -> new SwordItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "axe" -> new AxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "pickaxe" -> new PickaxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "shovel" -> new ShovelItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "hoe" -> new HoeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
             default -> throw new IllegalStateException("ModToolItems.registerTool -> Unexpected value: " + type);
         };
         return makeItem(caller, name, item);
