@@ -29,6 +29,12 @@ public class HelperItems {
             List<Item> all = new ArrayList<>();
             caller.getChildren().forEach(child -> all.addAll(List.of(all(child))));
             all.addAll(caller.getItems());
+            // check for duplicates
+            for (int i = 0; i < all.size(); i++) {
+                for (int j = all.size()-1; j > 0; j--) {
+                    if (i != j && all.get(i).equals(all.get(j))) all.remove(j);
+                }
+            }
             return all.toArray(new Item[0]);
         }
         return caller.getItems().toArray(new Item[0]);
@@ -56,6 +62,9 @@ public class HelperItems {
 
     /*--- ITEM ---*/
 
+//    public static ItemBuilder build(ItemCaller caller, String name) {
+//        return new ItemBuilder(...) -> recipe(), settings(), item() ?
+//    }
     public static Item makeItem(ItemCaller caller, String name) {
         Item item = new Item(new Item.Settings()); caller.add(item); if (!callers.contains(caller)) callers.add(caller);
         Identifier id = caller.hasMain() ? Identifier.of(caller.getMain(), name) : Identifier.of(name);
@@ -73,6 +82,21 @@ public class HelperItems {
     }
 
     /* TOOL */
+    public static Item makeTool(ItemCaller caller1, ItemCaller caller2, String type, ToolMaterial material, float baseAttackDamage, float attackSpeed) {
+        Item item = switch(type) {
+            case "sword" -> new SwordItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "axe" -> new AxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "pickaxe" -> new PickaxeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "shovel" -> new ShovelItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            case "hoe" -> new HoeItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));
+            default -> throw new IllegalStateException("ModToolItems.registerTool -> Unexpected value: " + type);
+        };
+
+        if (type.equals("sword")) return makeItem(caller1, caller2.getName() + "_" + type, item);
+
+        caller1.add(item); if (!callers.contains(caller1)) callers.add(caller1);
+        return makeItem(caller2, caller2.getName() + "_" + type, item);
+    }
     public static Item makeTool(ItemCaller caller, String type, ToolMaterial material, float baseAttackDamage, float attackSpeed) {
         Item item = switch(type) {
             case "sword" -> new SwordItem(material, ItemSettings.tool(type, material, baseAttackDamage, attackSpeed));

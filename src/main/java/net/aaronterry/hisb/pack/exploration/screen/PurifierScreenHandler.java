@@ -1,11 +1,14 @@
 package net.aaronterry.hisb.pack.exploration.screen;
 
 import net.aaronterry.helper.KeyGroup;
+import net.aaronterry.helper.LargeMap;
 import net.aaronterry.hisb.pack.exploration.block.entity.PurifierBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -89,7 +92,21 @@ public class PurifierScreenHandler extends ScreenHandler {
         return newStack;
     }
 
-    private boolean tryInsertItem(ItemStack stack, int slotIndex, KeyGroup group) {
+    private boolean tryInsertItem(ItemStack stack, int slotIndex, LargeMap<ItemConvertible> group) {
+        Slot targetSlot = this.slots.get(slotIndex); ItemStack slotStack = targetSlot.getStack();
+        boolean SUCCESS = false; boolean FAILURE = true;
+        if (group.contains(stack.getItem())) {
+            if (slotStack.isEmpty()) { targetSlot.setStack(stack.split(stack.getCount())); return SUCCESS;
+            } else if (slotStack.isOf(stack.getItem())) {
+                int maxCount = Math.min(slotStack.getMaxCount(), targetSlot.getMaxItemCount(stack));
+                int transferCount = Math.min(stack.getCount(), maxCount - slotStack.getCount());
+                slotStack.increment(transferCount); stack.decrement(transferCount); return SUCCESS;
+            }
+        }
+        return FAILURE;
+    }
+
+    private boolean tryInsertItem(ItemStack stack, int slotIndex, KeyGroup<Item, Object> group) {
         Slot targetSlot = this.slots.get(slotIndex); ItemStack slotStack = targetSlot.getStack();
         boolean SUCCESS = false; boolean FAILURE = true;
         if (group.contains(stack.getItem())) {

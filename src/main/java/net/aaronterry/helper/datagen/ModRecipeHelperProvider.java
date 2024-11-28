@@ -1,5 +1,6 @@
 package net.aaronterry.helper.datagen;
 
+import net.aaronterry.helper.KeyGroup;
 import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
@@ -9,9 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -197,6 +196,16 @@ public class ModRecipeHelperProvider extends FabricRecipeProvider {
         public static void toolset(RecipeExporter xpt, Item[] tools, Item ore, Item stick, Item criterion, String oreType, String unique) {
             String[] types = tools.length == 5 ? new String[] {"sword","axe","pickaxe","shovel","hoe"} : new String[] {"axe","pickaxe","shovel","hoe"};
             for (int i = 0; i < tools.length; i++) Recipe.tool(xpt, types[i], tools[i], ore, stick, criterion, String.format("%s_%s_%s", oreType, types[i], unique));
+        }
+
+        public static void swords(RecipeExporter xpt, KeyGroup<Item,ToolMaterial> swords, Item... stickTypes) {
+            // create a sword recipe for each weapon
+            for (int i = 0; i < swords.count(); i++) {
+                ToolMaterial material = swords.get(i);
+                Item ore = material.getRepairIngredient().getMatchingStacks()[0].getItem();
+                Item stick = (i >= stickTypes.length ? stickTypes[stickTypes.length-1] : stickTypes[i]);
+                tool(xpt, "sword", swords.getKey(i), ore, stick, ore);
+            }
         }
     }
 

@@ -56,9 +56,10 @@ public class ModRecipeProvider extends ModRecipeHelperProvider {
         offerSmelting(xpt, List.of(ModBlocks.UNTILLIUM_ORE,ModBlocks.INDUG_UNTILLIUM_ORE), RecipeCategory.MISC, ModItems.UNTILLIUM_BAR, 15f, 200, "untillium_process");
 
         /* TOOLS */
-        Recipe.tool(xpt, "sword", ModToolItems.depnetumTool(), ModItems.DEPNETUM_CLUMP, ModItems.DEEP_ROD, ModItems.DEPNETUM_CLUMP);
+        Recipe.swords(xpt, ModToolItems.swords(),ModItems.DEEP_ROD,Items.STICK);
         Recipe.toolset(xpt, ModToolItems.scultiumTools(), ModItems.SCULTIUM_BONES, ModItems.DEEP_ROD);
-        Recipe.toolset(xpt, ModToolItems.demandumTools(), ModItems.DEMANDUM_CHUNK, ModItems.DEEP_ROD);
+        Recipe.toolset(xpt, ModToolItems.fortoliumTools(), ModItems.FORTOLIUM);
+        Recipe.toolset(xpt, ModToolItems.demandumTools(), ModItems.DEMANDUM_CHUNK, Items.BLAZE_ROD);
         Recipe.toolset(xpt, ModToolItems.untilliumTools(), ModItems.UNTILLIUM_BAR);
 
         /* ARMOR */

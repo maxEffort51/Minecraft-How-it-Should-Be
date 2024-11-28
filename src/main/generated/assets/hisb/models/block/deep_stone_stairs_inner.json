@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "hisb:block/deep_stone",
-    "side": "hisb:block/deep_stone",
-    "top": "hisb:block/deep_stone"
-  }
-}

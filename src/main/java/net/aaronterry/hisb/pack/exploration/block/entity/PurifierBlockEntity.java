@@ -13,10 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -32,31 +29,30 @@ public class PurifierBlockEntity extends BlockEntity implements NamedScreenHandl
     protected static final int WET_SLOT = 1;
     protected static final int IMPURE_SLOT = 2;
     protected static final int PURE_SLOT = 3;
-    public static final KeyGroup HOT_GROUP = new KeyGroup(new Object[]{Items.LAVA_BUCKET, Items.BLAZE_ROD});
-    public static final KeyGroup WET_GROUP = new KeyGroup(new Object[]{Items.POTION,Items.WATER_BUCKET});
-    public static final KeyGroup IMPURE_GROUP = new LargeMap(new Object[]{
+    public static final KeyGroup<Item,Object> HOT_GROUP = new KeyGroup<>(Items.LAVA_BUCKET, Items.BLAZE_ROD).keys();
+    public static final KeyGroup<Item,Object> WET_GROUP = new KeyGroup<>(Items.POTION,Items.WATER_BUCKET).keys();
+    public static final LargeMap<ItemConvertible> IMPURE_GROUP = new LargeMap<ItemConvertible>(
             Items.IRON_INGOT, Items.COPPER_INGOT, Items.LAPIS_LAZULI, Items.REDSTONE, Items.EMERALD, Items.DIAMOND,
             ModItems.ANCIENT_STAR, Items.OBSIDIAN, Items.REINFORCED_DEEPSLATE, Items.NETHERITE_SCRAP, Items.QUARTZ,
             ModItems.DEPNETUM_CLUMP, ModBlocks.DEAD_SCULK, ModBlocks.CORRUPTED_MUD, ModBlocks.HARDENED_SCULK, ModItems.PRISMALITE_SHARD,
-            ModItems.BAKED_QUARTZ
-            // LAVA_BUCKET, COSMIUM, DEAD SCULK, WATER, CORRUPTED MUD, COBBLESTONE, HARDENED SCULK, DUST
-    }, new Object[]{
+            ModItems.BAKED_QUARTZ //, LAVA_BUCKET, COSMIUM, DEAD SCULK, WATER, CORRUPTED MUD, COBBLESTONE, HARDENED SCULK, DUST
+    ).out(
             ModItems.PURIFIED_IRON, ModItems.PURIFIED_COPPER, ModItems.PURIFIED_LAPIS, ModItems.PURIFIED_REDSTONE, ModItems.PURIFIED_EMERALD, ModItems.PURIFIED_DIAMOND,
             Items.NETHER_STAR, Items.LAVA_BUCKET, Items.DEEPSLATE, ModItems.PURIFIED_SCRAP, ModItems.CRYSTALLINE_QUARTZ,
             ModItems.DEMANDUM_CHUNK, ModBlocks.STIFF_SOIL, Blocks.MUD, ModBlocks.IMPERVIUM_BLOCK, Items.PRISMARINE_SHARD,
             ModItems.CRYSTALLINE_QUARTZ
-    }).addKeysValue(new Object[]{ // STAINED GLASS -> GLASS
+    ).addKeysValue(Items.GLASS, // STAINED GLASS -> GLASS
             Items.WHITE_STAINED_GLASS,Items.GRAY_STAINED_GLASS,Items.BROWN_STAINED_GLASS,Items.BLACK_STAINED_GLASS,
             Items.YELLOW_STAINED_GLASS,Items.GREEN_STAINED_GLASS,Items.ORANGE_STAINED_GLASS,Items.RED_STAINED_GLASS,
             Items.PURPLE_STAINED_GLASS,Items.PINK_STAINED_GLASS,Items.MAGENTA_STAINED_GLASS,Items.BLUE_STAINED_GLASS,
             Items.LIGHT_BLUE_STAINED_GLASS,Items.LIGHT_GRAY_STAINED_GLASS,Items.CYAN_STAINED_GLASS,Items.LIME_STAINED_GLASS,Items.TINTED_GLASS
-    }, Items.GLASS).addKeysValue(new Object[]{ // STAINED GLASS PANE -> GLASS PANE
+    ).addKeysValue(Items.GLASS_PANE, // STAINED GLASS PANE -> GLASS PANE
             Items.WHITE_STAINED_GLASS_PANE,Items.GRAY_STAINED_GLASS_PANE,Items.BROWN_STAINED_GLASS_PANE,Items.BLACK_STAINED_GLASS_PANE,
             Items.YELLOW_STAINED_GLASS_PANE,Items.GREEN_STAINED_GLASS_PANE,Items.ORANGE_STAINED_GLASS_PANE,Items.RED_STAINED_GLASS_PANE,
             Items.PURPLE_STAINED_GLASS_PANE,Items.PINK_STAINED_GLASS_PANE,Items.MAGENTA_STAINED_GLASS_PANE,Items.BLUE_STAINED_GLASS_PANE,
             Items.LIGHT_BLUE_STAINED_GLASS_PANE,Items.LIGHT_GRAY_STAINED_GLASS_PANE,Items.CYAN_STAINED_GLASS_PANE,Items.LIME_STAINED_GLASS_PANE
-    }, Items.GLASS_PANE);
-    public static final KeyGroup WATER_USAGE_AMOUNT = new KeyGroup(new Object[]{Items.POTION,Items.WATER_BUCKET},new int[]{1,4});
+    );
+    public static final KeyGroup<Item,Integer> WATER_USAGE_AMOUNT = new KeyGroup<Item,Integer>(Items.POTION,Items.WATER_BUCKET).out(1,4);
     private int progress;
     private int maxProgress;
     private static int waterUsages;

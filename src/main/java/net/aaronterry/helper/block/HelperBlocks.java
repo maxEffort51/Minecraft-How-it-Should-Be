@@ -51,12 +51,12 @@ public class HelperBlocks {
     protected static Sorting.Dimension sortBlock(Identifier id, Block block) {  return sortBlock(id, block, new Item.Settings()); }
     protected static Sorting.Dimension sortBlock(Identifier id, Block block, Rarity rarity) { return sortBlock(id, block, new Item.Settings().rarity(rarity)); }
     protected static Sorting.Dimension sortBlock(Identifier id, Block block, Item.Settings itemSettings) {
-        Block registered = registerSort(id, block, itemSettings); return new Sorting.Dimension(new Sorting(registered)); }
+        Block registered = registerSort(id, block, itemSettings); return new Sorting.Dimension(new Sorting(registered, id)); }
 
     protected static SortingPreset sortBlock(Identifier id, Block block, SortingPreset preset) {  return sortBlock(id, block, new Item.Settings(), preset); }
     protected static SortingPreset sortBlock(Identifier id, Block block, Rarity rarity, SortingPreset preset) { return sortBlock(id, block, new Item.Settings().rarity(rarity), preset); }
     protected static SortingPreset sortBlock(Identifier id, Block block, Item.Settings itemSettings, SortingPreset preset) {
-        Block registered = registerSort(id, block, itemSettings); return preset.copyAndCreate(block); }
+        Block registered = registerSort(id, block, itemSettings); return preset.copyAndCreate(block, id); }
 
     /* GET A BLOCK BASED ON SORTING */
     private static List<Block> get(String sortBy, String requirement) {
@@ -122,10 +122,10 @@ public class HelperBlocks {
         private final Sorting sortData;
         private int lastOff = -1;
 
-        public SortingPreset() { sortData = new Sorting(); }
+        public SortingPreset() { sortData = new Sorting(Identifier.of("")); }
         private SortingPreset(SortingPreset preset) { sortData = new Sorting(preset.sortData); lastOff = preset.lastOff; }
 
-        public void create(Block block) { sortData.block = block; sortData.hasBlock = true; }
+        public void create(Block block, Identifier id) { sortData.block = block; sortData.identifier = id; sortData.hasBlock = true; }
 
         public Block get() { return sortData.get(); }
 
@@ -160,8 +160,8 @@ public class HelperBlocks {
             sortData.parent = parent; return copy(parent);
         }
 
-        public SortingPreset copyAndCreate(Block create) {
-            SortingPreset newPreset = this.copy(); newPreset.create(create); return newPreset;
+        public SortingPreset copyAndCreate(Block create, Identifier id) {
+            SortingPreset newPreset = this.copy(); newPreset.create(create, id); return newPreset;
         }
 
         public ModRecipeHelperProvider.Shaped.Details shapedRecipe(RecipeCategory cat) {
@@ -214,6 +214,7 @@ public class HelperBlocks {
     /* ALREADY SORTED */
     public static class Sorted {
         private final Block block;
+        private final Identifier identifier;
         private final Block parent;
         private final String dim;
         private final String blockType;
@@ -227,11 +228,14 @@ public class HelperBlocks {
         private final List<ModRecipeHelperProvider.GenericDetails> recipes;
 
         private Sorted(Sorting template) {
-            block = template.block; dim = template.dim; blockType = template.blockType;
+            identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;
             dropType = template.dropType; oreType = template.oreType; oreData = template.oreData;
             toolType = template.toolType; toolMaterial = template.toolMaterial; parent = template.parent;
             hasBlock = template.hasBlock; isParent = template.isParent; recipes = template.recipes;
         }
+
+        public Identifier id() { return identifier; }
+        public Identifier id(String extension) { return Identifier.of(identifier.getNamespace(),identifier.getPath()+"_"+extension); }
 
         public boolean hasParent() { return parent != null; }
 
@@ -335,12 +339,13 @@ public class HelperBlocks {
     public static class Sorting {
         private Block block; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
         private String oreType = "_empty_"; private OreData oreData; private String toolType = "_empty_"; private String toolMaterial = "_empty_";
-        private boolean isParent = false; private Block parent; private boolean hasBlock; private List<ModRecipeHelperProvider.GenericDetails> recipes = new ArrayList<>();
+        private boolean isParent = false; private Block parent; private boolean hasBlock; private final List<ModRecipeHelperProvider.GenericDetails> recipes = new ArrayList<>();
+        private Identifier identifier;
 
-        private Sorting() { this.hasBlock = false; }
-        private Sorting(Block block) { this.block = block; this.hasBlock = true; }
+        private Sorting(Identifier id) { this.identifier = id; this.hasBlock = false; }
+        private Sorting(Block block, Identifier id) { this.block = block; this.identifier = id; this.hasBlock = true; }
         private Sorting(Sorting template) {
-            block = template.block; dim = template.dim; blockType = template.blockType;dropType = template.dropType;
+            identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;dropType = template.dropType;
             oreType = template.oreType; oreData = template.oreData; toolType = template.toolType; toolMaterial = template.toolMaterial;
             isParent = template.isParent; parent = template.parent; hasBlock = template.hasBlock; recipes.addAll(template.recipes);
         }
@@ -367,7 +372,7 @@ public class HelperBlocks {
             private final Sorting sortData;
             private Dimension(Sorting data) { sortData = data; }
 
-            public SortingPreset preset(SortingPreset preset) { return preset.copyAndCreate(sortData.block); }
+            public SortingPreset preset(SortingPreset preset) { return preset.copyAndCreate(sortData.block, sortData.identifier); }
 
             private BlockType dimension(String dim) { sortData.dim = dim; return new BlockType(sortData); }
             public BlockType inOverworld() { return dimension(SortInputs.OVERWORLD); }

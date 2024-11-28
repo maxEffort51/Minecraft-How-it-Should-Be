@@ -40,6 +40,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         addToTag(BlockTags.HOE_MINEABLE, ModBlocks.getFromToolType(HelperBlocks.SortInputs.HOE));
 
         addToTag(BlockTags.PLANKS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS)).add(ModBlocks.DEAD_PLANKS);
+        addToTag(BlockTags.DIRT, ModBlocks.getFromToolType(HelperBlocks.SortInputs.GRASSLIKE));
 
         addToTag(BlockTags.SLABS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.SLAB));
         addToTag(BlockTags.STAIRS, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STAIRS));

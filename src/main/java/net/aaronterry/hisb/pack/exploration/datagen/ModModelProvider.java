@@ -1,5 +1,6 @@
 package net.aaronterry.hisb.pack.exploration.datagen;
 
+import net.aaronterry.helper.KeyGroup;
 import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
 import net.aaronterry.hisb.pack.exploration.item.armor.ModArmorItems;
@@ -11,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class ModModelProvider extends FabricModelProvider {
         ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DOOR).forEach(generator::registerDoor);
         ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TRAPDOOR).forEach(generator::registerTrapdoor);
 
-        // SLAB, STAIRS, WALLS, FENCES, ETC. BLOCKS
+        // SLAB, STAIRS, WALLS, FENCES, & FENCE GATE BLOCKS
         List<HelperBlocks.Sorted> slabs = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.SLAB);
         List<HelperBlocks.Sorted> stairs = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.STAIRS);
         List<HelperBlocks.Sorted> walls = ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.WALL);
@@ -61,9 +63,16 @@ public class ModModelProvider extends FabricModelProvider {
             fence_gates.forEach(fence -> { if (fence.hasParent() && fence.getParent().equals(parent.getBlock())) texture.fenceGate(fence.getBlock()); });
         });
 
+        // TORCHES & WALL TORCHES
         ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.WALL_TORCH).forEach(wallTorch -> {
             if (wallTorch.hasParent()) generator.registerTorch(wallTorch.getParent(),wallTorch.getBlock());
         });
+
+        // GRASSLIKE BLOCKS
+        ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.GRASSLIKE).forEach(grasslike -> generator.modelCollector.accept(
+                grasslike.id(),
+                () -> Models.CUBE_BOTTOM_TOP.createJson(grasslike.id(), new KeyGroup<TextureKey,Identifier>(TextureKey.TOP,TextureKey.SIDE,TextureKey.BOTTOM).out(grasslike.id("top"),grasslike.id("side"),grasslike.id("bottom")).asMap())
+        ));
 
         // PILLAR BLOCKS AND LOGS
         generateLogs(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.PILLAR));
@@ -71,7 +80,6 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
-        Item[] items = ModItems.all();
         generateItems(generator, ModItems.all());
         generateItems(generator, ModToolItems.all(), Models.HANDHELD);
         generateArmor(generator, ModArmorItems.allArmor());

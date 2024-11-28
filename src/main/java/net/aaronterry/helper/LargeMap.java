@@ -1,45 +1,55 @@
 package net.aaronterry.helper;
 
-import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.Arrays;
-import java.util.Map;
+public class LargeMap<I> {
+    private final List<KeyGroup<I,I>> keysValue = new ArrayList<>();
+    private final I[] inputs;
+    private I[] outputs;
 
-public class LargeMap extends KeyGroup {
-    private static KeyGroup[] keysValue;
-
-    public LargeMap(Object[] inputs, Object[] outputs) {
-        super(inputs, outputs);
-        keysValue = new KeyGroup[] {};
+    @SafeVarargs
+    public LargeMap(I... inputs) {
+        this.inputs = inputs;
     }
 
-    public LargeMap addKeysValue(Object[] keys, Object value) {
-        int len = keysValue.length;
-        keysValue = Arrays.copyOf(keysValue,  len + 1);
-        keysValue[len] = new KeyGroup(keys, value);
+    @SafeVarargs
+    public final LargeMap<I> out(I... outputs) {
+        this.outputs = outputs;
         return this;
     }
 
-    @Override
-    public Object get(Object input) {
-        Object result = super.get(input);
+    @SafeVarargs
+    public final LargeMap<I> addKeysValue(I value, I... keys) {
+        keysValue.add(new KeyGroup<I,I>(keys).out(value));
+        return this;
+    }
+
+    private I getFromKey(I input) {
+        for (int i = 0; i < inputs.length; i++) {
+            if (input.equals(inputs[i])) return outputs[i];
+        }
+        return null;
+    }
+
+    public I get(I input) {
+        I result = getFromKey(input);
         if (result != null) return result;
-        for (KeyGroup keyGroup : keysValue) {
+        for (KeyGroup<I,I> keyGroup : keysValue) {
             result = keyGroup.get(input);
             if (result != null) return result;
         }
-        return result;
+        return null;
     }
 
-    @Override
-    public boolean contains(Object input) {
-        boolean contains = super.contains(input);
-        if (contains) return contains;
-        for (KeyGroup keyGroup : keysValue) {
-            contains = keyGroup.contains(input);
-            if (contains) return contains;
+    public boolean contains(I input) {
+        for (I i : inputs) {
+            if (input.equals(i)) return true;
+        }
+        for (KeyGroup<I,I> keyGroup : keysValue) {
+            if(keyGroup.contains(input)) return true;
         }
         return false;
     }
+
 }

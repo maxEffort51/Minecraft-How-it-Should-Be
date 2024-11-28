@@ -18,9 +18,10 @@ import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
     SCULTIUM(ModTags.Blocks.INCORRECT_FOR_SCULTIUM_TOOL, 1000, 10.0F, 6.0F, 13, () -> Ingredient.ofItems(ModItems.SCULTIUM_BONES)),
-    DEMANDUM(ModTags.Blocks.INCORRECT_FOR_DEMANDUM_TOOL, 1500, 11.0F, 8F, 16, () -> Ingredient.ofItems(ModItems.DEMANDUM_CHUNK)),
-    UNTILLIUM(ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL, 2500, 13.0F, 10F, 23, () -> Ingredient.ofItems(ModItems.UNTILLIUM_BAR)),
-    SCYTHE(ModTags.Blocks.INCORRECT_FOR_SCYTHE_TOOL, 2000, 12.0F, 14F, 10, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
+    FORTOLIUM(ModTags.Blocks.INCORRECT_FOR_FORTOLIUM_TOOL, 1600, 12.0F, 7.0F, 30, () -> Ingredient.ofItems(ModItems.FORTOLIUM)),
+    DEMANDUM(ModTags.Blocks.INCORRECT_FOR_DEMANDUM_TOOL, 1500, 14.0F, 8F, 16, () -> Ingredient.ofItems(ModItems.DEMANDUM_CHUNK)),
+    UNTILLIUM(ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL, 2500, 17.0F, 10F, 23, () -> Ingredient.ofItems(ModItems.UNTILLIUM_BAR)),
+    SCYTHE(ModTags.Blocks.INCORRECT_FOR_SCYTHE_TOOL, 2000, 20.0F, 16F, 10, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;
