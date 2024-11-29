@@ -8,6 +8,8 @@ import net.aaronterry.hisb.pack.exploration.item.custom.BlastChargeItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.DoverTalentItem;
 import net.aaronterry.hisb.pack.exploration.item.custom.SculkEchoItem;
 import net.aaronterry.hisb.pack.exploration.item.tool.ModToolItems;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.Rarity;
@@ -55,18 +57,25 @@ public class ModItems extends HelperItems {
     public static final Item SCULK_ECHO = makeItem(tool, "sculk_echo", new SculkEchoItem(new Item.Settings().maxCount(1)));
     public static final Item DEMANDUM_GEAR = makeItem(ingredient, "demandum_gear");
     public static final Item DEMANDUM_CHUNK = makeItem(ingredient, "demandum_chunk");
-    public static final Item RED_DOVER_TALENT = makeItem(dover, "red_dover_talent", new DoverTalentItem(1, new Item.Settings()));
-    public static final Item ORANGE_DOVER_TALENT = makeItem(dover, "orange_dover_talent", new DoverTalentItem(2, new Item.Settings()));
-    public static final Item BRIGHT_DOVER_TALENT = makeItem(dover, "bright_dover_talent", new DoverTalentItem(3, new Item.Settings()));
-    public static final Item BLUE_DOVER_TALENT = makeItem(dover, "blue_dover_talent", new DoverTalentItem(4, new Item.Settings()));
+    public static final Item RED_DOVER_TALENT = makeItem(dover, "red_dover_talent", new DoverTalentItem(1, new Item.Settings().maxCount(1)));
+    public static final Item ORANGE_DOVER_TALENT = makeItem(dover, "orange_dover_talent", new DoverTalentItem(2, new Item.Settings().maxCount(1)));
+    public static final Item BRIGHT_DOVER_TALENT = makeItem(dover, "bright_dover_talent", new DoverTalentItem(3, new Item.Settings().maxCount(1)));
+    public static final Item BLUE_DOVER_TALENT = makeItem(dover, "blue_dover_talent", new DoverTalentItem(4, new Item.Settings().maxCount(1)));
 
     public static final Item UNTILLIUM_BAR = makeItem(ingredient, "untillium_bar");
     // RARE ITEMS
-    public static final Item LAUREL_BOAT = makeItem(tool, "laurel_boat", new BoatItem(false, BoatEntity.Type.CHERRY,new Item.Settings().maxCount(1).fireproof()));
+    public static final Item LAUREL_BOAT = makeItem(tool, "laurel_boat", new BoatItem(false, BoatEntity.Type.CHERRY,new Item.Settings().maxCount(1)));
     public static final Item JADE = makeItem(ingredient, "jade");
     public static final Item JADEITE = makeItem(ingredient, "jadeite");
     public static final Item FORTOLIUM = makeItem(ingredient, "fortolium");
-    public static final Item CALLWETHER_TOTEM = makeItem(unique, "callwether_totem");
+    public static final Item CALLWETHER_TOTEM = makeItem(unique, "callwether_totem", new Item.Settings().maxCount(1));
+    // VORMITE ITEMS
+    public static final Item VORMITE_CLUMP = makeItem(ingredient, "vormite_clump");
+    public static final Item VORMITE_SPEAR = makeItem(tool, "vormite_spear", new TridentItem(new Item.Settings().rarity(Rarity.RARE).maxDamage(530).attributeModifiers(TridentItem.createAttributeModifiers()).component(DataComponentTypes.TOOL, TridentItem.createToolComponent())));
+    public static final Item VORMITE_MACE = makeItem(tool, "vormite_spear", new MaceItem(new Item.Settings().rarity(Rarity.RARE).maxDamage(700).component(DataComponentTypes.TOOL, MaceItem.createToolComponent()).attributeModifiers(MaceItem.createAttributeModifiers())));
+    public static final Item VORMITE_HOOK = makeItem(ingredient, "vormite_hook", new ArrowItem(new Item.Settings()));
+    public static final Item HOOK_AND_STRING = makeItem(tool, "hook_and_string", new FishingRodItem(new Item.Settings().maxDamage(600)));
+    public static final Item VORMITE_BOW = makeItem(tool, "vormite_bow", new BowItem(new Item.Settings().maxDamage(450)));
 
     public static void registerModItems() {
         HisbMod.debug("Registering Mod Items for " + HisbMod.id());

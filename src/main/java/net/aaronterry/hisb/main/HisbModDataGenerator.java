@@ -1,7 +1,7 @@
 package net.aaronterry.hisb.main;
 
 import net.aaronterry.helper.main.HelperGeneratorEntrypoint;
-import net.aaronterry.hisb.pack.exploration.datagen.*;
+import net.aaronterry.hisb.exploration.datagen.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
 public class HisbModDataGenerator extends HelperGeneratorEntrypoint {

@@ -1,0 +1,23 @@
+// 1.21	2024-11-28T12:21:54.91093	Minecraft How it Should Be - 1.21/Tags for minecraft:block
+d05bdcd969a44fb333c6cbb0e92368c7d0e3c3ab data/minecraft/tags/block/fences.json
+b490ae49f1c2f09ef37ffe357c924ce2e004d1e1 data/minecraft/tags/block/mineable/shovel.json
+5a0f62c5c4fdf4ba25586baabfca4fc16c94be74 data/minecraft/tags/block/fence_gates.json
+126b2ed2b645b73ec737ead46c7c8b61d452ebbb data/minecraft/tags/block/slabs.json
+edeb7d967b364c4d54ae1f040cd90f90e2c62b43 data/minecraft/tags/block/incorrect_for_netherite_tool.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/block/dirt.json
+9044646c9427def1d60f69a11d1dabc9cd44228c data/minecraft/tags/block/mineable/pickaxe.json
+60d05b1a9f61d259fb6b68f80e346d0268ad691d data/hisb/tags/block/all_mod_blocks.json
+5912887f26fcf4b0bf122d04ec15477293ebe92a data/minecraft/tags/block/base_stone_overworld.json
+1fa6c3c5c6172c0227827bad074b9e311c820e03 data/minecraft/tags/block/needs_iron_tool.json
+dd8545af5d0ec9c0dfb5643313e6c7fd72249d3f data/hisb/tags/block/needs_netherite_tool.json
+f1cc9cdc6d874a4d8fd2031d11823c52748fb92e data/minecraft/tags/block/stairs.json
+67f3e7e505c58d121a7bae2d8e23e440b9b54d5a data/minecraft/tags/block/trapdoors.json
+b067cdad526bf01e266ef790464a3bc317b84a3f data/minecraft/tags/block/climbable.json
+48b8155b5ba410c362815a7fa5c765b2c14c12a9 data/minecraft/tags/block/needs_diamond_tool.json
+6db4a88935b9dd384ae506744ad46651b79e8e56 data/minecraft/tags/block/needs_stone_tool.json
+3ede2d14874a1896c3cf32875d70ed7a1918c53f data/minecraft/tags/block/mineable/axe.json
+a2f1a7a800db0f4f502af36a2742e7795cb2dff8 data/minecraft/tags/block/mineable/hoe.json
+2234383af6e8f1b043df849c877a7450a66e2cd7 data/minecraft/tags/block/planks.json
+8161738704c1232ad6019d840a50b104638b3865 data/minecraft/tags/block/doors.json
+b269901b6c3f5990e82c64825263d7727254b1e2 data/hisb/tags/block/needs_scultium_tool.json
+04d9341a284d1f6aaf39d503e047cda1076bcceb data/minecraft/tags/block/incorrect_for_diamond_tool.json

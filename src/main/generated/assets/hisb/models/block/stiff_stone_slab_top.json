@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "hisb:block/stiff_stone",
+    "side": "hisb:block/stiff_stone",
+    "top": "hisb:block/stiff_stone"
+  }
+}

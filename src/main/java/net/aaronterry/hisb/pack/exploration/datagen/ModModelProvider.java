@@ -40,7 +40,7 @@ public class ModModelProvider extends FabricModelProvider {
         generateBlocks(generator, ModBlocks.getNotSorted());
         generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.NORMAL_TYPE,false));
         generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.TABLE,false));
-        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE,false));
+        generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_MODEL,false));
         generateBlocks(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.WOOD_PLANKS,false));
 
         // DOOR AND TRAPDOOR BLOCKS

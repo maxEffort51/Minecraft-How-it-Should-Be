@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "hisb:block/cleanstone",
+    "side": "hisb:block/cleanstone",
+    "top": "hisb:block/cleanstone"
+  }
+}

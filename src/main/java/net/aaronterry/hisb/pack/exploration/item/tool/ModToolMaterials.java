@@ -21,6 +21,7 @@ public enum ModToolMaterials implements ToolMaterial {
     FORTOLIUM(ModTags.Blocks.INCORRECT_FOR_FORTOLIUM_TOOL, 1600, 12.0F, 7.0F, 30, () -> Ingredient.ofItems(ModItems.FORTOLIUM)),
     DEMANDUM(ModTags.Blocks.INCORRECT_FOR_DEMANDUM_TOOL, 1500, 14.0F, 8F, 16, () -> Ingredient.ofItems(ModItems.DEMANDUM_CHUNK)),
     UNTILLIUM(ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL, 2500, 17.0F, 10F, 23, () -> Ingredient.ofItems(ModItems.UNTILLIUM_BAR)),
+    VORMITE(ModTags.Blocks.INCORRECT_FOR_UNTILLIUM_TOOL, 3000, 12.0F, 13F, 18, () -> Ingredient.ofItems(ModItems.VORMITE_CLUMP)),
     SCYTHE(ModTags.Blocks.INCORRECT_FOR_SCYTHE_TOOL, 2000, 20.0F, 16F, 10, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
 
     private final TagKey<Block> inverseTag;

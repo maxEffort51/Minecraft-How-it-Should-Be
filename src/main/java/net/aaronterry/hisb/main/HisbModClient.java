@@ -2,9 +2,9 @@ package net.aaronterry.hisb.main;
 
 import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.helper.main.HelperClientInitializer;
-import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
-import net.aaronterry.hisb.pack.exploration.screen.ModScreenHandlers;
-import net.aaronterry.hisb.pack.exploration.screen.PurifierScreen;
+import net.aaronterry.hisb.exploration.block.ModBlocks;
+import net.aaronterry.hisb.exploration.screen.ModScreenHandlers;
+import net.aaronterry.hisb.exploration.screen.PurifierScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 

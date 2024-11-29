@@ -24,13 +24,14 @@ public class ModToolItems extends HelperItems {
     private static final ItemCaller fortolium = createCaller("hisb_fortolium_tools",HisbMod.id(),"fortolium");
     private static final ItemCaller demandum = createCaller("hisb_demandum_tools",HisbMod.id(),"demandum");
     private static final ItemCaller untillium = createCaller("hisb_untillium_tools",HisbMod.id(),"untillium");
+    private static final ItemCaller vormite = createCaller("hisb_vormite_tools",HisbMod.id(),"vormite");
     private static final ItemCaller tools = createCaller("hisb_tools",HisbMod.id()).addChild(scultium)
             .addChild(fortolium).addChild(demandum).addChild(untillium);
     private static final ItemCaller toolsAndWeapons = createCaller("hisb_tools",HisbMod.id()).addChild(tools).addChild(weapons);
 
     private static final List<ToolMaterial> materials = List.of(ModToolMaterials.SCULTIUM,ModToolMaterials.SCULTIUM,
-            ModToolMaterials.DEMANDUM,ModToolMaterials.DEMANDUM,ModToolMaterials.UNTILLIUM,ModToolMaterials.UNTILLIUM,
-            ModToolMaterials.FORTOLIUM,ModToolMaterials.FORTOLIUM,ModToolMaterials.SCYTHE);
+            ModToolMaterials.DEMANDUM,ModToolMaterials.DEMANDUM,ModToolMaterials.FORTOLIUM,ModToolMaterials.FORTOLIUM,
+            ModToolMaterials.UNTILLIUM,ModToolMaterials.UNTILLIUM,ModToolMaterials.VORMITE,ModToolMaterials.VORMITE,ModToolMaterials.SCYTHE);
 
     public static final Item DEPNETUM_SWORD = makeTool(swords, depnetum, ItemTypes.SWORD, ModToolMaterials.SCULTIUM, 4, -2.0f);
     public static final Item SCULTIUM_AXE = makeTool(weapons, scultium, ItemTypes.AXE, ModToolMaterials.SCULTIUM, 4.5f, -2.8f);
@@ -44,17 +45,20 @@ public class ModToolItems extends HelperItems {
     public static final Item DEMANDUM_SHOVEL = makeTool(demandum, ItemTypes.SHOVEL, ModToolMaterials.DEMANDUM, 1.6f, -2.7f);
     public static final Item DEMANDUM_HOE = makeTool(demandum, ItemTypes.HOE, ModToolMaterials.DEMANDUM, -2.0F, -0.3F);
 
+    public static final Item FORTOLIUM_SWORD = makeTool(swords, fortolium, ItemTypes.SWORD, ModToolMaterials.FORTOLIUM, 4, -2f);
+    public static final Item FORTOLIUM_AXE = makeTool(weapons, fortolium, ItemTypes.AXE, ModToolMaterials.FORTOLIUM, 4.5f, -2.7f);
+    public static final Item FORTOLIUM_PICKAXE = makeTool(fortolium, ItemTypes.PICKAXE, ModToolMaterials.FORTOLIUM, 1.0f, -2.3f);
+    public static final Item FORTOLIUM_SHOVEL = makeTool(fortolium, ItemTypes.SHOVEL, ModToolMaterials.FORTOLIUM, 1.5f, -2.5f);
+    public static final Item FORTOLIUM_HOE = makeTool(fortolium, ItemTypes.HOE, ModToolMaterials.FORTOLIUM, -1.0f, 0.0f);
+
     public static final Item UNTILLIUM_SWORD = makeTool(swords, untillium, ItemTypes.SWORD, ModToolMaterials.UNTILLIUM, 4, -1.9f);
     public static final Item UNTILLIUM_AXE = makeTool(weapons, untillium, ItemTypes.AXE, ModToolMaterials.UNTILLIUM, 4.5f, -2.6f);
     public static final Item UNTILLIUM_PICKAXE = makeTool(untillium, ItemTypes.PICKAXE, ModToolMaterials.UNTILLIUM, 1.0f, -2.2f);
     public static final Item UNTILLIUM_SHOVEL = makeTool(untillium, ItemTypes.SHOVEL, ModToolMaterials.UNTILLIUM, 1.5f, -2.4f);
     public static final Item UNTILLIUM_HOE = makeTool(untillium, ItemTypes.HOE, ModToolMaterials.UNTILLIUM, -1.0f, 0.0f);
 
-    public static final Item FORTOLIUM_SWORD = makeTool(swords, fortolium, ItemTypes.SWORD, ModToolMaterials.FORTOLIUM, 4, -2f);
-    public static final Item FORTOLIUM_AXE = makeTool(weapons, fortolium, ItemTypes.AXE, ModToolMaterials.FORTOLIUM, 4.5f, -2.7f);
-    public static final Item FORTOLIUM_PICKAXE = makeTool(fortolium, ItemTypes.PICKAXE, ModToolMaterials.FORTOLIUM, 1.0f, -2.3f);
-    public static final Item FORTOLIUM_SHOVEL = makeTool(fortolium, ItemTypes.SHOVEL, ModToolMaterials.FORTOLIUM, 1.5f, -2.5f);
-    public static final Item FORTOLIUM_HOE = makeTool(fortolium, ItemTypes.HOE, ModToolMaterials.FORTOLIUM, -1.0f, 0.0f);
+    public static final Item VORMITE_SWORD = makeTool(swords, vormite, ItemTypes.SWORD, ModToolMaterials.VORMITE, 3.8f, -1.6f);
+    public static final Item VORMITE_AXE = makeTool(weapons, "vormite_axe", ItemTypes.AXE, ModToolMaterials.VORMITE, 4.5f, -3.2f);
 
     public static final Item REAPER_SCYTHE = makeTool(weapons, "reaper_scythe", ItemTypes.HOE, ModToolMaterials.SCYTHE, 5.5F, -2.0F);
 
@@ -62,7 +66,6 @@ public class ModToolItems extends HelperItems {
     public static Item[] tools() { return all(tools); }
     public static Item[] weapons() { return all(weapons); }
     public static KeyGroup<Item,ToolMaterial> swords() { return new KeyGroup<Item,ToolMaterial>(all(swords)).out(materials.toArray(new ToolMaterial[0])); }
-    public static KeyGroup<String,Object> weaponTypes() { return new KeyGroup<>("sword", "axe", "sword", "axe", "sword", "axe", "sword", "axe", "hoe").keys();}
     public static Item[] scultiumTools() { return all(scultium); }
     public static Item[] fortoliumTools() { return all(fortolium); }
     public static Item[] demandumTools() { return all(demandum); }

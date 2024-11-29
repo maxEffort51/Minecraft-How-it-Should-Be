@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "hisb:block/dark",
+    "side": "hisb:block/dark",
+    "top": "hisb:block/dark"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "hisb:block/hesper_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "hisb:block/hesper_log"
+    },
+    "axis=z": {
+      "model": "hisb:block/hesper_log_horizontal",
+      "x": 90
+    }
+  }
+}

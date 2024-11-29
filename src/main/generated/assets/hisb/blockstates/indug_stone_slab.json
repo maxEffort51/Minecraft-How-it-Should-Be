@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/indug_stone_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/indug_stone"
+    },
+    "type=top": {
+      "model": "hisb:block/indug_stone_slab_top"
+    }
+  }
+}

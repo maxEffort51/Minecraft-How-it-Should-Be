@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hisb:block/burple_block",
+    "side": "hisb:block/burple_block",
+    "top": "hisb:block/burple_block"
+  }
+}

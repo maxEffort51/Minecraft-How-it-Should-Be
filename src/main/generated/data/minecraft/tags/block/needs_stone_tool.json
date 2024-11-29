@@ -1,0 +1,14 @@
+{
+  "values": [
+    "hisb:purifier_table",
+    "hisb:corrupted_mud",
+    "hisb:clove_block",
+    "hisb:finchstone",
+    "hisb:grent_block",
+    "hisb:dead_log",
+    "hisb:dead_planks",
+    "hisb:finchstone_slab",
+    "hisb:finchstone_stairs",
+    "hisb:finchstone_wall"
+  ]
+}

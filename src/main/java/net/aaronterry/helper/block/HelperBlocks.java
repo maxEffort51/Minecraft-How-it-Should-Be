@@ -1,6 +1,6 @@
 package net.aaronterry.helper.block;
 
-import net.aaronterry.helper.datagen.ModRecipeHelperProvider;
+import net.aaronterry.helper.datagen.HelperRecipeProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -84,7 +84,7 @@ public class HelperBlocks {
     public static List<Block> getFromToolMaterial(String req, boolean includeParents) { return get("toolMaterial",req,includeParents); }
     public static List<OreData> getFromOreType(String req) {
         List<OreData> result = new ArrayList<>();
-        sorted.forEach(sortedBlock -> { if (sortedBlock.matches("oreType", req)) result.add(sortedBlock.getOreData()); });
+        sorted.forEach(sortedBlock -> { if (sortedBlock.matches("oreType", req) && sortedBlock.oreData != null) result.add(sortedBlock.getOreData()); });
         return result;
     }
     private static List<Sorted> find(String sortBy, String requirement) {
@@ -107,9 +107,15 @@ public class HelperBlocks {
     public static List<Sorted> sortWithDropType(String req) { return find("dropType",req); }
     public static List<Sorted> sortWithToolType(String req) { return find("toolType",req); }
     public static List<Sorted> sortWithToolMaterial(String req) { return find("toolMaterial",req); }
+
     public static List<Block> all() {
         List<Block> sortedBlocks = new ArrayList<>(sorted.stream().map(Sorted::getBlock).toList());
         sortedBlocks.addAll(notSorted);
+        List<Block> hiddenBlocks = new ArrayList<>();
+        sorted.forEach(sort -> {
+            if (sort.isHidden()) hiddenBlocks.add(sort.getBlock());
+        });
+        sortedBlocks.removeAll(hiddenBlocks);
         return sortedBlocks;
     }
     public static Sorted getFromBlock(Block block) {
@@ -139,20 +145,9 @@ public class HelperBlocks {
             if (isEmpty(sortData.blockType)) sortData.blockType = sortedBlock.blockType;
             if (isEmpty(sortData.dropType)) sortData.dropType = sortedBlock.dropType;
             if (isEmpty(sortData.oreType)) sortData.oreType = sortedBlock.oreType;
+            if (sortedBlock.oreData != null && sortData.oreData == null && !sortData.oreType.equals(SortInputs.NO_ORE)) sortData.oreData = sortedBlock.oreData;
             if (isEmpty(sortData.toolType)) sortData.toolType = sortedBlock.toolType;
             if (isEmpty(sortData.toolMaterial)) sortData.toolMaterial = sortedBlock.toolMaterial;
-            return get();
-        }
-        public Block copyAsParent(Block block) {
-            if (block == null) { throw new IllegalArgumentException("Null input in HelperBlocks.copy"); }
-            Sorted sortedBlock = getFromBlock(block);
-            if (isEmpty(sortData.dim)) sortData.dim = sortedBlock.dim;
-            if (isEmpty(sortData.blockType)) sortData.blockType = sortedBlock.blockType;
-            if (isEmpty(sortData.dropType)) sortData.dropType = sortedBlock.dropType;
-            if (isEmpty(sortData.oreType)) sortData.oreType = sortedBlock.oreType;
-            if (isEmpty(sortData.toolType)) sortData.toolType = sortedBlock.toolType;
-            if (isEmpty(sortData.toolMaterial)) sortData.toolMaterial = sortedBlock.toolMaterial;
-            if (sortedBlock.isParent) sortData.isParent = true;
             return get();
         }
 
@@ -164,24 +159,24 @@ public class HelperBlocks {
             SortingPreset newPreset = this.copy(); newPreset.create(create, id); return newPreset;
         }
 
-        public ModRecipeHelperProvider.Shaped.Details shapedRecipe(RecipeCategory cat) {
-            return ModRecipeHelperProvider.Shaped.recipe(cat, sortData.block, copy());
+        public HelperRecipeProvider.Shaped.Details shapedRecipe(RecipeCategory cat) {
+            return HelperRecipeProvider.Shaped.recipe(cat, sortData.block, copy());
         }
-        public ModRecipeHelperProvider.Shaped.Details shapedRecipe(RecipeCategory cat, int count) {
-            return ModRecipeHelperProvider.Shaped.recipe(cat, sortData.block, count, copy());
+        public HelperRecipeProvider.Shaped.Details shapedRecipe(RecipeCategory cat, int count) {
+            return HelperRecipeProvider.Shaped.recipe(cat, sortData.block, count, copy());
         }
-        public ModRecipeHelperProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat) {
-            return ModRecipeHelperProvider.Shapeless.recipe(cat, sortData.block, copy());
+        public HelperRecipeProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat) {
+            return HelperRecipeProvider.Shapeless.recipe(cat, sortData.block, copy());
         }
-        public ModRecipeHelperProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat, int count) {
-            return ModRecipeHelperProvider.Shapeless.recipe(cat, sortData.block, count, copy());
+        public HelperRecipeProvider.Shapeless.Details shapelessRecipe(RecipeCategory cat, int count) {
+            return HelperRecipeProvider.Shapeless.recipe(cat, sortData.block, count, copy());
         }
         public SortingPreset reverseRecipe(RecipeCategory cat, ItemConvertible base) {
-            sortData.recipes.add(new ModRecipeHelperProvider.GenericDetails(cat, base, sortData.block));
+            sortData.recipes.add(new HelperRecipeProvider.GenericDetails(cat, base, sortData.block));
             return this;
         }
 
-        public void recipe(ModRecipeHelperProvider.GenericDetails details) {
+        public void recipe(HelperRecipeProvider.GenericDetails details) {
             sortData.recipes.add(details);
         }
 
@@ -200,6 +195,8 @@ public class HelperBlocks {
 
         public SortingPreset material(String mat) { sortData.toolMaterial = mat; if (lastOff < 4) { lastOff = 4; } return this; }
 
+        public SortingPreset hidden() { sortData.hidden = true; return this; }
+
         public SortingPreset and(SortingPreset preset) {
             if (!isEmpty(preset.sortData.dim) && isEmpty(sortData.dim)) sortData.dim = preset.sortData.dim;
             if (!isEmpty(preset.sortData.blockType) && isEmpty(sortData.blockType)) sortData.blockType = preset.sortData.blockType;
@@ -213,6 +210,7 @@ public class HelperBlocks {
 
     /* ALREADY SORTED */
     public static class Sorted {
+        private final boolean hidden;
         private final Block block;
         private final Identifier identifier;
         private final Block parent;
@@ -225,10 +223,10 @@ public class HelperBlocks {
         private final String toolMaterial;
         private final boolean hasBlock;
         private final boolean isParent;
-        private final List<ModRecipeHelperProvider.GenericDetails> recipes;
+        private final List<HelperRecipeProvider.GenericDetails> recipes;
 
         private Sorted(Sorting template) {
-            identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;
+            hidden = template.hidden; identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;
             dropType = template.dropType; oreType = template.oreType; oreData = template.oreData;
             toolType = template.toolType; toolMaterial = template.toolMaterial; parent = template.parent;
             hasBlock = template.hasBlock; isParent = template.isParent; recipes = template.recipes;
@@ -249,7 +247,7 @@ public class HelperBlocks {
 
         public boolean hasRecipes() { return !recipes.isEmpty(); }
 
-        public List<ModRecipeHelperProvider.GenericDetails> getRecipes() { return recipes; }
+        public List<HelperRecipeProvider.GenericDetails> getRecipes() { return recipes; }
 
         public boolean matches(String type, String condition) {
             return switch(type) {
@@ -264,60 +262,68 @@ public class HelperBlocks {
         }
 
         public boolean isParentBlock() { return isParent; }
+
+        public boolean isHidden() { return hidden; }
     }
 
     /* POSSIBLE SORT INPUTS */
     public static class SortInputs {
         // DIMENSIONS
-        public static final String OVERWORLD = "overworld";
-        public static final String NETHER = "nether";
-        public static final String END = "end";
-        public static final String DEMANDI = "demandi";
-        public static final String NEXUS = "nexus";
-        public static final String RARE = "rare";
-        public static final String CUSTOM_DIM = "custom";
+        public static final String OVERWORLD = "dim_overworld";
+        public static final String NETHER = "dim_nether";
+        public static final String END = "dim_end";
+        public static final String DEMANDI = "dim_demandi";
+        public static final String NEXUS = "dim_nexus";
+        public static final String RARE = "dim_rare";
+        public static final String VORTEX = "dim_vortex";
+        public static final String INFINITE = "dim_infinite";
+        public static final String UNTER = "dim_unter";
+        public static final String CUSTOM_DIM = "dim_custom";
         public static final String NO_DIM = "dim_empty";
         // MODEL TYPES
-        public static final String PILLAR = "pillar";
-        public static final String MULTIFACETED = "multi";
-        public static final String STONE_BLOCK_TYPE = "stone_block_type";
-        public static final String WOOD_PLANKS = "wood_planks";
-        public static final String TABLE = "table";
-        public static final String VINE = "vine";
-        public static final String SLAB = "slab";
-        public static final String STAIRS = "stairs";
-        public static final String DOOR = "door";
-        public static final String TRAPDOOR = "trapdoor";
-        public static final String WALL = "wall";
-        public static final String GRASSLIKE = "grasslike";
-        public static final String FENCE = "fence";
-        public static final String FENCE_GATE = "fence_gate";
-        public static final String CROSS = "cross_section";
-        public static final String TORCH = "torch";
-        public static final String WALL_TORCH = "wall_torch";
-        public static final String NORMAL_TYPE = "block_empty";
+        public static final String PILLAR = "model_pillar";
+        public static final String MULTIFACETED = "model_multi";
+        public static final String STONE_MODEL = "model_stone";
+        public static final String WOOD_PLANKS = "model_wood_planks";
+        public static final String TABLE = "model_table";
+        public static final String VINE = "model_vine";
+        public static final String SLAB = "model_slab";
+        public static final String STAIRS = "model_stairs";
+        public static final String DOOR = "model_door";
+        public static final String TRAPDOOR = "model_trapdoor";
+        public static final String WALL = "model_wall";
+        public static final String GRASSLIKE = "model_grasslike";
+        public static final String FENCE = "model_fence";
+        public static final String FENCE_GATE = "model_fence_gate";
+        public static final String CROSS = "model_cross";
+        public static final String TORCH = "model_torch";
+        public static final String WALL_TORCH = "model_wall_torch";
+        public static final String NORMAL_TYPE = "model_empty";
         // DROP TYPES
-        public static final String DROP_SELF = "self";
+        public static final String DROP_SELF = "drop_self";
         public static final String DROP_SLAB = "drop_slab";
         public static final String DROP_DOOR = "drop_door";
-        public static final String ORE = "ore";
-        public static final String BASIC_ORE = "basic_ore";
-        public static final String SPECIFIC_ORE = "specific_ore";
-        public static final String NO_ORE = "no_ore";
-        public static final String NEEDS_SHEARS = "shears";
+        public static final String ORE = "drop_ore";
+        public static final String BASIC_ORE = "ore_basic";
+        public static final String SPECIFIC_ORE = "ore_specific";
+        public static final String NO_ORE = "ore_empty";
+        public static final String NEEDS_SHEARS = "drop_shears";
         public static final String NO_DROPS = "drop_empty";
         // TOOL TYPES
-        public static final String AXE = "axe";
-        public static final String PICKAXE = "pickaxe";
-        public static final String SHOVEL = "shovel";
-        public static final String HOE = "hoe";
+        public static final String AXE = "tool_axe";
+        public static final String PICKAXE = "tool_pickaxe";
+        public static final String SHOVEL = "tool_shovel";
+        public static final String HOE = "tool_hoe";
         public static final String HAND = "tool_empty";
         // TOOL MATERIALS
-        public static final String STONE = "stone";
-        public static final String IRON = "iron";
-        public static final String DIAMOND = "diamond";
-        public static final String NETHERITE = "netherite";
-        public static final String SCULTIUM = "scultium";
+        public static final String STONE = "material_stone";
+        public static final String IRON = "material_iron";
+        public static final String DIAMOND = "material_diamond";
+        public static final String NETHERITE = "material_netherite";
+        public static final String SCULTIUM = "material_scultium";
+        public static final String FORTOLIUM = "material_fortolium";
+        public static final String DEMANDUM = "material_demandum";
+        public static final String UNTILLIUM = "material_untillium";
         public static final String NO_MATERIAL = "material_empty";
     }
 
@@ -337,15 +343,16 @@ public class HelperBlocks {
 
     /* SORTING PROCESS CLASS */
     public static class Sorting {
+        private boolean hidden;
         private Block block; private String dim = "_empty_"; private String blockType = "_empty_"; private String dropType = "_empty_";
         private String oreType = "_empty_"; private OreData oreData; private String toolType = "_empty_"; private String toolMaterial = "_empty_";
-        private boolean isParent = false; private Block parent; private boolean hasBlock; private final List<ModRecipeHelperProvider.GenericDetails> recipes = new ArrayList<>();
+        private boolean isParent = false; private Block parent; private boolean hasBlock; private final List<HelperRecipeProvider.GenericDetails> recipes = new ArrayList<>();
         private Identifier identifier;
 
         private Sorting(Identifier id) { this.identifier = id; this.hasBlock = false; }
         private Sorting(Block block, Identifier id) { this.block = block; this.identifier = id; this.hasBlock = true; }
         private Sorting(Sorting template) {
-            identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;dropType = template.dropType;
+            hidden = template.hidden; identifier = template.identifier; block = template.block; dim = template.dim; blockType = template.blockType;dropType = template.dropType;
             oreType = template.oreType; oreData = template.oreData; toolType = template.toolType; toolMaterial = template.toolMaterial;
             isParent = template.isParent; parent = template.parent; hasBlock = template.hasBlock; recipes.addAll(template.recipes);
         }
@@ -393,7 +400,7 @@ public class HelperBlocks {
             public DropType pillar() { return blockType(SortInputs.PILLAR); }
             public DropType multifaceted() { return blockType(SortInputs.MULTIFACETED); }
             public DropType tableBlock() { return blockType(SortInputs.TABLE); }
-            public DropType stone() { return blockType(SortInputs.STONE_BLOCK_TYPE); }
+            public DropType stone() { return blockType(SortInputs.STONE_MODEL); }
             public DropType planks() { return blockType(SortInputs.WOOD_PLANKS); }
             public DropType vine() { return blockType(SortInputs.VINE); }
             public Tool slab() { sortData.blockType = SortInputs.SLAB; sortData.dropType = SortInputs.DROP_SLAB; return new Tool(sortData); }

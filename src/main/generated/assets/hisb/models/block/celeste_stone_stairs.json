@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "hisb:block/celeste_stone",
+    "side": "hisb:block/celeste_stone",
+    "top": "hisb:block/celeste_stone"
+  }
+}

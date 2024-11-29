@@ -1,7 +1,7 @@
 package net.aaronterry.helper.block.table;
 
 import net.aaronterry.hisb.HisbMod;
-import net.aaronterry.hisb.pack.exploration.block.ModBlocks;
+import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/compact_concrete_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/compact_concrete"
+    },
+    "type=top": {
+      "model": "hisb:block/compact_concrete_slab_top"
+    }
+  }
+}

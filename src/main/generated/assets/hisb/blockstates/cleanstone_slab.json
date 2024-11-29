@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/cleanstone_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/cleanstone"
+    },
+    "type=top": {
+      "model": "hisb:block/cleanstone_slab_top"
+    }
+  }
+}

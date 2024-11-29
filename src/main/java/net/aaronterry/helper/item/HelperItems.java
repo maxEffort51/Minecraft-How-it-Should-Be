@@ -1,6 +1,6 @@
 package net.aaronterry.helper.item;
 
-import net.aaronterry.hisb.pack.exploration.item.custom.ElytraArmorItem;
+import net.aaronterry.hisb.exploration.item.custom.ElytraArmorItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;

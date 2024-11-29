@@ -51,7 +51,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         addToTag(BlockTags.CLIMBABLE, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.VINE));
 
-        addToTag(BlockTags.BASE_STONE_OVERWORLD, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_BLOCK_TYPE));
+        addToTag(BlockTags.BASE_STONE_OVERWORLD, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.STONE_MODEL));
 
         addToTag(BlockTags.NEEDS_STONE_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.STONE));
         addToTag(BlockTags.NEEDS_IRON_TOOL, ModBlocks.getFromToolMaterial(HelperBlocks.SortInputs.IRON));

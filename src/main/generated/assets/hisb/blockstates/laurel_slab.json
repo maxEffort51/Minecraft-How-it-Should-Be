@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hisb:block/laurel_slab"
+    },
+    "type=double": {
+      "model": "hisb:block/laurel_planks"
+    },
+    "type=top": {
+      "model": "hisb:block/laurel_slab_top"
+    }
+  }
+}

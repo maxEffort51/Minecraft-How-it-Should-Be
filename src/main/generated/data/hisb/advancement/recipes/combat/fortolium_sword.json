@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_demandum_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:demandum_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hisb:fortolium_sword"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_demandum_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hisb:fortolium_sword"
+    ]
+  }
+}
