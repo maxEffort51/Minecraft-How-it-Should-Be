@@ -1,6 +1,5 @@
 package net.aaronterry.hisb.exploration.datagen;
 
-import net.aaronterry.helper.KeyGroup;
 import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.aaronterry.hisb.exploration.item.armor.ModArmorItems;
@@ -12,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
 
 import java.util.List;
 
@@ -69,10 +67,10 @@ public class ModModelProvider extends FabricModelProvider {
         });
 
         // GRASSLIKE BLOCKS
-        ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.GRASSLIKE).forEach(grasslike -> generator.modelCollector.accept(
-                grasslike.id(),
-                () -> Models.CUBE_BOTTOM_TOP.createJson(grasslike.id(), new KeyGroup<TextureKey,Identifier>(TextureKey.TOP,TextureKey.SIDE,TextureKey.BOTTOM).out(grasslike.id("top"),grasslike.id("side"),grasslike.id("bottom")).asMap())
-        ));
+//        ModBlocks.sortWithBlockType(HelperBlocks.SortInputs.GRASSLIKE).forEach(grasslike -> generator.modelCollector.accept(
+//                grasslike.id(),
+//                () -> Models.CUBE_BOTTOM_TOP.createJson(grasslike.id(), new KeyGroup<TextureKey,Identifier>(TextureKey.TOP,TextureKey.SIDE,TextureKey.BOTTOM).out(grasslike.id("top"),grasslike.id("side"),grasslike.id("bottom")).asMap())
+//        ));
 
         // PILLAR BLOCKS AND LOGS
         generateLogs(generator, ModBlocks.getFromBlockType(HelperBlocks.SortInputs.PILLAR));

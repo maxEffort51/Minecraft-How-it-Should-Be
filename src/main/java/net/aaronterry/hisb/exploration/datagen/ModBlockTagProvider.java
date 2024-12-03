@@ -1,17 +1,11 @@
 package net.aaronterry.hisb.exploration.datagen;
 
-import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.helper.datagen.HelperBlockTagProvider;
 import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.aaronterry.hisb.utility.tag.ModBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends HelperBlockTagProvider {
@@ -19,17 +13,17 @@ public class ModBlockTagProvider extends HelperBlockTagProvider {
         super(output, registriesFuture);
     }
 
-    public FabricTagBuilder addToTag(TagKey<Block> tag, Block block) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.add(block); return builder; }
-    public FabricTagBuilder addToTag(TagKey<Block> tag, TagKey<Block> tagToAdd) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.addTag(tagToAdd); return builder; }
-    public FabricTagBuilder addToTag(TagKey<Block> tag, List<Block> blocks) {
-        FabricTagBuilder builder = getOrCreateTagBuilder(tag); for (Block block : blocks) builder.add(block); return builder; }
-
-    public void handleToolLevels(List<TagKey<Block>> toolTags, List<TagKey<Block>> inverse) {
-        for (int i = 0; i < inverse.size(); i++) {
-            FabricTagBuilder builder = getOrCreateTagBuilder(inverse.get(i));
-            for (int j = i; j < toolTags.size(); j++) builder.addTag(toolTags.get(j));
-        }
-    }
+//    public FabricTagBuilder addToTag(TagKey<Block> tag, Block block) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.add(block); return builder; }
+//    public FabricTagBuilder addToTag(TagKey<Block> tag, TagKey<Block> tagToAdd) { FabricTagBuilder builder = getOrCreateTagBuilder(tag); builder.addTag(tagToAdd); return builder; }
+//    public FabricTagBuilder addToTag(TagKey<Block> tag, List<Block> blocks) {
+//        FabricTagBuilder builder = getOrCreateTagBuilder(tag); for (Block block : blocks) builder.add(block); return builder;
+//    }
+//    public void handleToolLevels(List<TagKey<Block>> toolTags, List<TagKey<Block>> inverse) {
+//        for (int i = 0; i < inverse.size(); i++) {
+//            FabricTagBuilder builder = getOrCreateTagBuilder(inverse.get(i));
+//            for (int j = i; j < toolTags.size(); j++) builder.addTag(toolTags.get(j));
+//        }
+//    }
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {

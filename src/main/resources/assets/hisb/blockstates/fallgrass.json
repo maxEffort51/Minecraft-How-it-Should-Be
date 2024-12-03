@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "minecraft:block/fallgrass"
+      },
+      {
+        "model": "minecraft:block/fallgrass",
+        "y": 90
+      },
+      {
+        "model": "minecraft:block/fallgrass",
+        "y": 180
+      },
+      {
+        "model": "minecraft:block/fallgrass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "minecraft:block/fallgrass"
+    }
+  }
+}

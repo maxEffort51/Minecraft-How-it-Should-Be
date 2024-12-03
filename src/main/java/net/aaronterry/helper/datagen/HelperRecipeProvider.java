@@ -2,6 +2,7 @@ package net.aaronterry.helper.datagen;
 
 import net.aaronterry.helper.KeyGroup;
 import net.aaronterry.helper.block.HelperBlocks;
+import net.aaronterry.helper.item.HelperToolItems;
 import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.exploration.item.ModItems;
@@ -23,6 +24,8 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
     public HelperRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
+
+    public static Pattern pattern(String layer1, String layer2, String layer3) { return new Pattern(layer1, layer2, layer3); }
 
     public static class GenericDetails {
         private final String type;
@@ -95,7 +98,12 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
             ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result, count); return new Details(builder, preset);
         }
 
+        public static Details recipe(RecipeCategory cat, Item result, HelperToolItems.ToolBuilder toolBuilder) {
+            ShapedRecipeJsonBuilder builder = ShapedRecipeJsonBuilder.create(cat, result); return new Details(builder, toolBuilder);
+        }
+
         public static class Details {
+            private HelperToolItems.ToolBuilder toolBuilder;
             private HelperBlocks.SortingPreset preset;
             private final ShapedRecipeJsonBuilder builder;
             private Identifier id;
@@ -103,16 +111,22 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
             public Details(ShapedRecipeJsonBuilder builder) { this.builder = builder; }
             public Details(ShapedRecipeJsonBuilder builder, HelperBlocks.SortingPreset preset) {
                 this.builder = builder; this.preset = preset; }
+            public Details(ShapedRecipeJsonBuilder builder, HelperToolItems.ToolBuilder tool) {
+                this.builder = builder; this.toolBuilder = tool; }
+
+            public ShapedRecipeJsonBuilder getBuilder() { return builder; }
 
             public Details needs(ItemConvertible item) { builder.criterion(hasItem(item), conditionsFromItem(item)); return this; }
             public Details needs(int i) { builder.criterion(hasItem(inputs.get(i)), conditionsFromItem(inputs.get(i))); return this; }
             public Details pattern(Pattern pattern) { pattern.with(builder); return this; }
             public Details input(char[] chars, ItemConvertible[] items) { inputs.addAll(List.of(items)); for (int i = 0; i < chars.length; i++) builder.input(chars[i],items[i]); return this; }
+            public Details input(List<Character> chars, List<ItemConvertible> items) { inputs.addAll(items); for (int i = 0; i < chars.size(); i++) builder.input(chars.get(i),items.get(i)); return this; }
             public Details input(char c, ItemConvertible item) { inputs.add(item); builder.input(c, item); return this; }
             public Details id(Identifier id) { this.id = id; return this; }
             public void offer(RecipeExporter xpt) { builder.offerTo(xpt); }
             public void offer(RecipeExporter xpt, String unique) { builder.offerTo(xpt, Identifier.of(HisbMod.id(), unique)); }
             public HelperBlocks.SortingPreset endRecipe() { preset.recipe(new GenericDetails(builder, id)); return preset; }
+            public HelperToolItems.ToolBuilder toolBuilder() { return toolBuilder.recipe(new GenericDetails(builder)); }
         }
     }
 
@@ -141,7 +155,7 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
             public Details(ShapelessRecipeJsonBuilder builder, ItemConvertible result, HelperBlocks.SortingPreset preset) {
                 this.builder = builder; this.result = result; this.preset = preset; }
 
-
+            public ShapelessRecipeJsonBuilder getBuilder() { return builder; }
             public Details needs(ItemConvertible item) { builder.criterion(hasItem(item), conditionsFromItem(item)); return this; }
             public Details needsResult() { builder.criterion(hasItem(result), conditionsFromItem(result)); return this; }
             public Details input(ItemConvertible input, int amount) { builder.input(input, amount); return this; }
@@ -170,7 +184,7 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
             for (int i = 0; i < set.length; i++) Shaped.recipe(RecipeCategory.COMBAT,set[i]).pattern(patterns[i]).input('#', input).needs(input).offer(xpt);
         }
 
-        private static Shaped.Details _tool(String type, Item tool, Item ore, Item stick, Item criterion) {
+        public static Shaped.Details buildTool(String type, Item tool, Item ore, Item stick, Item criterion) {
             Pattern toolPattern = switch(type) {
                 case "sword" -> new Pattern(" @ "," @ "," | "); case "axe" -> new Pattern("@@ ","@| "," | ");
                 case "pickaxe" -> new Pattern("@@@"," | ", " | "); case "shovel" -> new Pattern(" @ "," | ", " | ");
@@ -178,8 +192,8 @@ public class HelperRecipeProvider extends FabricRecipeProvider {
             };
             return Shaped.recipe(RecipeCategory.COMBAT, tool).pattern(toolPattern).needs(criterion).input(new char[] {'@','|'}, new Item[] {ore, stick});
         }
-        public static void tool(RecipeExporter xpt, String type, Item tool, Item ore, Item stick, Item criterion) { Recipe._tool(type, tool, ore, stick, criterion).offer(xpt); }
-        public static void tool(RecipeExporter xpt, String type, Item tool, Item ore, Item stick, Item criterion, String unique) { Recipe._tool(type, tool, ore, stick, criterion).offer(xpt, unique); }
+        public static void tool(RecipeExporter xpt, String type, Item tool, Item ore, Item stick, Item criterion) { Recipe.buildTool(type, tool, ore, stick, criterion).offer(xpt); }
+        public static void tool(RecipeExporter xpt, String type, Item tool, Item ore, Item stick, Item criterion, String unique) { Recipe.buildTool(type, tool, ore, stick, criterion).offer(xpt, unique); }
 
         public static void toolset(RecipeExporter xpt, Item[] tools, Item ore) {
             String[] types = tools.length == 5 ? new String[] {"sword","axe","pickaxe","shovel","hoe"} : new String[] {"axe","pickaxe","shovel","hoe"};

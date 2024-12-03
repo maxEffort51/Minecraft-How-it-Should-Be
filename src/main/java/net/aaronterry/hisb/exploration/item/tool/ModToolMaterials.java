@@ -3,8 +3,10 @@ package net.aaronterry.hisb.exploration.item.tool;
 import net.aaronterry.hisb.exploration.item.ModItems;
 import net.aaronterry.hisb.utility.tag.ModBlockTags;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 
 import java.util.function.Supplier;
@@ -21,8 +23,9 @@ public enum ModToolMaterials implements ToolMaterial {
     FORTOLIUM(ModBlockTags.INCORRECT_FOR_FORTOLIUM_TOOL, 1600, 12.0F, 7.0F, 30, () -> Ingredient.ofItems(ModItems.FORTOLIUM)),
     DEMANDUM(ModBlockTags.INCORRECT_FOR_DEMANDUM_TOOL, 1500, 14.0F, 8F, 16, () -> Ingredient.ofItems(ModItems.DEMANDUM_CHUNK)),
     UNTILLIUM(ModBlockTags.INCORRECT_FOR_UNTILLIUM_TOOL, 2500, 17.0F, 10F, 23, () -> Ingredient.ofItems(ModItems.UNTILLIUM_BAR)),
-    VORMITE(ModBlockTags.INCORRECT_FOR_UNTILLIUM_TOOL, 3000, 12.0F, 13F, 18, () -> Ingredient.ofItems(ModItems.VORMITE_CLUMP)),
-    SCYTHE(ModBlockTags.INCORRECT_FOR_SCYTHE_TOOL, 2000, 20.0F, 16F, 10, () -> Ingredient.ofItems(ModItems.DEPNETUM_CLUMP));
+    ARMITE(ModBlockTags.INCORRECT_FOR_ARMITE_TOOL, 950, 19.0F, 11F, 17, () -> Ingredient.ofItems(ModItems.ARMITE_CHUNK)),
+    VORMITE(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 3000, 12.0F, 18F, 18, () -> Ingredient.ofItems(ModItems.VORMITE_CLUMP)),
+    SCYTHE(ModBlockTags.INCORRECT_FOR_SCYTHE_TOOL, 500, 30.0F, 25F, 1, () -> Ingredient.ofItems(Blocks.AIR));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

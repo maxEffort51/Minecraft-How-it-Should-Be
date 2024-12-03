@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "hisb:fallgrass_bottom",
-    "side": "hisb:fallgrass_side",
-    "top": "hisb:fallgrass_top"
-  }
-}

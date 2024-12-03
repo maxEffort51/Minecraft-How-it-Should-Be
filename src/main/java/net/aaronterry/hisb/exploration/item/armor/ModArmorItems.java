@@ -14,10 +14,13 @@ public class ModArmorItems extends HelperItems {
     public static final ItemCaller purvium = createCaller("hisb_purvium_armor",HisbMod.id());
     public static final ItemCaller depnetum = createCaller("hisb_depnetum_armor",HisbMod.id());
     public static final ItemCaller fortolium = createCaller("hisb_fortolium_armor",HisbMod.id());
+    public static final ItemCaller infitium = createCaller("hisb_infitium_armor",HisbMod.id());
     public static final ItemCaller untillium = createCaller("hisb_untillium_armor",HisbMod.id());
+    public static final ItemCaller armite = createCaller("hisb_armite_armor",HisbMod.id());
 
     private static final ItemCaller armor = createCaller("hisb_armor",HisbMod.id())
-            .addChild(firite).addChild(purvium).addChild(purviumElytra).addChild(depnetum).addChild(fortolium).addChild(untillium);
+            .addChild(firite).addChild(purvium).addChild(purviumElytra).addChild(depnetum).addChild(fortolium)
+            .addChild(infitium).addChild(untillium).addChild(armite);
 
     public static final Item NETHERITE_FIRITE_HELMET = makeArmor(firite, "netherite_firite_helmet", ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.HELMET, new Item.Settings().maxCount(1).fireproof(), 37);
     public static final Item NETHERITE_FIRITE_CHESTPLATE = makeArmor(firite, "netherite_firite_chestplate", ModArmorMaterials.NETHERITE_FIRITE, ItemTypes.CHESTPLATE, new Item.Settings().maxCount(1).fireproof(), 37);
@@ -39,10 +42,20 @@ public class ModArmorItems extends HelperItems {
     public static final Item FORTOLIUM_LEGGINGS = makeArmor(fortolium, "fortolium_leggings", ModArmorMaterials.FORTOLIUM, ItemTypes.LEGGINGS, new Item.Settings().maxCount(1), 45);
     public static final Item FORTOLIUM_BOOTS = makeArmor(fortolium, "fortolium_boots", ModArmorMaterials.FORTOLIUM, ItemTypes.BOOTS, new Item.Settings().maxCount(1), 45);
 
-    public static final Item UNTILLIUM_HELMET = makeArmor(untillium, "untillium_helmet", ModArmorMaterials.UNTILLIUM, ItemTypes.HELMET, new Item.Settings().maxCount(1), 48);
-    public static final Item UNTILLIUM_CHESTPLATE = makeArmor(untillium, "untillium_chestplate", ModArmorMaterials.UNTILLIUM, ItemTypes.CHESTPLATE, new Item.Settings().maxCount(1), 48);
-    public static final Item UNTILLIUM_LEGGINGS = makeArmor(untillium, "untillium_leggings", ModArmorMaterials.UNTILLIUM, ItemTypes.LEGGINGS, new Item.Settings().maxCount(1), 48);
-    public static final Item UNTILLIUM_BOOTS = makeArmor(untillium, "untillium_boots", ModArmorMaterials.UNTILLIUM, ItemTypes.BOOTS, new Item.Settings().maxCount(1), 48);
+    public static final Item INFITIUM_HELMET = makeArmor(infitium, "infitium_helmet", ModArmorMaterials.INFITIUM, ItemTypes.HELMET, new Item.Settings().maxCount(1), 47);
+    public static final Item INFITIUM_CHESTPLATE = makeArmor(infitium, "infitium_chestplate", ModArmorMaterials.INFITIUM, ItemTypes.CHESTPLATE, new Item.Settings().maxCount(1), 47);
+    public static final Item INFITIUM_LEGGINGS = makeArmor(infitium, "infitium_leggings", ModArmorMaterials.INFITIUM, ItemTypes.LEGGINGS, new Item.Settings().maxCount(1), 47);
+    public static final Item INFITIUM_BOOTS = makeArmor(infitium, "infitium_boots", ModArmorMaterials.INFITIUM, ItemTypes.BOOTS, new Item.Settings().maxCount(1), 47);
+
+    public static final Item UNTILLIUM_HELMET = makeArmor(untillium, "untillium_helmet", ModArmorMaterials.UNTILLIUM, ItemTypes.HELMET, new Item.Settings().maxCount(1), 49);
+    public static final Item UNTILLIUM_CHESTPLATE = makeArmor(untillium, "untillium_chestplate", ModArmorMaterials.UNTILLIUM, ItemTypes.CHESTPLATE, new Item.Settings().maxCount(1), 49);
+    public static final Item UNTILLIUM_LEGGINGS = makeArmor(untillium, "untillium_leggings", ModArmorMaterials.UNTILLIUM, ItemTypes.LEGGINGS, new Item.Settings().maxCount(1), 49);
+    public static final Item UNTILLIUM_BOOTS = makeArmor(untillium, "untillium_boots", ModArmorMaterials.UNTILLIUM, ItemTypes.BOOTS, new Item.Settings().maxCount(1), 49);
+
+    public static final Item ARMITE_FURCAP = makeArmor(armite, "armite_furcap", ModArmorMaterials.THICK_ARMITE, ItemTypes.HELMET, new Item.Settings().maxCount(1), 50);
+    public static final Item ARMITE_FURCOAT = makeArmor(armite, "armite_furcoat", ModArmorMaterials.THICK_ARMITE, ItemTypes.CHESTPLATE, new Item.Settings().maxCount(1), 50);
+    public static final Item ARMITE_THICKPANTS = makeArmor(armite, "armite_thickpants", ModArmorMaterials.THICK_ARMITE, ItemTypes.LEGGINGS, new Item.Settings().maxCount(1), 50);
+    public static final Item ARMITE_SNOWBOOTS = makeArmor(armite, "armite_snowboots", ModArmorMaterials.THICK_ARMITE, ItemTypes.BOOTS, new Item.Settings().maxCount(1), 50);
 
     public static Item[] all() { return all(armor); }
     public static Item[] allArmor() { List<Item> i = new ArrayList<>(List.of(all(armor))); i.remove(purviumElytra()); return i.toArray(new Item[0]);}
@@ -50,7 +63,10 @@ public class ModArmorItems extends HelperItems {
     public static Item[] purvium(boolean includeElytra) { return all(purvium, includeElytra); }
     public static Item purviumElytra() { return all(purviumElytra)[0]; }
     public static Item[] depnetum() { return all(depnetum); }
+    public static Item[] fortolium() { return all(fortolium); }
+    public static Item[] infitium() { return all(infitium); }
     public static Item[] untillium() { return all(untillium); }
+    public static Item[] armite() { return all(armite); }
 
     public static void registerModArmor() {
         HisbMod.debug("Registering Mod Armor Items for " + HisbMod.id());

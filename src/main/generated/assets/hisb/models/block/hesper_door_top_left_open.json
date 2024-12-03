@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_left_open",
-  "textures": {
-    "bottom": "hisb:block/hesper_door_bottom",
-    "top": "hisb:block/hesper_door_top"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "hisb:block/finchstone",
-    "side": "hisb:block/finchstone",
-    "top": "hisb:block/finchstone"
-  }
-}

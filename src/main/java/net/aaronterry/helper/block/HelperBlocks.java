@@ -1,12 +1,10 @@
 package net.aaronterry.helper.block;
 
 import net.aaronterry.helper.datagen.HelperRecipeProvider;
+import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -29,6 +27,10 @@ public class HelperBlocks {
     private static final List<Sorted> sorted = new ArrayList<>();
 
     /* HELPER FUNCTIONS */
+    protected static void registerAsItem(Identifier identifier, Block block, BlockItem item, boolean sorted) {
+        Registry.register(Registries.ITEM, identifier, item);
+        if (!sorted) notSorted.add(block);
+    }
     protected static void registerAsItem(Identifier identifier, Block block, Item.Settings settings, boolean sorted) {
         Registry.register(Registries.ITEM, identifier, new BlockItem(block, settings));
         if (!sorted) notSorted.add(block);
@@ -47,6 +49,9 @@ public class HelperBlocks {
     protected static Block registerSort(Identifier identifier, Block block, Item.Settings itemSettings) {
         Block registered = registerBlock(identifier,block); registerAsItem(identifier, block, itemSettings, true); return registered;
     }
+    protected static Block registerSort(Identifier identifier, Block block, BlockItem item) {
+        Block registered = registerBlock(identifier,block); registerAsItem(identifier, block, item, true); return registered;
+    }
     /* REGISTER AND SORT A BLOCK */
     protected static Sorting.Dimension sortBlock(Identifier id, Block block) {  return sortBlock(id, block, new Item.Settings()); }
     protected static Sorting.Dimension sortBlock(Identifier id, Block block, Rarity rarity) { return sortBlock(id, block, new Item.Settings().rarity(rarity)); }
@@ -55,8 +60,15 @@ public class HelperBlocks {
 
     protected static SortingPreset sortBlock(Identifier id, Block block, SortingPreset preset) {  return sortBlock(id, block, new Item.Settings(), preset); }
     protected static SortingPreset sortBlock(Identifier id, Block block, Rarity rarity, SortingPreset preset) { return sortBlock(id, block, new Item.Settings().rarity(rarity), preset); }
-    protected static SortingPreset sortBlock(Identifier id, Block block, Item.Settings itemSettings, SortingPreset preset) {
-        Block registered = registerSort(id, block, itemSettings); return preset.copyAndCreate(block, id); }
+    protected static SortingPreset sortBlock(Identifier id, Block block, Item.Settings itemSettings, SortingPreset preset) { return sortBlock(id, block, new BlockItem(block, itemSettings), preset); }
+    protected static SortingPreset sortBlock(Identifier id, Block block, BlockItem item, SortingPreset preset) {
+        Block registered = registerSort(id, block, item); return preset.copyAndCreate(registered, id);
+    }
+    protected static SortingPreset sortBlock(Identifier id, Block block, boolean createItem, SortingPreset preset) {
+        Block registered = createItem ? registerSort(id, block, new Item.Settings()) : registerBlock(id, block); return preset.copyAndCreate(registered, id);
+    }
+
+    //
 
     /* GET A BLOCK BASED ON SORTING */
     private static List<Block> get(String sortBy, String requirement) {
@@ -157,6 +169,28 @@ public class HelperBlocks {
 
         public SortingPreset copyAndCreate(Block create, Identifier id) {
             SortingPreset newPreset = this.copy(); newPreset.create(create, id); return newPreset;
+        }
+
+        public Block slabRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 6).input('#', craft).pattern(new HelperRecipeProvider.Pattern("   ","###")).needs(0).endRecipe().parent(craft);
+        }
+        public Block stairsRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 4).input('#',craft).pattern(new HelperRecipeProvider.Pattern("  #"," ##","###")).needs(0).endRecipe().parent(craft);
+        }
+        public Block doorRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 3).input('#',craft).pattern(new HelperRecipeProvider.Pattern("##","##","##")).needs(0).endRecipe().parent(craft);
+        }
+        public Block trapdoorRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 2).input('#', craft).pattern(new HelperRecipeProvider.Pattern("###","###")).needs(0).endRecipe().parent(craft);
+        }
+        public Block fenceRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 3).input('#', craft).input('/', Items.STICK).pattern(new HelperRecipeProvider.Pattern("#/#","#/#")).needs(0).endRecipe().parent(craft);
+        }
+        public Block fenceGateRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 1).input('#', craft).input('/', Items.STICK).pattern(new HelperRecipeProvider.Pattern("/#/","/#/")).needs(0).endRecipe().parent(craft);
+        }
+        public Block wallRecipe(Block craft) {
+            return shapedRecipe(RecipeCategory.BUILDING_BLOCKS, 6).input('#', craft).pattern(new HelperRecipeProvider.Pattern("###","###")).needs(0).endRecipe().parent(craft);
         }
 
         public HelperRecipeProvider.Shaped.Details shapedRecipe(RecipeCategory cat) {
@@ -324,6 +358,7 @@ public class HelperBlocks {
         public static final String FORTOLIUM = "material_fortolium";
         public static final String DEMANDUM = "material_demandum";
         public static final String UNTILLIUM = "material_untillium";
+        public static final String ARMITE = "material_armite";
         public static final String NO_MATERIAL = "material_empty";
     }
 

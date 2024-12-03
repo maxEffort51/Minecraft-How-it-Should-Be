@@ -18,9 +18,12 @@ public class HelperBlockTags {
     protected static TagKey<Block> tag(String main, String name) {
         return tag(sorter(main, TagSorter.Type.MISC), name);
     }
-    protected static TagKey<Block> incorrect(String main, String ore) { return tag(sorter(main, TagSorter.Type.INCORRECT), "incorrect_for_"+ore+"_tool"); }
-    protected static TagKey<Block> needs(String main, String ore) { return tag(sorter(main, TagSorter.Type.NEEDS), "needs_"+ore+"_tool"); }
-    protected static TagKey<Block> all(String main, String name) { return tag(sorter(main, TagSorter.Type.ALL), name); }
+    protected static TagKey<Block> incorrect(TagSorter sorter, String ore) { return tag(sorter.type(TagSorter.Type.INCORRECT), "incorrect_for_"+ore+"_tool"); }
+    protected static TagKey<Block> incorrect(String main, String ore) { return incorrect(sorter(main), ore); }
+    protected static TagKey<Block> needs(TagSorter sorter, String ore) { return tag(sorter.type(TagSorter.Type.NEEDS), "needs_"+ore+"_tool"); }
+    protected static TagKey<Block> needs(String main, String ore) { return needs(sorter(main, TagSorter.Type.NEEDS), ore); }
+    protected static TagKey<Block> all(TagSorter sorter, String name) { return tag(sorter.type(TagSorter.Type.ALL), name); }
+    protected static TagKey<Block> all(String main, String name) { return all(sorter(main), name); }
 
     public static TagSorter sorter(String main) { return new TagSorter(main); }
     public static TagSorter sorter(String main, TagSorter.Type sortType) { return new TagSorter(main, sortType); }

@@ -1,12 +1,21 @@
 package net.aaronterry.helper.main;
 
+import net.aaronterry.hisb.HisbMod;
+import net.aaronterry.hisb.exploration.item.custom.structure.BookScrapDataLoader;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class HelperModInitializer implements ModInitializer {
     protected static String modId;
@@ -32,6 +41,11 @@ public class HelperModInitializer implements ModInitializer {
     public static void debugLevel(int level) { debugLevels = level; }
     public static int getLevel() { return debugLevels; }
     public Logger logger() { return LOGGER; }
+
+    public static void resource(IdentifiableResourceReloadListener... listeners) {
+        ResourceManagerHelper helper = ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES);
+        for (IdentifiableResourceReloadListener listener : listeners) { helper.registerReloadListener(listener); }
+    }
 
     protected static void _debug(int level, String data) { if (debugMode && level < debugLevels) LOGGER.info(data); }
     protected static void _debug(int level, String data, Object... objects) { if (debugMode && level < debugLevels) LOGGER.info(data, objects); }

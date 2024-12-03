@@ -3,10 +3,7 @@ package net.aaronterry.hisb.exploration.item;
 import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.exploration.item.armor.ModArmorItems;
-import net.aaronterry.hisb.exploration.item.custom.AncientStarItem;
-import net.aaronterry.hisb.exploration.item.custom.BlastChargeItem;
-import net.aaronterry.hisb.exploration.item.custom.DoverTalentItem;
-import net.aaronterry.hisb.exploration.item.custom.SculkEchoItem;
+import net.aaronterry.hisb.exploration.item.custom.*;
 import net.aaronterry.hisb.exploration.item.tool.ModToolItems;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -70,13 +67,22 @@ public class ModItems extends HelperItems {
     public static final Item CALLWETHER_TOTEM = makeItem(unique, "callwether_totem", new Item.Settings().maxCount(1));
     // VORMITE ITEMS
     public static final Item VORMITE_CLUMP = makeItem(ingredient, "vormite_clump");
+    public static final Item VORMITE_ROD = makeItem(ingredient, "vormite_rod");
     public static final Item VORMITE_SPEAR = makeItem(tool, "vormite_spear", new TridentItem(new Item.Settings().rarity(Rarity.RARE).maxDamage(530).attributeModifiers(TridentItem.createAttributeModifiers()).component(DataComponentTypes.TOOL, TridentItem.createToolComponent())));
     public static final Item VORMITE_MACE = makeItem(tool, "vormite_mace", new MaceItem(new Item.Settings().rarity(Rarity.RARE).maxDamage(700).component(DataComponentTypes.TOOL, MaceItem.createToolComponent()).attributeModifiers(MaceItem.createAttributeModifiers())));
     public static final Item VORMITE_HOOK = makeItem(ingredient, "vormite_hook", new ArrowItem(new Item.Settings()));
     public static final Item HOOK_AND_STRING = makeItem(tool, "hook_and_string", new FishingRodItem(new Item.Settings().maxDamage(600)));
     public static final Item VORMITE_BOW = makeItem(tool, "vormite_bow", new BowItem(new Item.Settings().maxDamage(450)));
-
-    public static final Item INFITIUM = makeItem(ingredient, "infitium");
+    // INFITIUM ITEMS
+    public static final Item INFITIUM_RING = makeItem(ingredient, "infitium_ring");
+    public static final Item AFLITE = makeItem(ingredient, "aflite");
+    public static final Item CLOUDFLUFF = makeItem(ingredient, "cloudfluff");
+    public static final Item IVORY_TUSK = makeItem(ingredient, "ivory_tusk");
+    // UNTER ITEMS
+    public static final Item ARMITE_CHUNK = makeItem(ingredient, "armite_chunk");
+    public static final Item THICK_FUR = makeItem(ingredient, "thick_fur");
+    public static final Item PALLECOLDIUM_ALLOY = makeItem(ingredient, "pallecoldium_alloy");
+    public static final Item PALLECOLDIUM_TOTEM = makeItem(ingredient, "pallecoldium_totem", new FrozenTotem(4,3));
 
     public static void registerModItems() {
         HisbMod.debug("Registering Mod Items for " + HisbMod.id());

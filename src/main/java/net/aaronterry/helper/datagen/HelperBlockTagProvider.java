@@ -44,11 +44,21 @@ public class HelperBlockTagProvider extends FabricTagProvider.BlockTagProvider{
             all = provider.all;
         }
 
+        public BlockTagTraveler defaultJourney(TagKey<Block> all, List<TagKey<Block>> needs, List<TagKey<Block>> incorrect) {
+            return allBlocksTag(all).mineable().planks()
+                    .grass().nonBlocks().vines().stone()
+                    .materials().miningLevels(needs, incorrect);
+        }
+
         public void quickJourney(TagKey<Block> all, List<TagKey<Block>> needs, List<TagKey<Block>> incorrect) {
             allBlocksTag(all).mineable().planks()
                     .grass().nonBlocks().vines().stone()
                     .materials().miningLevels(needs, incorrect).endJourney();
         }
+
+        public BlockTagTraveler model(TagKey<Block> tag, String search) { attach(tag, blockType.apply(search)); return this; }
+        public BlockTagTraveler tool(TagKey<Block> tag, String search) { attach(tag, toolType.apply(search)); return this; }
+        public BlockTagTraveler material(TagKey<Block> tag, String search) { attach(tag, toolMaterial.apply(search)); return this; }
 
         private void attach(TagKey<Block> tag, List<Block> blocks) {
             FabricTagBuilder builder = provider.getOrCreateTagBuilder(tag); for (Block block : blocks) builder.add(block);
@@ -91,6 +101,7 @@ public class HelperBlockTagProvider extends FabricTagProvider.BlockTagProvider{
             attach(ModBlockTags.NEEDS_FORTOLIUM_TOOL, toolMaterial.apply(HelperBlocks.SortInputs.FORTOLIUM));
             attach(ModBlockTags.NEEDS_DEMANDUM_TOOL, toolMaterial.apply(HelperBlocks.SortInputs.DEMANDUM));
             attach(ModBlockTags.NEEDS_UNTILLIUM_TOOL, toolMaterial.apply(HelperBlocks.SortInputs.UNTILLIUM));
+            attach(ModBlockTags.NEEDS_ARMITE_TOOL, toolMaterial.apply(HelperBlocks.SortInputs.ARMITE));
             return this;
         }
 

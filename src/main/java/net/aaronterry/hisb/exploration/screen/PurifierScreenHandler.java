@@ -44,10 +44,6 @@ public class PurifierScreenHandler extends ScreenHandler {
         this.addProperties(propertyDelegate);
     }
 
-    public PurifierScreenHandler(int i, PlayerInventory playerInventory, Object o) {
-        this(i, playerInventory);
-    }
-
     public boolean isCrafting() {
         return propertyDelegate.get(0) > 0;
     }
