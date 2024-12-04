@@ -4,6 +4,7 @@ import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.HisbMod;
 import net.aaronterry.hisb.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.exploration.item.custom.*;
+import net.aaronterry.hisb.exploration.item.custom.structure.BookScrapItem;
 import net.aaronterry.hisb.exploration.item.tool.ModToolItems;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -81,8 +82,9 @@ public class ModItems extends HelperItems {
     // UNTER ITEMS
     public static final Item ARMITE_CHUNK = makeItem(ingredient, "armite_chunk");
     public static final Item THICK_FUR = makeItem(ingredient, "thick_fur");
-    public static final Item PALLECOLDIUM_ALLOY = makeItem(ingredient, "pallecoldium_alloy");
     public static final Item PALLECOLDIUM_TOTEM = makeItem(ingredient, "pallecoldium_totem", new FrozenTotem(4,3));
+    // NON-SPECIFIC ITEMS
+    public static final Item BOOK_RUIN_SCRAP = makeItem(ingredient, "book_ruin_scrap", new BookScrapItem(new Item.Settings().maxCount(1)));
 
     public static void registerModItems() {
         HisbMod.debug("Registering Mod Items for " + HisbMod.id());

@@ -26,7 +26,7 @@ public class BookScrapItem extends Item {
         if (text.isEmpty()) text = BookScrapDataLoader.get(world.getRegistryKey().getValue().getPath());
         if (!world.isClient()) {
             player.openHandledScreen(new SimpleNamedScreenHandlerFactory(((syncId, inventory, playerEntity) ->
-                new BookScrapScreenHandler(syncId, this)), Text.of("Book Scrap")));
+                new BookScrapScreenHandler(syncId, text)), Text.of("Book Scrap")));
         }
         return TypedActionResult.success(player.getStackInHand(hand));
     }

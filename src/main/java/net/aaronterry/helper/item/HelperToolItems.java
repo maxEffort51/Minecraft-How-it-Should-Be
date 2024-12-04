@@ -4,7 +4,6 @@ import net.aaronterry.helper.datagen.HelperRecipeProvider;
 import net.minecraft.item.*;
 import net.minecraft.recipe.book.RecipeCategory;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +73,16 @@ public class HelperToolItems extends HelperItems {
             return this;
         }
 
+        private void finishCallers() {
+            if (toolCallers.isEmpty()) {
+                root.add(result);
+                return;
+            }
+            toolCallers.forEach(caller -> { if (!root.getChildren().contains(caller)) root.addChild(caller); });
+            toolCallers.forEach(caller -> caller.add(result));
+            callers.add(root);
+        }
+
         public ToolBuilder name(String name) { this.name = name; return this; }
         public ToolBuilder material(ToolMaterial mat) { this.material = mat; return this; }
         public ToolBuilder attack(float damage, float speed) { this.baseAttackDamage = damage; this.attackSpeed = speed; return this; }
@@ -82,8 +91,7 @@ public class HelperToolItems extends HelperItems {
 
         public Item finish() {
             prepareResult();
-            toolCallers.forEach(caller -> caller.add(result));
-            callers.addAll(toolCallers);
+            finishCallers();
             return result;
         }
     }

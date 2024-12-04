@@ -1,10 +1,10 @@
 {
-  "parent": "block/block",
+  "parent": "minecraft:block/block",
   "textures": {
-    "particle": "block/clove_block",
-    "bottom": "block/clove_block",
-    "top": "block/fallgrass_top",
-    "side": "block/fallgrass_side"
+    "particle": "hisb:block/clove_block",
+    "bottom": "hisb:block/clove_block",
+    "top": "hisb:block/fallgrass_top",
+    "side": "hisb:block/fallgrass_side"
   },
   "elements": [
     {   "from": [ 0, 0, 0 ],

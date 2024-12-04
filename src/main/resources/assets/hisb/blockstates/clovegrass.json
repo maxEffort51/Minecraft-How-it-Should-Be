@@ -2,23 +2,23 @@
   "variants": {
     "snowy=false": [
       {
-        "model": "minecraft:block/clovegrass"
+        "model": "hisb:block/clovegrass"
       },
       {
-        "model": "minecraft:block/clovegrass",
+        "model": "hisb:block/clovegrass",
         "y": 90
       },
       {
-        "model": "minecraft:block/clovegrass",
+        "model": "hisb:block/clovegrass",
         "y": 180
       },
       {
-        "model": "minecraft:block/clovegrass",
+        "model": "hisb:block/clovegrass",
         "y": 270
       }
     ],
     "snowy=true": {
-      "model": "minecraft:block/clovegrass"
+      "model": "hisb:block/clovegrass"
     }
   }
 }

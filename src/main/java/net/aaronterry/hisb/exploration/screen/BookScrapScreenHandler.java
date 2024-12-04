@@ -1,21 +1,21 @@
 package net.aaronterry.hisb.exploration.screen;
 
-import net.aaronterry.hisb.exploration.item.custom.structure.BookScrapItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 
 public class BookScrapScreenHandler extends ScreenHandler {
-    private final String text;
+    private static String scrapText = "";
 
     protected BookScrapScreenHandler(int syncId, PlayerInventory inventory) {
-        this(syncId, (BookScrapItem) inventory.getMainHandStack().getItem());
+        this(syncId, "");
     }
 
-    public BookScrapScreenHandler(int syncId, BookScrapItem item) {
+    public BookScrapScreenHandler(int syncId, String text) {
         super(ModScreenHandlers.BOOK_SCRAP_SCREEN_HANDLER, syncId);
-        text = item.getScrapText();
+        scrapText = text;
+
     }
 
     @Override
@@ -25,6 +25,8 @@ public class BookScrapScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return false;
+        return true;
     }
+
+    public String getScrapText() { return scrapText; }
 }

@@ -60,15 +60,14 @@ public class ModBlocks extends HelperBlocks {
 
     /* TABLES */
 
-    // new PurifierTableBlock(Useful.BlockSettings.sounds(3.5f, false, NoteBlockInstrument.BASS, BlockSoundGroup.METAL))
     public static final Block PURIFIER_TABLE = sortBlock(id("purifier_table"), new PurifierTableBlock(new BlockSettings(3.5f).sound(NoteBlockInstrument.BASS, BlockSoundGroup.METAL).get()))
             .preset(ps_TABLE).dimension(SortInputs.NO_DIM).tool(SortInputs.PICKAXE).material(SortInputs.STONE).shapelessRecipe(RecipeCategory.MISC)
-            .input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE}, new int[] {2,2,2,1,2})
+            .input(new Item[]{Items.NETHER_STAR, Items.GHAST_TEAR, Items.BLAZE_ROD, Items.SPONGE, Items.BLUE_ICE}, new int[] {1,2,2,1,2})
             .needsResult().endRecipe().get();
 
     /* BASIC BLOCKS */
     public static final Block BURPLE_BLOCK = sortBlock(id("burple_block"), BlockSettings.makeBlock(6f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.SHOVEL).material(SortInputs.IRON).parent().get();
-    public static final Block CONDENSED_PURPUR_BLOCK = sortBlock(id("condensed_purpur_block"), BlockSettings.makeBlock(8f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
+    public static final Block PURE_PURPUR_BLOCK = sortBlock(id("pure_purpur_block"), BlockSettings.makeBlock(8f),ps_NORMAL).dimension(SortInputs.END).tool(SortInputs.PICKAXE).material(SortInputs.IRON).parent().get();
     // DEMANDI
     public static final Block DEEP = sortBlock(id("deep"), BlockSettings.makeBlock(20f),ps_DEMANDI).material(SortInputs.IRON).get();
     public static final Block DARK = sortBlock(id("dark"), BlockSettings.makeBlock(9f),ps_DEMANDI).material(SortInputs.IRON).parent().get();
@@ -85,7 +84,7 @@ public class ModBlocks extends HelperBlocks {
     public static final Block HARDENED_SCULK = sortBlock(id("hardened_sculk"), BlockSettings.makeBlock(100f, 10f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE).get();
     public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), BlockSettings.makeBlock(200f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM).parent().get();
     // NEXUS
-    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), BlockSettings.makeBlock(15f)).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
+    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), new GrassBlock(new BlockSettings(15f).get())).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
     public static final Block CELESTE_STONE = sortBlock(id("celeste_stone"), BlockSettings.makeBlock(18f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
     public static final Block INDUG_STONE = sortBlock(id("indug_stone"), BlockSettings.makeBlock(20f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
     // RARE
@@ -114,15 +113,15 @@ public class ModBlocks extends HelperBlocks {
     public static final Block BRAWNSTONE = sortBlock(id("brawnstone"), new BlockSettings(40f).sound(BlockSoundGroup.DEEPSLATE).piston(PistonBehavior.BLOCK).requires().getBlock(),ps_NORMAL).dimension(SortInputs.VORTEX).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND).get();
     public static final Block GRENT_BLOCK = sortBlock(id("grent_block"), BlockSettings.copy(Blocks.COARSE_DIRT).strength(1.2f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.VORTEX).tool(SortInputs.SHOVEL).material(SortInputs.STONE).get();
     public static final Block CLEANSTONE = sortBlock(id("cleanstone"), BlockSettings.copy(BLIPNUM).strength(26f,140f).getBlock(),ps_NORMAL).parent().copy(BLIPNUM);
-    public static final Block SPRING_WATER = sortBlock(id("spring_water"), new FluidBlock(Fluids.WATER,BlockSettings.copy(Blocks.WATER).get()),ps_NORMAL).copy(BLIPNUM);
+//    public static final Block SPRING_WATER = sortBlock(id("spring_water"), new FluidBlock(Fluids.WATER,BlockSettings.copy(Blocks.WATER).get()),ps_NORMAL).copy(BLIPNUM);
     // INFINITE
     public static final Block DUST_BLOCK = sortBlock(id("dust_block"), new ColoredFallingBlock(new ColorCode(12854685), BlockSettings.copy(Blocks.RED_SAND).strength(1.3f).get()),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL).get();
     public static final Block DUST = sortBlock(id("dust"), new SnowBlock(BlockSettings.copy(Blocks.SNOW).strength(0.3f).get()),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL).get();
     public static final Block DUSTSAND = sortBlock(id("dustsand"), BlockSettings.copy(Blocks.SAND).strength(12.3f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.NO_MATERIAL).get();
     public static final Block DUSTSTONE = sortBlock(id("duststone"), BlockSettings.copy(Blocks.SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-    public static final Block SMOOTH_DUSTSTONE = sortBlock(id("smooth_duststone"), BlockSettings.copy(Blocks.SMOOTH_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-    public static final Block CHISELED_DUSTSTONE = sortBlock(id("chiseled_duststone"), BlockSettings.copy(Blocks.CHISELED_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-    public static final Block CUT_DUSTSTONE = sortBlock(id("cut_duststone"), BlockSettings.copy(Blocks.CUT_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
+//    public static final Block SMOOTH_DUSTSTONE = sortBlock(id("smooth_duststone"), BlockSettings.copy(Blocks.SMOOTH_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
+//    public static final Block CHISELED_DUSTSTONE = sortBlock(id("chiseled_duststone"), BlockSettings.copy(Blocks.CHISELED_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
+//    public static final Block CUT_DUSTSTONE = sortBlock(id("cut_duststone"), BlockSettings.copy(Blocks.CUT_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
     public static final Block CLEAR_FOG = sortBlock(id("clear_fog"), new AirBlock(BlockSettings.copy(Blocks.CAVE_AIR).strength(0.8f).get()),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL)
             .shapedRecipe(RecipeCategory.DECORATIONS).input('*',ModItems.CLOUDFLUFF).input('%',ModItems.AFLITE).pattern(new HelperRecipeProvider.Pattern(" * ","*%*"," * ")).needs(ModItems.CLOUDFLUFF).endRecipe().get();
     public static final Block CLEAR_CORE = sortBlock(id("clear_core"), new FluffBlock(0.02f, BlockSettings.copy(Blocks.HAY_BLOCK).strength(2f).get()),ps_NORMAL).ore(ModItems.CLOUDFLUFF).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL)
@@ -178,12 +177,8 @@ public class ModBlocks extends HelperBlocks {
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.FORTOLIUM).get();
     public static final Block VORMITE_BLOCK = sortBlock(id("vormite_block"), BlockSettings.makeBlock(80f,200f),ps_NORMAL).dimension(SortInputs.VORTEX).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.VORMITE_CLUMP).get();
-    public static final Block IVORY_BLOCK = sortBlock(id("ivory_block"), BlockSettings.copy(Blocks.BONE_BLOCK).colorMap(MapColor.OFF_WHITE).strength(5f,100f).getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.IRON)
-            .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.IVORY_TUSK).get();
     public static final Block INFITIUM_BLOCK = sortBlock(id("infitium_block"), BlockSettings.makeBlock(70f,400f),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.INFITIUM_RING).parent().get();
-    public static final Block PALLECOLDIUM_BLOCK = sortBlock(id("pallecoldium_block"), BlockSettings.makeBlock(40f,10f),ps_NORMAL).dimension(SortInputs.UNTER).tool(SortInputs.PICKAXE).material(SortInputs.IRON)
-            .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.PALLECOLDIUM_ALLOY).get();
     public static final Block ARMITE_BLOCK = sortBlock(id("armite_block"), BlockSettings.makeBlock(60f,30f),ps_NORMAL).dimension(SortInputs.UNTER).tool(SortInputs.PICKAXE).material(SortInputs.DIAMOND)
             .reverseRecipe(RecipeCategory.BUILDING_BLOCKS, ModItems.ARMITE_CHUNK).get();
 
@@ -205,8 +200,8 @@ public class ModBlocks extends HelperBlocks {
     public static final Block BLEAKSTONE_ARMITE_ORE = sortBlock(id("bleakstone_armite_ore"), BlockSettings.makeBlock(32f),ps_ORE).copy(ARMITE_ORE);
 
     /* NON-BLOCK BLOCKS */
-    public static final Block CONDENSED_PURPUR_SLAB = sortBlock(id("condensed_purpur_slab"), new SlabBlock(new BlockSettings(8f).requires().get()),ps_SLAB).slabRecipe(CONDENSED_PURPUR_BLOCK);
-    public static final Block CONDENSED_PURPUR_STAIRS = sortBlock(id("condensed_purpur_stairs"), new StairsBlock(CONDENSED_PURPUR_BLOCK.getDefaultState(), new BlockSettings(8f).requires().get()),ps_STAIRS).stairsRecipe(CONDENSED_PURPUR_BLOCK);
+    public static final Block PURE_PURPUR_SLAB = sortBlock(id("pure_purpur_slab"), new SlabBlock(new BlockSettings(8f).requires().get()),ps_SLAB).slabRecipe(PURE_PURPUR_BLOCK);
+    public static final Block PURE_PURPUR_STAIRS = sortBlock(id("pure_purpur_stairs"), new StairsBlock(PURE_PURPUR_BLOCK.getDefaultState(), new BlockSettings(8f).requires().get()),ps_STAIRS).stairsRecipe(PURE_PURPUR_BLOCK);
     public static final Block BURPLE_SLAB = sortBlock(id("burple_slab"), new SlabBlock(new BlockSettings(6f).requires().get()),ps_SLAB).slabRecipe(BURPLE_BLOCK);
     public static final Block BURPLE_STAIRS = sortBlock(id("burple_stairs"), new StairsBlock(BURPLE_BLOCK.getDefaultState(), new BlockSettings(6f).requires().get()),ps_STAIRS).stairsRecipe(BURPLE_BLOCK);
     // DEMANDI
@@ -313,16 +308,11 @@ public class ModBlocks extends HelperBlocks {
     public static final Block LAUREL_LEAVES = sortBlock(id("laurel_leaves"), new LeavesBlock(BlockSettings.copy(Blocks.AZALEA_LEAVES).strength(2f).model("non_opaque").get()),ps_NORMAL).model("").dimension(SortInputs.RARE).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
     public static final Block AUTUMN_LEAVES = sortBlock(id("autumn_leaves"), new LeavesBlock(BlockSettings.copy(Blocks.OAK_LEAVES).strength(3f).model("non_opaque").get()),ps_NORMAL).model("").dimension(SortInputs.RARE).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
     public static final Block CHRYSANTHEMUM = sortBlock(id("chrysanthemum"), new FlowerBlock(StatusEffects.GLOWING, 15, BlockSettings.copy(Blocks.SUNFLOWER).instabreak().get()),ps_FLOWER).dimension(SortInputs.RARE).get();
-    public static final Block LUCKY_TORCH = sortBlock(id("lucky_torch"), new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockSettings.copy(Blocks.TORCH).luminance(state -> 15).colorMap(MapColor.GREEN).get()), false,ps_TORCH).dimension(SortInputs.RARE).tool(SortInputs.PICKAXE).material(SortInputs.NO_MATERIAL).get();
-    public static final Block LUCKY_WALL_TORCH = sortBlock(id("lucky_wall_torch"), new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, BlockSettings.copy(LUCKY_TORCH).get()),ps_WALL_TORCH).parent(LUCKY_TORCH);
     // UNTER
     public static final Block REDBUD_LEAVES = sortBlock(id("redbud_leaves"), new LeavesBlock(BlockSettings.copy(Blocks.BIRCH_LEAVES).strength(4f).model("non_opaque").get()),ps_NORMAL).model("").dimension(SortInputs.UNTER).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
 
     public static void registerModBlocks() {
         HisbMod.debug("Registering Mod Blocks for " + HisbMod.id());
-
-        // TORCH ITEM REGISTER
-        registerAsItem(id("lucky_torch"), LUCKY_TORCH, new VerticallyAttachableBlockItem(LUCKY_TORCH,LUCKY_WALL_TORCH,new Item.Settings(), Direction.DOWN), true);
 
         addToItemGroup(ItemGroups.BUILDING_BLOCKS,all());
     }
