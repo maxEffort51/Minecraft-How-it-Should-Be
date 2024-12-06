@@ -19,5 +19,6 @@ public class HisbModClient extends HelperClientInitializer {
         renderCutout(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.FENCE).toArray(new Block[0]));
         renderCutout(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.FENCE_GATE).toArray(new Block[0]));
         renderCutout(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.VINE).toArray(new Block[0]));
+        renderCutout(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.CROSS).toArray(new Block[0]));
     }
 }

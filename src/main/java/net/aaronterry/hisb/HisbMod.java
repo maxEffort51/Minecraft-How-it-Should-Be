@@ -21,7 +21,7 @@ public class HisbMod extends HelperModInitializer {
 			ModAbilities::registerModAbilities
 		).add(HelperServerTick::run);
 		super.onInitialize();
-		resource(new BookScrapDataLoader());
+//		resource(new BookScrapDataLoader());
 	}
 }
 

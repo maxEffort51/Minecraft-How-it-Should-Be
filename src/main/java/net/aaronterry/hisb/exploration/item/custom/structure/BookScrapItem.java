@@ -11,10 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class BookScrapItem extends Item {
-    private String text = "";
 
     public BookScrapItem(Settings settings) {
         super(settings);
@@ -22,14 +19,12 @@ public class BookScrapItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        HisbMod.debug("Dimension: " + world.getRegistryKey().getValue().getPath());
-        if (text.isEmpty()) text = BookScrapDataLoader.get(world.getRegistryKey().getValue().getPath());
+        String dim = world.getRegistryKey().getValue().getPath();
+        HisbMod.debug("Dimension: " + dim);
         if (!world.isClient()) {
             player.openHandledScreen(new SimpleNamedScreenHandlerFactory(((syncId, inventory, playerEntity) ->
-                new BookScrapScreenHandler(syncId, text)), Text.of("Book Scrap")));
+                new BookScrapScreenHandler(syncId, BookScrapDataLoader.get(dim))), Text.of("Book Scrap")));
         }
         return TypedActionResult.success(player.getStackInHand(hand));
     }
-
-    public String getScrapText() { return text; }
 }

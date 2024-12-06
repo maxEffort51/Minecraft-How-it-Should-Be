@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "all": "hisb:block/chrysanthemum"
+    "cross": "hisb:block/chrysanthemum"
   }
 }

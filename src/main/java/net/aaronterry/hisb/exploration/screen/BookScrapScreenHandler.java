@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 
 public class BookScrapScreenHandler extends ScreenHandler {
-    private static String scrapText = "";
+    private final String scrapText;
 
     protected BookScrapScreenHandler(int syncId, PlayerInventory inventory) {
         this(syncId, "");
@@ -15,7 +15,6 @@ public class BookScrapScreenHandler extends ScreenHandler {
     public BookScrapScreenHandler(int syncId, String text) {
         super(ModScreenHandlers.BOOK_SCRAP_SCREEN_HANDLER, syncId);
         scrapText = text;
-
     }
 
     @Override

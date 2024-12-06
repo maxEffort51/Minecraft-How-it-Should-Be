@@ -42,7 +42,6 @@ public class ModBlocks extends HelperBlocks {
     private static final SortingPreset ps_TORCH = ps_NORMAL.copy().model(SortInputs.TORCH);
     private static final SortingPreset ps_WALL_TORCH = ps_NORMAL.copy().model(SortInputs.WALL_TORCH).hidden();
     private static final SortingPreset ps_LOG = ps_NORMAL.copy().model(SortInputs.PILLAR).tool(SortInputs.AXE);
-
     private static final SortingPreset ps_ORE = new SortingPreset().model(SortInputs.NORMAL_TYPE).tool(SortInputs.PICKAXE);
     private static final SortingPreset ps_STONE = ps_NORMAL.copy().model(SortInputs.STONE_MODEL).tool(SortInputs.PICKAXE);
     private static final SortingPreset ps_VINE = new SortingPreset().model(SortInputs.VINE).drop(SortInputs.NEEDS_SHEARS).tool(SortInputs.HAND);
@@ -84,7 +83,7 @@ public class ModBlocks extends HelperBlocks {
     public static final Block HARDENED_SCULK = sortBlock(id("hardened_sculk"), BlockSettings.makeBlock(100f, 10f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.NETHERITE).get();
     public static final Block IMPERVIUM_BLOCK = sortBlock(id("impervium_block"), BlockSettings.makeBlock(200f),ps_DEMANDI).tool(SortInputs.PICKAXE).material(SortInputs.SCULTIUM).parent().get();
     // NEXUS
-    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), new GrassBlock(new BlockSettings(15f).get())).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
+    public static final Block CELESTE_BLOCK = sortBlock(id("celeste_block"), new GrassBlock(new BlockSettings(15f).randomTick().sound(BlockSoundGroup.GRASS).get())).inNexus().normalType().dropSelf().withShovel().anyMaterial().get();
     public static final Block CELESTE_STONE = sortBlock(id("celeste_stone"), BlockSettings.makeBlock(18f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
     public static final Block INDUG_STONE = sortBlock(id("indug_stone"), BlockSettings.makeBlock(20f),ps_STONE).dimension(SortInputs.NEXUS).material(SortInputs.IRON).parent().get();
     // RARE
@@ -119,9 +118,6 @@ public class ModBlocks extends HelperBlocks {
     public static final Block DUST = sortBlock(id("dust"), new SnowBlock(BlockSettings.copy(Blocks.SNOW).strength(0.3f).get()),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL).get();
     public static final Block DUSTSAND = sortBlock(id("dustsand"), BlockSettings.copy(Blocks.SAND).strength(12.3f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.NO_MATERIAL).get();
     public static final Block DUSTSTONE = sortBlock(id("duststone"), BlockSettings.copy(Blocks.SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-//    public static final Block SMOOTH_DUSTSTONE = sortBlock(id("smooth_duststone"), BlockSettings.copy(Blocks.SMOOTH_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-//    public static final Block CHISELED_DUSTSTONE = sortBlock(id("chiseled_duststone"), BlockSettings.copy(Blocks.CHISELED_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
-//    public static final Block CUT_DUSTSTONE = sortBlock(id("cut_duststone"), BlockSettings.copy(Blocks.CUT_SANDSTONE).strength(25.4f).requires().getBlock(),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.PICKAXE).material(SortInputs.STONE).get();
     public static final Block CLEAR_FOG = sortBlock(id("clear_fog"), new AirBlock(BlockSettings.copy(Blocks.CAVE_AIR).strength(0.8f).get()),ps_NORMAL).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL)
             .shapedRecipe(RecipeCategory.DECORATIONS).input('*',ModItems.CLOUDFLUFF).input('%',ModItems.AFLITE).pattern(new HelperRecipeProvider.Pattern(" * ","*%*"," * ")).needs(ModItems.CLOUDFLUFF).endRecipe().get();
     public static final Block CLEAR_CORE = sortBlock(id("clear_core"), new FluffBlock(0.02f, BlockSettings.copy(Blocks.HAY_BLOCK).strength(2f).get()),ps_NORMAL).ore(ModItems.CLOUDFLUFF).dimension(SortInputs.INFINITE).tool(SortInputs.SHOVEL).material(SortInputs.NO_MATERIAL)

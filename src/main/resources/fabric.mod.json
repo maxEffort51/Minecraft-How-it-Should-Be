@@ -3,7 +3,7 @@
 	"id": "hisb",
 	"version": "${version}",
 	"name": "Minecraft How it Should Be - 1.21",
-	"description": "The mod to fix Minecraft's problems, from adventure to building to redstone!",
+	"description": "The mod to help improve Minecraft, from adventure to building to redstone!",
 	"authors": [
 		"Aaron Terry"
 	],
@@ -31,11 +31,9 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",
-		"minecraft": ">=1.21",
+		"minecraft": "1.21.0",
 		"java": ">=21",
-		"fabric-api": ">=0.102.0"
+		"fabric-api": "*"
 	},
-	"suggests": {
-		"another-mod": "*"
-	}
+	"suggests": {}
 }
