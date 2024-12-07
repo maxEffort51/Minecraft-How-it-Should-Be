@@ -1,0 +1,19 @@
+{
+  "description": "Here's a list of things I need to get done.",
+  "sort-by": "week",
+  "1": [
+    "Finish Helper Placed Features",
+    "Finish Prismalite Ore Generation",
+    "Set up Structure helpers",
+    "Finish Book Ruin structure in the Overworld",
+    "Fix the glitch with running Minecraft out of development environment"
+  ],
+  "2+": [
+    "Fix flower item display bug",
+    "Improve the End",
+    "Figure out how to add a Custom Mob to Minecraft: the Whinter Guard",
+    "Add the Ancient Wither to Minecraft",
+    "Completely Revamp Worldgen, Mobs, and Structures with Helper Classes",
+    "Completely add the Whinter Structure to the Nether"
+  ]
+}
