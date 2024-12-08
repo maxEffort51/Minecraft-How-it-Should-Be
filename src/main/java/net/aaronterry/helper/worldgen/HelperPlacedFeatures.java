@@ -6,11 +6,15 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HelperPlacedFeatures extends HelperFeatures {
+    public static final List<BuildFeature> ores = new ArrayList<>();
+
     protected static RegistryKey<PlacedFeature> key(String modId, String name) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, id(modId, name));
     }
@@ -20,16 +24,35 @@ public class HelperPlacedFeatures extends HelperFeatures {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 
-    public static RegistryKey<PlacedFeature> feature(String modId, String name, RegistryEntry<ConfiguredFeature<?, ?>> config, PlacementModifier... modifiers) {
-        // save something to build later !!!!!
-
-        return key(modId, name);
+    public static RegistryKey<PlacedFeature> ore(String modId, String name, RegistryKey<ConfiguredFeature<?, ?>> configKey, int perChunk, PlacementModifier... modifiers) {
+        var regKey = key(modId, name);
+        ores.add(new BuildFeature(regKey, configKey, perChunk, modifiers));
+        return regKey;
     }
 
     public static void build(Registerable<PlacedFeature> context) {
         var configured = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
-        // build using finish : context, placedKey, config feature, placement modifiers !!!!!
+        ores.forEach(ore -> finish(context, ore.key, configured.getOrThrow(ore.configKey), ore.modifiers()));
+//        finish(context, PINK_GARNET_ORE_PLACED_KEY, configured.getOrThrow(ModConfiguredFeatures.PRISMALITE_KEY),
+//        OrePlacement.modifiersWithCount(14,
+//                ));
+    }
+
+    public static class BuildFeature {
+        protected final RegistryKey<PlacedFeature> key;
+        protected final RegistryKey<ConfiguredFeature<?, ?>> configKey;
+        protected final int vein;
+        protected final PlacementModifier[] modifiers;
+
+        protected BuildFeature(RegistryKey<PlacedFeature> key, RegistryKey<ConfiguredFeature<?, ?>> configKey, int vein, PlacementModifier... modifiers) {
+            this.key = key;
+            this.configKey = configKey;
+            this.vein = vein;
+            this.modifiers = modifiers;
+        }
+
+        protected List<PlacementModifier> modifiers() { var mods = new ArrayList<>(List.of(modifiers)); mods.add(CountPlacementModifier.of(vein)); return mods; }
     }
 }
 

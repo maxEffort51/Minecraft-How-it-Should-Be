@@ -16,5 +16,5 @@ public class ModConfiguredFeatures extends HelperConfiguredFeatures {
         return ore(HisbMod.id(), name, blockTest, vein, target, type);
     }
 
-    public static final RegistryKey<ConfiguredFeature<?, ?>> PRISMALITE_KEY = ore("prismalite_ore_key", Blocks.DIORITE, 9, ModBlocks.PRISMALITE_ORE, Feature.ORE);
+    public static final RegistryKey<ConfiguredFeature<?, ?>> PRISMALITE = ore("prismalite_config", Blocks.STONE, 9, ModBlocks.PRISMALITE_ORE, Feature.ORE);
 }

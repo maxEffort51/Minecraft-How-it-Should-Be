@@ -6,8 +6,8 @@ import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.aaronterry.hisb.exploration.block.entity.ModBlockEntities;
 import net.aaronterry.hisb.exploration.item.ModItems;
 import net.aaronterry.hisb.exploration.effect.ModAbilities;
-import net.aaronterry.hisb.exploration.item.custom.structure.BookScrapDataLoader;
 import net.aaronterry.hisb.exploration.screen.ModScreenHandlers;
+import net.aaronterry.hisb.exploration.worldgen.ModPlacedFeatures;
 
 public class HisbMod extends HelperModInitializer {
 
@@ -18,9 +18,12 @@ public class HisbMod extends HelperModInitializer {
 			ModItems::registerModItems,
 			ModScreenHandlers::registerScreenHandlers,
 			ModBlockEntities::registerBlockEntities,
-			ModAbilities::registerModAbilities
-		).add(HelperServerTick::run);
+			ModAbilities::registerModAbilities,
+			HelperServerTick::run,
+			ModPlacedFeatures::generate
+		);
 		super.onInitialize();
+
 //		resource(new BookScrapDataLoader());
 	}
 }

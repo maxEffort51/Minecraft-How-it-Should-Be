@@ -26,17 +26,17 @@ public class BookRuinStructure extends Structure {
         super(config);
     }
 
-    @Override
-    public StructureStart createStructureStart(DynamicRegistryManager dynamicRegistryManager, ChunkGenerator chunkGenerator, BiomeSource biomeSource, NoiseConfig noiseConfig, StructureTemplateManager structureTemplateManager, long seed, ChunkPos chunkPos, int references, HeightLimitView world, Predicate<RegistryEntry<Biome>> validBiomes) {
-        BlockPos surfacePos = chunkGenerator.getHeightOnGround(chunkPos.x * 16, chunkPos.z * 16, Heightmap.Type.WORLD_SURFACE_WG, HeightLimitView.create(60, 20),);
-        Random random = new Random();
-        BlockPos structurePos = surfacePos.down(random.nextInt(3));
-        List<BlockPos> positions = new ArrayList<>();
-        for (int i = 0; i < random.nextInt(2) + 1; i++) {
-            positions.add(structurePos.add(random.nextInt(2), 0, random.nextInt(2)));
-        }
-        return Optional.of(new StructureStart(this, chunkPos, references, ));
-    }
+//    @Override
+//    public StructureStart createStructureStart(DynamicRegistryManager dynamicRegistryManager, ChunkGenerator chunkGenerator, BiomeSource biomeSource, NoiseConfig noiseConfig, StructureTemplateManager structureTemplateManager, long seed, ChunkPos chunkPos, int references, HeightLimitView world, Predicate<RegistryEntry<Biome>> validBiomes) {
+////        BlockPos surfacePos = chunkGenerator.getHeightOnGround(chunkPos.x * 16, chunkPos.z * 16, Heightmap.Type.WORLD_SURFACE_WG, HeightLimitView.create(60, 20),);
+////        Random random = new Random();
+////        BlockPos structurePos = surfacePos.down(random.nextInt(3));
+////        List<BlockPos> positions = new ArrayList<>();
+////        for (int i = 0; i < random.nextInt(2) + 1; i++) {
+////            positions.add(structurePos.add(random.nextInt(2), 0, random.nextInt(2)));
+////        }
+////        return Optional.of(new StructureStart(this, chunkPos, references, ));
+//    }
 
     @Override
     protected Optional<StructurePosition> getStructurePosition(Context context) {

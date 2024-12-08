@@ -7,7 +7,7 @@ import net.minecraft.data.DataProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelperGeneratorEntrypoint implements DataGeneratorEntrypoint {
+public class HelperDataGenerator implements DataGeneratorEntrypoint {
     protected static final List<FabricDataGenerator.Pack.RegistryDependentFactory<DataProvider>> registryFactories = new ArrayList<>();
     protected static final List<FabricDataGenerator.Pack.Factory<DataProvider>> factories = new ArrayList<>();
 
