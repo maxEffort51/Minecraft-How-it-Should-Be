@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "hisb:light_blue_compact_concrete"
+    }
+  },
+  "pattern": [
+    "   ",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "hisb:light_blue_compact_concrete_slab"
+  }
+}

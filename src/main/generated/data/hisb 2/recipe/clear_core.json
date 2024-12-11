@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    },
+    {
+      "item": "hisb:cloudfluff"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:clear_core"
+  }
+}

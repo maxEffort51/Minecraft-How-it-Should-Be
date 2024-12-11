@@ -1,0 +1,16 @@
+{
+  "values": [
+    "hisb:hardened_sculk",
+    "hisb:debritinum_block",
+    "hisb:purvium_block",
+    "hisb:scultium_block",
+    "hisb:untillium_block",
+    "hisb:infitium_block",
+    "hisb:untillium_ore",
+    "hisb:indug_untillium_ore",
+    "hisb:infitium_slab",
+    "hisb:infitium_stairs",
+    "hisb:infitium_door",
+    "hisb:infitium_wall"
+  ]
+}

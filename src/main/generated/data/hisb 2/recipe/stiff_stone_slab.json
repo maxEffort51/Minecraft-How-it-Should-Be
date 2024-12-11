@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "hisb:stiff_stone"
+    }
+  },
+  "pattern": [
+    "   ",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "hisb:stiff_stone_slab"
+  }
+}

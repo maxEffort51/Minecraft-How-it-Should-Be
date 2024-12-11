@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "hisb:indug_stone"
+    }
+  },
+  "pattern": [
+    "   ",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "hisb:indug_stone_slab"
+  }
+}

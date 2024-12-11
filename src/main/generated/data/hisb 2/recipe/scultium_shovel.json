@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "@": {
+      "item": "hisb:scultium_bones"
+    },
+    "|": {
+      "item": "hisb:deep_rod"
+    }
+  },
+  "pattern": [
+    " @ ",
+    " | ",
+    " | "
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:scultium_shovel"
+  }
+}

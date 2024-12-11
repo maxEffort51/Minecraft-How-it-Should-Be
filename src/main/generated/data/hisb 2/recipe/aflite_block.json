@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    },
+    {
+      "item": "hisb:aflite"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:aflite_block"
+  }
+}

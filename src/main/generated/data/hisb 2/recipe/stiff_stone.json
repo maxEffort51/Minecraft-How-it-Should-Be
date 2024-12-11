@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hisb:stiff_soil"
+    },
+    {
+      "item": "hisb:stiff_soil"
+    },
+    {
+      "item": "hisb:stiff_soil"
+    },
+    {
+      "item": "hisb:stiff_soil"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:stiff_stone"
+  }
+}

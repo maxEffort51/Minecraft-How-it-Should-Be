@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-public class HelperBlockTagProvider extends FabricTagProvider.BlockTagProvider{
+public abstract class HelperBlockTagProvider extends FabricTagProvider.BlockTagProvider{
     protected Function<String, List<Block>> blockType;
     protected Function<String, List<Block>> toolType;
     protected Function<String, List<Block>> toolMaterial;
@@ -22,7 +22,6 @@ public class HelperBlockTagProvider extends FabricTagProvider.BlockTagProvider{
     public HelperBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
-    @Override protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) { }
 
     public BlockTagTraveler connect(Function<String, List<Block>> block, Function<String, List<Block>> tool, Function<String, List<Block>> material, List<Block> allBlocks) {
         blockType = block; toolType = tool; toolMaterial = material; all = allBlocks;

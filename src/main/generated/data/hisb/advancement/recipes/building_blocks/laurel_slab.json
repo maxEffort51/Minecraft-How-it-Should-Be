@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_laurel_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:laurel_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hisb:laurel_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_laurel_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hisb:laurel_slab"
+    ]
+  }
+}

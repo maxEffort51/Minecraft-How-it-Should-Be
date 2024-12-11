@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_armite_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:armite_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:armite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_armite_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:armite_block"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ package net.aaronterry.hisb.exploration.datagen;
 
 import net.aaronterry.helper.block.HelperBlocks;
 import net.aaronterry.hisb.exploration.block.ModBlocks;
+import net.aaronterry.hisb.exploration.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
@@ -44,6 +45,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.getFromDropType(HelperBlocks.SortInputs.DROP_SELF));
         addSlabDrop(ModBlocks.getFromBlockType(HelperBlocks.SortInputs.DROP_SLAB));
         addDoorDrop(ModBlocks.getFromDropType(HelperBlocks.SortInputs.DROP_DOOR));
+
+        addDrop(ModBlocks.SHELF_RUIN, ModItems.BOOK_RUIN_SCRAP);
 
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.BASIC_ORE));
         addOreDrops(ModBlocks.getFromOreType(HelperBlocks.SortInputs.SPECIFIC_ORE));

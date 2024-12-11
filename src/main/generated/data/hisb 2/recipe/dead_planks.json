@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hisb:dead_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "hisb:dead_planks"
+  }
+}

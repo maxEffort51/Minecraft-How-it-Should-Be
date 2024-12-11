@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "@": {
+      "item": "hisb:vormite_clump"
+    },
+    "|": {
+      "item": "hisb:vormite_rod"
+    }
+  },
+  "pattern": [
+    " @ ",
+    " @ ",
+    " | "
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:vormite_sword"
+  }
+}

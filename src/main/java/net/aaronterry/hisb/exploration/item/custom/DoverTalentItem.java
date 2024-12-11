@@ -111,7 +111,7 @@ public class DoverTalentItem extends Item {
             entity.setVelocity(knockbackDirection.x * 2, y, knockbackDirection.z * 2);
             entity.velocityModified = true;
         });
-        world.playSound(user, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.HOSTILE, 0.9f, 1.3f);
+        world.playSound(user, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE.comp_349(), SoundCategory.HOSTILE, 0.9f, 1.3f);
     }
 
     private void blueTick(LivingEntity user, ServerWorld world) {

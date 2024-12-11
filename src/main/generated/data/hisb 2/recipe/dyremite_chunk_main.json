@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hisb:purified_diamond"
+    },
+    {
+      "item": "hisb:purified_diamond"
+    },
+    {
+      "item": "hisb:purified_iron"
+    },
+    {
+      "item": "hisb:purified_iron"
+    },
+    {
+      "item": "hisb:purified_redstone"
+    },
+    {
+      "item": "hisb:purified_redstone"
+    },
+    {
+      "item": "hisb:purified_lapis"
+    },
+    {
+      "item": "hisb:purified_emerald"
+    },
+    {
+      "item": "hisb:purified_copper"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hisb:dyremite_chunk"
+  }
+}

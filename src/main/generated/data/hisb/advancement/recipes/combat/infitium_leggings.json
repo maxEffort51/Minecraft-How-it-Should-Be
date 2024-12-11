@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_infitium_ring": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hisb:infitium_ring"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hisb:infitium_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_infitium_ring"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hisb:infitium_leggings"
+    ]
+  }
+}

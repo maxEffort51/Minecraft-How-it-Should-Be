@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hisb:infitium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "hisb:infitium_ring"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 250,
+  "experience": 3.7,
+  "group": "jadeite_smelting",
+  "ingredient": {
+    "item": "hisb:jade_ore"
+  },
+  "result": {
+    "id": "hisb:jadeite"
+  }
+}

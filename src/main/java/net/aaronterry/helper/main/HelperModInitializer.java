@@ -42,8 +42,13 @@ public class HelperModInitializer implements ModInitializer {
     public static int getLevel() { return debugLevels; }
     public Logger logger() { return LOGGER; }
 
+    public static void resource(IdentifiableResourceReloadListener listener) {
+        ResourceManagerHelper helper = ResourceManagerHelper.get(ResourceType.SERVER_DATA);
+        helper.registerReloadListener(listener);
+    }
+
     public static void resource(IdentifiableResourceReloadListener... listeners) {
-        ResourceManagerHelper helper = ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES);
+        ResourceManagerHelper helper = ResourceManagerHelper.get(ResourceType.SERVER_DATA);
         for (IdentifiableResourceReloadListener listener : listeners) { helper.registerReloadListener(listener); }
     }
 
