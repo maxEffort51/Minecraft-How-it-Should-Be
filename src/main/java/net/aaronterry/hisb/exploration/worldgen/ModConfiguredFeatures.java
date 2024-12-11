@@ -11,7 +11,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class ModConfiguredFeatures extends HelperConfiguredFeatures {
-    protected static RegistryKey<ConfiguredFeature<?, ?>> key(String name) { return key(HisbMod.id(), name); }
     protected static RegistryKey<ConfiguredFeature<?, ?>> ore(String name, Block blockTest, int vein, Block target, Feature<OreFeatureConfig> type) {
         return ore(HisbMod.id(), name, blockTest, vein, target, type);
     }

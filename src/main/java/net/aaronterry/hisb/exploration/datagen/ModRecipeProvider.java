@@ -6,7 +6,6 @@ import net.aaronterry.helper.item.HelperItems;
 import net.aaronterry.hisb.exploration.block.ModBlocks;
 import net.aaronterry.hisb.exploration.item.armor.ModArmorItems;
 import net.aaronterry.hisb.exploration.item.ModItems;
-import net.aaronterry.hisb.exploration.item.tool.ModToolItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;

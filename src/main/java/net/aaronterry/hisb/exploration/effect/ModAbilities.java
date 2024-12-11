@@ -46,10 +46,10 @@ public class ModAbilities {
             entity.setVelocity(entity.getVelocity().multiply(1, slowFallBuildup, 1));
         }
         EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE);
-        if (instance != null && !instance.hasModifier(FALL_DISTANCE.id())) instance.addTemporaryModifier(FALL_DISTANCE);
+        if (instance != null && !instance.hasModifier(FALL_DISTANCE.comp_2447())) instance.addTemporaryModifier(FALL_DISTANCE);
     }, entity -> {
         EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE);
-        if (instance != null && instance.hasModifier(FALL_DISTANCE.id())) instance.removeModifier(FALL_DISTANCE);
+        if (instance != null && instance.hasModifier(FALL_DISTANCE.comp_2447())) instance.removeModifier(FALL_DISTANCE);
     });
 
     public static final Ability UNDARK = new Ability(Ability.ItemInputs.armor(ModArmorItems.DEPNETUM_HELMET), entity -> { if (entity.hasStatusEffect(StatusEffects.DARKNESS)) entity.removeStatusEffect(StatusEffects.DARKNESS); });

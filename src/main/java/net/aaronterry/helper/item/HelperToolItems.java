@@ -33,7 +33,7 @@ public class HelperToolItems extends HelperItems {
         private ToolMaterial material; private float baseAttackDamage;
         private float attackSpeed;
         private Item result;
-        private List<ItemCaller> toolCallers = new ArrayList<>();
+        private final List<ItemCaller> toolCallers = new ArrayList<>();
 
         public ToolBuilder(ItemCaller root, String type) {
             this.root = root; this.type = type;

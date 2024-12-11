@@ -13,16 +13,13 @@ import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ColorCode;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.math.Direction;
 
 public class ModBlocks extends HelperBlocks {
     public static Identifier id(String value) { return id(HisbMod.id(), value); }
@@ -39,8 +36,6 @@ public class ModBlocks extends HelperBlocks {
     private static final SortingPreset ps_FENCE_GATE = ps_NORMAL.copy().model(SortInputs.FENCE_GATE);
     private static final SortingPreset ps_FLOWER = ps_NORMAL.copy().model(SortInputs.CROSS);
     private static final SortingPreset ps_GRASSLIKE = ps_NORMAL.copy().model(SortInputs.GRASSLIKE);
-    private static final SortingPreset ps_TORCH = ps_NORMAL.copy().model(SortInputs.TORCH);
-    private static final SortingPreset ps_WALL_TORCH = ps_NORMAL.copy().model(SortInputs.WALL_TORCH).hidden();
     private static final SortingPreset ps_LOG = ps_NORMAL.copy().model(SortInputs.PILLAR).tool(SortInputs.AXE);
     private static final SortingPreset ps_ORE = new SortingPreset().model(SortInputs.NORMAL_TYPE).tool(SortInputs.PICKAXE);
     private static final SortingPreset ps_STONE = ps_NORMAL.copy().model(SortInputs.STONE_MODEL).tool(SortInputs.PICKAXE);
@@ -148,6 +143,10 @@ public class ModBlocks extends HelperBlocks {
     public static final Block REDBUD_LOG = sortBlock(id("redbud_log"), new PillarBlock(new BlockSettings(18f, -1.0f).sound(NoteBlockInstrument.BASS, BlockSoundGroup.WOOD).get()),ps_LOG).dimension(SortInputs.UNTER).material(SortInputs.NO_MATERIAL).get();
     public static final Block REDBUD_PLANKS = sortBlock(id("redbud_planks"), BlockSettings.makeBlock(19f),ps_PLANKS).dimension(SortInputs.RARE).material(SortInputs.NO_MATERIAL).parent()
             .shapelessRecipe(RecipeCategory.BUILDING_BLOCKS, 4).input(ModBlocks.REDBUD_LOG).needs(ModBlocks.REDBUD_LOG).endRecipe().get();
+    // NONE
+    public static final Block SHELF_RUIN = sortBlock(id("shelf_ruin"), new PillarBlock(new BlockSettings(2f).sound(BlockSoundGroup.SOUL_SAND).get()), ps_LOG).dimension(SortInputs.NO_DIM).material(SortInputs.NO_MATERIAL).drop(SortInputs.NO_DROPS).get();
+    public static final Block BURNT_PLANKS = sortBlock(id("burnt_planks"), BlockSettings.makeBlock(4f), ps_NORMAL).tool(SortInputs.AXE).dimension(SortInputs.NO_DIM).material(SortInputs.NO_MATERIAL).drop(SortInputs.NO_DROPS).get();
+
 
     /* LIVING BLOCKS */
     public static final Block DEEP_DARK_HEART = sortBlock(id("deep_dark_heart"), BlockSettings.makeBlock(60f),ps_DEMHEART).get();
@@ -306,6 +305,7 @@ public class ModBlocks extends HelperBlocks {
     public static final Block CHRYSANTHEMUM = sortBlock(id("chrysanthemum"), new FlowerBlock(StatusEffects.GLOWING, 15, BlockSettings.copy(Blocks.SUNFLOWER).instabreak().get()),ps_FLOWER).dimension(SortInputs.RARE).get();
     // UNTER
     public static final Block REDBUD_LEAVES = sortBlock(id("redbud_leaves"), new LeavesBlock(BlockSettings.copy(Blocks.BIRCH_LEAVES).strength(4f).model("non_opaque").get()),ps_NORMAL).model("").dimension(SortInputs.UNTER).tool(SortInputs.HOE).material(SortInputs.NO_MATERIAL).get();
+
 
     public static void registerModBlocks() {
         HisbMod.debug("Registering Mod Blocks for " + HisbMod.id());
