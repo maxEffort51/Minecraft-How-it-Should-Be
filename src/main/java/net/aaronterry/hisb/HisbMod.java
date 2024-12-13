@@ -14,8 +14,7 @@ import net.aaronterry.hisb.exploration.worldgen.ModStructures;
 
 public class HisbMod extends HelperModInitializer {
 
-	@Override
-	public void onInitialize() {
+	@Override public void init() {
 		create("hisb",true).addAll(
 			ModBlocks::registerModBlocks,
 			ModItems::registerModItems,
@@ -26,9 +25,8 @@ public class HisbMod extends HelperModInitializer {
 			ModPlacedFeatures::generate,
 			ModStructures::run
 		);
-		super.onInitialize();
-
-//		resource(new BookScrapDataLoader());
+		// resource(new BookScrapDataLoader());
 	}
+
 }
 
