@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "hisb",
+	"id": "beyond",
 	"version": "${version}",
-	"name": "Minecraft How it Should Be - 1.21",
+	"name": "Minecraft Beyond",
 	"description": "The mod to help improve Minecraft, from adventure to building to redstone!",
 	"authors": [
 		"Aaron Terry"
@@ -12,17 +12,17 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/hisb/logo.png",
+	"icon": "assets/beyond/logo.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.aaronterry.hisb.HisbMod"
+			"net.maxeffort.beyond.main.BeyondMod"
 		],
 		"client": [
-			"net.aaronterry.hisb.main.HisbModClient"
+			"net.maxeffort.beyond.main.BeyondModClient"
 		],
 		"fabric-datagen": [
-			"net.aaronterry.hisb.main.HisbModDataGenerator"
+			"net.maxeffort.beyond.main.BeyondModDataGenerator"
 		]
 	},
 	"mixins": [

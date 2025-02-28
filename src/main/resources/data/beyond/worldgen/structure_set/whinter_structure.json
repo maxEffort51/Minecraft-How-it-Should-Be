@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "beyond:whinter_structure",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 138293651327,
+    "spacing": 50,
+    "separation": 12,
+    "type": "minecraft:random_spread"
+  }
+}

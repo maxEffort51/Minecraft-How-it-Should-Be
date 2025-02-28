@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: net.aaronterry.hisb.HisbMod
+Main-Class: net.maxeffort.beyond.main.BeyondMod
 

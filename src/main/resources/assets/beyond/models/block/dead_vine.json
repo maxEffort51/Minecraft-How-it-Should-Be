@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/vine",
+  "textures": {
+    "all": "beyond:block/dead_vine"
+  }
+}

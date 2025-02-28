@@ -1,0 +1,66 @@
+{
+  "name": "beyond:whinter/center_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "beyond:whinter/hall_sm",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "location": "beyond:whinter/hall_md",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "beyond:whinter/hall_lg",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:list_pool_element",
+        "elements": [
+          {
+            "element_type": "minecraft:single_pool_element",
+            "location": "beyond:whinter/redstone_room",
+            "processors": "minecraft:empty",
+            "projection": "rigid"
+          },
+          {
+            "element_type": "minecraft:single_pool_element",
+            "location": "beyond:whinter/living_quarters",
+            "processors": "minecraft:empty",
+            "projection": "rigid"
+          },
+          {
+            "element_type": "minecraft:single_pool_element",
+            "location": "beyond:whinter/gear_room",
+            "processors": "minecraft:empty",
+            "projection": "rigid"
+          },
+          {
+            "element_type": "minecraft:single_pool_element",
+            "location": "beyond:whinter/training_room",
+            "processors": "minecraft:empty",
+            "projection": "rigid"
+          }
+        ]
+
+      }
+    }
+  ]
+}

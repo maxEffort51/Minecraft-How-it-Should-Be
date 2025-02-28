@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "beyond:block/fallgrass"
+      },
+      {
+        "model": "beyond:block/fallgrass",
+        "y": 90
+      },
+      {
+        "model": "beyond:block/fallgrass",
+        "y": 180
+      },
+      {
+        "model": "beyond:block/fallgrass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "beyond:block/fallgrass"
+    }
+  }
+}
